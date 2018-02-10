@@ -12,11 +12,17 @@ export default class Etf extends Component {
     };
   }
 
+  addEtf = (etf) => {
+    this.setState({
+      etfs: [...this.state.etfs, etf],
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>ETF App</h1>
-        <EtfQuoteForm />
+        <EtfQuoteForm addOnSubmit={this.addEtf.bind(this)} />
       </div>
     );
   }
