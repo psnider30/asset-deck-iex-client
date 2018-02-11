@@ -9,7 +9,8 @@ export default class EtfQuoteForm extends Component {
   }
 
   initialState = {
-      ticker: '',
+      symbol: '',
+      name: '',
       assetClass: '',
       region: '',
     };
@@ -31,10 +32,16 @@ export default class EtfQuoteForm extends Component {
       <div>
         <h2>ETF Quote Form</h2>
         <form onSubmit={(event) => this.handleSubmit(event) }>
-          <label htmlFor='ticker'>ETF Ticker Symbol </label>
-          <input type='text' name='ticker'
+          <label htmlFor='symbol'>ETF Ticker Symbol</label>
+          <input type='text' name='symbol'
             onChange={(event) => this.handleChange(event)}
-            value={this.state.ticker} />
+            value={this.state.symbol} />
+          <br />
+
+          <label htmlFor='name'>ETF Name </label>
+          <input type='text' name='name'
+            onChange={(event) => this.handleChange(event)}
+            value={this.state.name} />
           <br />
 
           <label htmlFor='assetClass'>Asset Class </label>
