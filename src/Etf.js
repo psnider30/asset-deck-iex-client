@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import EtfQuoteForm from './EtfQuoteForm.js'
 import Etfs from './Etfs.js'
+import uuid from 'uuid';
 
-// Ticker, Asset Class, Region
+// Symbol, Name, Asset Class, Region
 export default class Etf extends Component {
   constructor(props) {
     super(props);
@@ -12,9 +13,22 @@ export default class Etf extends Component {
     };
   }
 
+  componentWillMount = () => {
+    this.setState({
+      etfs: [
+        ...this.state.etfs,
+        {id: uuid(), symbol: 'SPX', name: 'S&P 500'}
+      ]
+    })
+  }
+
+  componentDidMount = () => {
+
+  }
+
   addEtf = (etf) => {
     this.setState({
-      etfs: [...this.state.etfs, etf],
+      etfs: [...this.state.etfs, {id: uuid(), ...etf}],
     })
   }
 
