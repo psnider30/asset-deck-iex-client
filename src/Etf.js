@@ -11,6 +11,7 @@ export default class Etf extends Component {
 
     this.state = {
       etfs: [],
+      editing: null,
     };
   }
 
@@ -18,7 +19,8 @@ export default class Etf extends Component {
     this.setState({
       etfs: [
         ...this.state.etfs,
-        {id: uuidv4(), symbol: 'SPX', name: 'S&P 500'}
+        {id: uuidv4(), symbol: 'SPY', name: 'S&P 500',
+        assetClass: 'Equity', region: 'North America'}
       ]
     })
   }
@@ -33,6 +35,12 @@ export default class Etf extends Component {
     })
   }
 
+  editEtf = (id) => {
+    this.setState({
+      editing: id
+    })
+  }
+
   render() {
     return (
       <div>
@@ -44,9 +52,12 @@ export default class Etf extends Component {
           />
           <Route
             exaxct path='/etfs'
-            component={ () => <Etfs etfs={this.state.etfs} /> }
+            component={ () => <Etfs
+              etfs={this.state.etfs}
+              editEtf = {this.editEtf.bind(this)}
+            /> }
            />
-      
+
       </div>
     );
   }
