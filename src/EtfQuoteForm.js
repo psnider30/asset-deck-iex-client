@@ -4,16 +4,31 @@ export default class EtfQuoteForm extends Component {
   constructor(props) {
     super(props);
 
+    this.initialState = {
+        id: null,
+        symbol: '',
+        name: '',
+        assetClass: '',
+        region: '',
+      };
+
     this.state = this.initialState
   }
 
-  initialState = {
-      symbol: '',
-      name: '',
-      assetClass: '',
-      region: '',
-    };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.editing !== nextProps.editing) {
+      const etf = this.props.findEtf(nextProps.editing);
+      const {id, symbol, name, assetClass, region } = etf
+      this.setState({
+        id: id,
+        symbol: symbol,
+        name: name,
+        assetClass: assetClass,
+        region: region,
+      });
+    }
+  }
 
   handleSubmit = (event) => {
       event.preventDefault();

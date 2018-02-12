@@ -25,10 +25,6 @@ export default class EtfDeck extends Component {
     })
   }
 
-  componentDidMount = () => {
-
-  }
-
   addEtf = (etf) => {
     this.setState({
       etfs: [...this.state.etfs, {id: uuidv4(), ...etf}],
@@ -41,6 +37,10 @@ export default class EtfDeck extends Component {
     })
   }
 
+  findEtf = (id) => {
+    return this.state.etfs.find(etf => etf.id === id)
+  }
+
   render() {
     return (
       <div>
@@ -51,14 +51,15 @@ export default class EtfDeck extends Component {
         </div>
           <Route
             path='/etfs/new'
-            component={ () =>
+            render={ () =>
               <EtfQuoteForm
                 addOnSubmit={this.addEtf.bind(this)}
-                editing = {this.editing} /> }
+                editing = {this.state.editing}
+                findEtf = {this.findEtf}/> }
           />
           <Route
             exaxct path='/etfs'
-            component={ () =>
+            render={ () =>
               <Etfs
                 etfs={this.state.etfs}
                 editEtf = {this.editEtf.bind(this)} /> }
