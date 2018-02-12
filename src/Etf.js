@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import EtfQuoteForm from './EtfQuoteForm.js'
-import Etfs from './Etfs.js'
-import uuid from 'uuid';
+import React, { Component } from 'react';
+import EtfQuoteForm from './EtfQuoteForm.js';
+import Etfs from './Etfs.js';
+import uuidv4 from 'uuid/v4';
+import { Route, Switch } from 'react-router-dom';
 
 // Symbol, Name, Asset Class, Region
 export default class Etf extends Component {
@@ -17,7 +18,7 @@ export default class Etf extends Component {
     this.setState({
       etfs: [
         ...this.state.etfs,
-        {id: uuid(), symbol: 'SPX', name: 'S&P 500'}
+        {id: uuidv4(), symbol: 'SPX', name: 'S&P 500'}
       ]
     })
   }
@@ -28,7 +29,7 @@ export default class Etf extends Component {
 
   addEtf = (etf) => {
     this.setState({
-      etfs: [...this.state.etfs, {id: uuid(), ...etf}],
+      etfs: [...this.state.etfs, {id: uuidv4(), ...etf}],
     })
   }
 
@@ -36,8 +37,16 @@ export default class Etf extends Component {
     return (
       <div>
         <h1>ETF App</h1>
-        <EtfQuoteForm addOnSubmit={this.addEtf.bind(this)} />
-        <Etfs etfs={this.state.etfs} />
+
+          <Route
+            path='/etfs/new'
+            component={ () => <EtfQuoteForm addOnSubmit={this.addEtf.bind(this)} /> }
+          />
+          <Route
+            exaxct path='/etfs'
+            component={ () => <Etfs etfs={this.state.etfs} /> }
+           />
+      
       </div>
     );
   }
