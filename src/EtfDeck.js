@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import EtfQuoteForm from './EtfQuoteForm.js';
-import Etfs from './Etfs.js';
 import uuidV4 from 'uuid/v4';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import EtfQuoteForm from './EtfQuoteForm.js';
+import Etfs from './Etfs.js';
 
 // Symbol, Name, Asset Class, Region
-export default class EtfDeck extends Component {
+class EtfDeck extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      etfs: [],
       editing: null,
     };
   }
@@ -25,11 +26,11 @@ export default class EtfDeck extends Component {
   //   })
   // }
 
-  addEtf = (etf) => {
-    this.setState({
-      etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
-    })
-  }
+  // addEtf = (etf) => {
+  //   this.setState({
+  //     etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
+  //   })
+  // }
 
   editEtf = (id) => {
     this.setState({
@@ -38,7 +39,7 @@ export default class EtfDeck extends Component {
   }
 
   findEtf = (id) => {
-    return this.state.etfs.find(etf => etf.id === id)
+    return this.props.etfs.find(etf => etf.id === id)
   }
 
   render() {
@@ -54,7 +55,6 @@ export default class EtfDeck extends Component {
               path='/etfs/new'
               render={ () =>
                 <EtfQuoteForm
-                  addOnSubmit={this.addEtf.bind(this)}
                   editing = {this.state.editing}
                   findEtf = {this.findEtf}/> }
             />
@@ -62,7 +62,7 @@ export default class EtfDeck extends Component {
               exaxct path='/etfs'
               render={ () =>
                 <Etfs
-                  etfs={this.state.etfs}
+                  etfs={this.props.etfs}
                   editEtf = {this.editEtf.bind(this)} /> }
              />
         </div>
@@ -70,3 +70,9 @@ export default class EtfDeck extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { etfs: state.etfDeck.etfs };
+}
+
+export default connect(mapStateToProps,null)(EtfDeck);
