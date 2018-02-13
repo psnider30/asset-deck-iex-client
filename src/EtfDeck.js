@@ -15,15 +15,15 @@ export default class EtfDeck extends Component {
     };
   }
 
-  componentWillMount = () => {
-    this.setState({
-      etfs: [
-        ...this.state.etfs,
-        {id: uuidV4(), symbol: 'SPY', name: 'S&P 500',
-        assetClass: 'Equity', region: 'North America'}
-      ]
-    })
-  }
+  // componentWillMount = () => {
+  //   this.setState({
+  //     etfs: [
+  //       ...this.state.etfs,
+  //       {id: uuidV4(), symbol: 'SPY', name: 'S&P 500',
+  //       assetClass: 'Equity', region: 'North America'}
+  //     ]
+  //   })
+  // }
 
   addEtf = (etf) => {
     this.setState({
