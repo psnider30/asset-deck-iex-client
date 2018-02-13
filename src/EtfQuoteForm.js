@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from './actions/etfActions.js'
 
-export default class EtfQuoteForm extends Component {
+
+class EtfQuoteForm extends Component {
   constructor(props) {
     super(props);
 
@@ -32,7 +36,7 @@ export default class EtfQuoteForm extends Component {
 
   handleSubmit = (event) => {
       event.preventDefault();
-      this.props.addOnSubmit(this.state);
+      this.props.actions.addEtf(this.state);
       this.setState(this.initialState);
     }
 
@@ -76,3 +80,9 @@ export default class EtfQuoteForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch)};
+}
+
+export default connect(null, mapDispatchToProps)(EtfQuoteForm)

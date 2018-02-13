@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EtfQuoteForm from './EtfQuoteForm.js';
 import Etfs from './Etfs.js';
-import uuidv4 from 'uuid/v4';
+import uuidV4 from 'uuid/v4';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 
 // Symbol, Name, Asset Class, Region
@@ -19,7 +19,7 @@ export default class EtfDeck extends Component {
     this.setState({
       etfs: [
         ...this.state.etfs,
-        {id: uuidv4(), symbol: 'SPY', name: 'S&P 500',
+        {id: uuidV4(), symbol: 'SPY', name: 'S&P 500',
         assetClass: 'Equity', region: 'North America'}
       ]
     })
@@ -27,7 +27,7 @@ export default class EtfDeck extends Component {
 
   addEtf = (etf) => {
     this.setState({
-      etfs: [...this.state.etfs, {id: uuidv4(), ...etf}],
+      etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
     })
   }
 
