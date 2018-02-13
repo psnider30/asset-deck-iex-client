@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EtfQuoteForm from './EtfQuoteForm.js';
 import Etfs from './Etfs.js';
 import uuidv4 from 'uuid/v4';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 
 // Symbol, Name, Asset Class, Region
 export default class EtfDeck extends Component {
@@ -43,28 +43,30 @@ export default class EtfDeck extends Component {
 
   render() {
     return (
-      <div>
-        <h1>ETF App</h1>
+      <Router>
         <div>
-          <NavLink style={{ marginRight: '10px' }} to="/etfs">Your Portfolio</NavLink>
-          <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
+          <h1>ETF App</h1>
+          <div>
+            <NavLink style={{ marginRight: '10px' }} to="/etfs">Your Portfolio</NavLink>
+            <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
+          </div>
+            <Route
+              path='/etfs/new'
+              render={ () =>
+                <EtfQuoteForm
+                  addOnSubmit={this.addEtf.bind(this)}
+                  editing = {this.state.editing}
+                  findEtf = {this.findEtf}/> }
+            />
+            <Route
+              exaxct path='/etfs'
+              render={ () =>
+                <Etfs
+                  etfs={this.state.etfs}
+                  editEtf = {this.editEtf.bind(this)} /> }
+             />
         </div>
-          <Route
-            path='/etfs/new'
-            render={ () =>
-              <EtfQuoteForm
-                addOnSubmit={this.addEtf.bind(this)}
-                editing = {this.state.editing}
-                findEtf = {this.findEtf}/> }
-          />
-          <Route
-            exaxct path='/etfs'
-            render={ () =>
-              <Etfs
-                etfs={this.state.etfs}
-                editEtf = {this.editEtf.bind(this)} /> }
-           />
-      </div>
+      </Router>
     );
   }
 }
