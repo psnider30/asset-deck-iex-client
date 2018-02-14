@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from './actions/etfActions.js'
+import * as actions from '../actions/etfActions.js'
 
-import './Etf.css'
+import '../Etf.css'
 import Etfs from './Etfs.js';
 
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import EtfQuoteForm from './EtfQuoteForm.js';
-import * as actions from './actions/etfActions.js'
+import * as actions from '../actions/etfActions.js'
 
 // Symbol, Name, Asset Class, Region
 class EtfDeck extends Component {

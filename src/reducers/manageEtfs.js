@@ -17,7 +17,7 @@ export default function manageEtfs(state = {etfs: []}, action) {
         etfs: [...state.etfs.slice(0, idx), action.etf, ...state.etfs.slice(idx + 1)]
       }
     case 'REMOVE_ETF':
-      const etfs = state.etfs.filter(etf => etf.id !== action.id);
+      const etfs = state.etfs.filter(etf => etf.id !== action.etfId);
       return {...state, etfs: etfs}
     default:
       return state;

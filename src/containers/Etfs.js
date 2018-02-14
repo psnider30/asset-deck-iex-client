@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateEtf } from './actions/etfActions.js'
+import { removeEtf } from '../actions/etfActions.js'
 
 class Etfs extends Component {
 
@@ -24,6 +24,10 @@ handleEditClick = (etf, event) => {
   this.props.onUpdateETF(etf);
 }
 
+handleRemoveClick = (etf, event) => {
+  this.props.removeEtf(etf.id);
+}
+
   render() {
     const etfsList = this.props.etfs.map((etf, index) => {
       return (
@@ -35,6 +39,11 @@ handleEditClick = (etf, event) => {
           <td>
             <button data-id={etf.id} onClick={(event) => this.handleEditClick(etf, event)}>
               Edit
+            </button>
+          </td>
+          <td>
+            <button data-id={etf.id} onClick={(event) => this.handleRemoveClick(etf, event)}>
+              Remove
             </button>
           </td>
         </tr>
@@ -77,7 +86,7 @@ handleEditClick = (etf, event) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    updateEtf: updateEtf,
+    removeEtf: removeEtf,
   }, dispatch);
 }
 

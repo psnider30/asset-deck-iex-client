@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 
-import EtfDeck from './EtfDeck.js'
+import EtfDeck from './containers/EtfDeck.js'
 
 class App extends Component {
   render() {
