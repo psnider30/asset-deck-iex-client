@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import uuidV4 from 'uuid/v4';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import EtfQuoteForm from './EtfQuoteForm.js';
-import Etfs from './Etfs.js';
+import * as actions from './actions/etfActions.js'
 
 // Symbol, Name, Asset Class, Region
 class EtfDeck extends Component {
@@ -12,7 +13,8 @@ class EtfDeck extends Component {
     super(props);
 
     this.state = {
-      editing: null,
+      editingId: null,
+      etfToUpdate: null,
     };
   }
 
@@ -26,23 +28,20 @@ class EtfDeck extends Component {
   //   })
   // }
 
-  // addEtf = (etf) => {
-  //   this.setState({
-  //     etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
-  //   })
-  // }
-
-  editEtf = (id) => {
+  addEtf = (etf) => {
     this.setState({
-      editing: id
+      etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
     })
   }
 
-  findEtf = (id) => {
-    return this.props.etfs.find(etf => etf.id === id)
-  }
+  // editEtf = (id) => {
+  //   this.setState({
+  //     editingId: id
+  //   })
+  // }
 
   render() {
+    const { etfs, etfToUpdate, actions } = this.props;
     return (
       <Router>
         <div>
@@ -51,20 +50,10 @@ class EtfDeck extends Component {
             <NavLink style={{ marginRight: '10px' }} to="/etfs">Your Portfolio</NavLink>
             <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
           </div>
-            <Route
-              path='/etfs/new'
-              render={ () =>
-                <EtfQuoteForm
-                  editing = {this.state.editing}
-                  findEtf = {this.findEtf}/> }
-            />
-            <Route
-              exaxct path='/etfs'
-              render={ () =>
-                <Etfs
-                  etfs={this.props.etfs}
-                  editEtf = {this.editEtf.bind(this)} /> }
-             />
+          <EtfQuoteForm
+            etfs={etfs}
+            etfToUdate={etfToUpdate}
+          />
         </div>
       </Router>
     );
@@ -72,7 +61,14 @@ class EtfDeck extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { etfs: state.etfDeck.etfs };
+  return {
+    etfs: state.etfDeck.etfs,
+    etfToUpdate: state.etfDeck.etfToUpdate,
+  }
 }
 
-export default connect(mapStateToProps,null)(EtfDeck);
+const mapDispatchToProps = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch)};
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EtfDeck);

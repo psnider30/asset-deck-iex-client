@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions/etfActions.js'
 
+import Etfs from './Etfs.js';
+
 
 class EtfQuoteForm extends Component {
   constructor(props) {
@@ -14,24 +16,10 @@ class EtfQuoteForm extends Component {
         name: '',
         assetClass: '',
         region: '',
+        updating: false,
       };
 
     this.state = this.initialState
-  }
-
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.editing !== nextProps.editing) {
-      const etf = this.props.findEtf(nextProps.editing);
-      const {id, symbol, name, assetClass, region } = etf
-      this.setState({
-        id: id,
-        symbol: symbol,
-        name: name,
-        assetClass: assetClass,
-        region: region,
-      });
-    }
   }
 
   handleSubmit = (event) => {
@@ -45,7 +33,25 @@ class EtfQuoteForm extends Component {
     this.setState({[name]: value});
   }
 
+  findEtf = (id) => {
+    return this.props.etfs.find(etf => etf.id === id)
+  }
+
+  onUpdateETF = (etfToUpdate) => {
+    const {id, symbol, name, assetClass, region } = etfToUpdate
+    this.setState({
+      id: id,
+     symbol: symbol,
+     name: name,
+     assetClass: assetClass,
+     region: region,
+     updating: true,
+   });
+    // this.props.actions.updateEtf(etfToUpdate)
+  }
+
   render() {
+    const { etfs, etfToUpdate, actions } = this.props;
     return (
       <div>
         <h2>ETF Quote Form</h2>
@@ -76,10 +82,23 @@ class EtfQuoteForm extends Component {
 
           <input type='submit'/>
         </form>
+
+        <Etfs
+          etfs={etfs}
+          findEtf ={this.findEtf.bind(this)}
+          onUpdateETF={this.onUpdateETF.bind(this)}
+          etfToUpdate={etfToUpdate} />
       </div>
     );
   }
 }
+
+// function mapStateToProps(state) {
+//   return {
+//     etfs: state.etfs,
+//     etfToUpdate: state.etfToUpdate,
+//   }
+// }
 
 const mapDispatchToProps = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch)};

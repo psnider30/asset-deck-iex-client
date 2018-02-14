@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateEtf } from './actions/etfActions.js'
 
-export default class Etfs extends Component {
+class Etfs extends Component {
 
-handleEditClick = (etfId, event) => {
-    this.props.editEtf(etfId);
-  }
+// componentWillReceiveProps(nextProps) {
+//   if (this.props.etfToUpdate.id !== nextProps.etfToUpdate.id) {
+//     const etf = this.props.findEtf(nextProps.etfToUpdate.id);
+//     const {id, symbol, name, assetClass, region } = etf
+//     debugger;
+//     this.setState({
+//       id: id,
+//       symbol: symbol,
+//       name: name,
+//       assetClass: assetClass,
+//       region: region,
+//     });
+//   }
+// }
+
+handleEditClick = (etf, event) => {
+  this.props.onUpdateETF(etf);
+}
 
   render() {
     const etfsList = this.props.etfs.map((etf, index) => {
@@ -15,7 +33,7 @@ handleEditClick = (etfId, event) => {
           <td>{etf.assetClass}</td>
           <td>{etf.region}</td>
           <td>
-            <button onClick={(event) => this.handleEditClick(etf.id, event)}>
+            <button data-id={etf.id} onClick={(event) => this.handleEditClick(etf, event)}>
               Edit
             </button>
           </td>
@@ -41,3 +59,18 @@ handleEditClick = (etfId, event) => {
     );
   }
 }
+
+// function mapStateToProps(state) {
+//   return {
+//     etfs: state.etfs,
+//     etfToUpdate: state.etfToUpdate,
+//   }
+// }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updateEtf: updateEtf,
+  }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Etfs);
