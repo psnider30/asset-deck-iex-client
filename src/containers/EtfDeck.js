@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import uuidV4 from 'uuid/v4';
+// import uuidV4 from 'uuid/v4';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import EtfQuoteForm from './EtfQuoteForm.js';
-import * as actions from '../actions/etfActions.js'
+// import { bindActionCreators } from 'redux';
+// import * as actions from '../actions/etfActions.js'
+
+const APIURL =`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=${process.env.ALPHA_VANTAGE_KEY}`
 
 // Symbol, Name, Asset Class, Region
 class EtfDeck extends Component {
@@ -12,7 +13,8 @@ class EtfDeck extends Component {
     super(props);
 
     this.state = {
-      editingId: null,
+      fetchingData: true,
+      etfData: {},
       etfToUpdate: null,
     };
   }
@@ -27,20 +29,10 @@ class EtfDeck extends Component {
   //   })
   // }
 
-  // addEtf = (etf) => {
-  //   this.setState({
-  //     etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
-  //   })
-  // }
-
-  // editEtf = (id) => {
-  //   this.setState({
-  //     editingId: id
-  //   })
-  // }
-
   render() {
+    const { fetchingData } = this.state;
     const { etfs, etfToUpdate, actions } = this.props;
+    console.log(fetchingData)
     return (
       <div className='etf-deck'>
         <EtfQuoteForm
@@ -58,8 +50,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch)};
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return { actions: bindActionCreators(actions, dispatch)};
+// }
 
-export default connect(mapStateToProps,mapDispatchToProps)(EtfDeck);
+export default connect(mapStateToProps, null)(EtfDeck);
