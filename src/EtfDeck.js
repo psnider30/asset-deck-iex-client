@@ -42,7 +42,7 @@ class EtfDeck extends Component {
   render() {
     const { etfs, etfToUpdate, actions } = this.props;
     return (
-      <div>
+      <div className='etf-deck'>
         <EtfQuoteForm
           etfs={etfs}
           etfToUpdate={etfToUpdate} />

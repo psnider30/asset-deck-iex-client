@@ -1,4 +1,4 @@
-html, body {
+html, body, #root {
   margin: 0;
   height: 100%;
 }
@@ -6,9 +6,5 @@ html, body {
 body {
   padding: 0px;
   margin: 0px;
-  border: 6px solid rgb(70, 70, 70);
-}
-
-#root {
-
+  border: 6px solid rgb(60, 60, 60);
 }

@@ -1,0 +1,11 @@
+.quote-form, .etfs-list {
+  background-color: rgb(255,255,255);
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.etfs-list {
+  background-color: rgb(200,230,255);
+  min-height: 100px;
+}
