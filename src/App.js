@@ -9,15 +9,17 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h1 classname="App-title">ETF Deck</h1>
+          <h1 className="App-title">ETF Deck</h1>
         </div>
         <Router>
-          <div>
+          <div className="Nav">
             <NavLink style={{ marginRight: '10px' }} to="/etfs">Your Portfolio</NavLink>
             <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
           </div>
         </Router>
-        <EtfDeck />
+        <div className="App-body">
+          <EtfDeck />
+        </div>
       </div>
     );
   }

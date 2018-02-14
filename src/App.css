@@ -11,13 +11,24 @@
 
 .App-header {
   background-color: rgba(21, 120, 35, 0.85);
-  height: 80px;
-  padding: 20px;
-  color: rgb(202,168,0);
-  font-family: 'Roboto Slab', serif;
-  font-size: 115%;
-  text-shadow: 2px 2px rgb(1,1,1);
+  height: 100px;
+  padding: 5px;
   margin-bottom: 20px;
+  border-bottom: 2px solid black;
+}
+
+.App-title {
+  margin-left: 20px;
+  font-size: 2.4em;
+  color: rgb(205,175,0);
+  font-family: 'Roboto Slab', serif;
+  text-shadow: 1.5px 1.5px rgb(1,1,1);
+}
+
+.App-body, .Nav {
+  margin-left: 20px;
+  padding: 0;
+  font-family: 'Robot Slab', sans-serif;
 }
 
 .App-intro {

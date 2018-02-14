@@ -1,5 +1,14 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 body {
-  margin-left: 20px;
-  padding: 0;
-  font-family: 'Robot Slab', sans-serif;
+  padding: 0px;
+  margin: 0px;
+  border: 6px solid rgb(70, 70, 70);
+}
+
+#root {
+
 }
