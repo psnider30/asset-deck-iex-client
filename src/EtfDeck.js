@@ -52,7 +52,7 @@ class EtfDeck extends Component {
           </div>
           <EtfQuoteForm
             etfs={etfs}
-            etfToUdate={etfToUpdate}
+            etfToUpdate={etfToUpdate}
           />
         </div>
       </Router>

@@ -41,22 +41,35 @@ class EtfQuoteForm extends Component {
     const {id, symbol, name, assetClass, region } = etfToUpdate
     this.setState({
       id: id,
-     symbol: symbol,
-     name: name,
-     assetClass: assetClass,
-     region: region,
-     updating: true,
+      symbol: symbol,
+      name: name,
+      assetClass: assetClass,
+      region: region,
+      updating: true,
    });
     // this.props.actions.updateEtf(etfToUpdate)
   }
 
+  handleExitUpdate = () => {
+    this.setState(this.initialState) 
+  }
+
+  submitOrUpdate = () => {
+    return this.state.updating ? 'Update Etf' : 'Add Etf'
+  }
+
   render() {
     const { etfs, etfToUpdate, actions } = this.props;
+    const updating = this.state.updating
+    let exitUpdateButton;
+    if (updating) {
+      exitUpdateButton = <button onClick={this.handleExitUpdate}>Exit Without Updating</button>
+    }
     return (
       <div>
         <h2>ETF Quote Form</h2>
         <form onSubmit={(event) => this.handleSubmit(event) }>
-          <label htmlFor='symbol'>ETF Ticker Symbol</label>
+          <label htmlFor='symbol'>ETF Ticker Symbol </label>
           <input type='text' name='symbol'
             onChange={(event) => this.handleChange(event)}
             value={this.state.symbol} />
@@ -78,16 +91,18 @@ class EtfQuoteForm extends Component {
           <input type='region' name='region'
             onChange={(event) => this.handleChange(event)}
             value={this.state.region} />
-          <br />
+          <br /><br />
 
-          <input type='submit'/>
+          <input type='submit' value={this.submitOrUpdate()}/>
+          <span className='col-sm'> {exitUpdateButton} </span>
         </form>
+        <br /><hr />
 
         <Etfs
           etfs={etfs}
           findEtf ={this.findEtf.bind(this)}
           onUpdateETF={this.onUpdateETF.bind(this)}
-          etfToUpdate={etfToUpdate} />
+          etfToUpdate={this.state} />
       </div>
     );
   }
