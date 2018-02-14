@@ -24,7 +24,12 @@ class EtfQuoteForm extends Component {
 
   handleSubmit = (event) => {
       event.preventDefault();
-      this.props.actions.addEtf(this.state);
+      if (this.state.updating) {
+        const etf = this.state;
+        this.props.actions.updateEtf(etf);
+      } else {
+        this.props.actions.addEtf(this.state);
+      }
       this.setState(this.initialState);
     }
 
@@ -51,7 +56,7 @@ class EtfQuoteForm extends Component {
   }
 
   handleExitUpdate = () => {
-    this.setState(this.initialState) 
+    this.setState(this.initialState)
   }
 
   submitOrUpdate = () => {

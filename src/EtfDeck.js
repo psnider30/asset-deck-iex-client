@@ -28,11 +28,11 @@ class EtfDeck extends Component {
   //   })
   // }
 
-  addEtf = (etf) => {
-    this.setState({
-      etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
-    })
-  }
+  // addEtf = (etf) => {
+  //   this.setState({
+  //     etfs: [...this.state.etfs, {id: uuidV4(), ...etf}],
+  //   })
+  // }
 
   // editEtf = (id) => {
   //   this.setState({
