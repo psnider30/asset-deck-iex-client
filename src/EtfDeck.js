@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import uuidV4 from 'uuid/v4';
-import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -43,19 +42,11 @@ class EtfDeck extends Component {
   render() {
     const { etfs, etfToUpdate, actions } = this.props;
     return (
-      <Router>
-        <div>
-          <h1>ETF App</h1>
-          <div>
-            <NavLink style={{ marginRight: '10px' }} to="/etfs">Your Portfolio</NavLink>
-            <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
-          </div>
-          <EtfQuoteForm
-            etfs={etfs}
-            etfToUpdate={etfToUpdate}
-          />
-        </div>
-      </Router>
+      <div>
+        <EtfQuoteForm
+          etfs={etfs}
+          etfToUpdate={etfToUpdate} />
+      </div>
     );
   }
 }
