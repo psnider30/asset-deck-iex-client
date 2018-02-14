@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h1>ETF Deck</h1>
+          <h1 classname="App-title">ETF Deck</h1>
         </div>
         <Router>
           <div>

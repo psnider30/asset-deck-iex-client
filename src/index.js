@@ -6,6 +6,13 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers/rootReducer.js'
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Roboto Slab', 'Crimson Text', 'Roboto']
+  }
+});
 
 // wrap store in a function for testing purposes
 export function configureStore(){
