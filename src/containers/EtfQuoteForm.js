@@ -65,7 +65,7 @@ class EtfQuoteForm extends Component {
   }
 
   render() {
-    const { etfs, etfToUpdate, actions } = this.props;
+    const { etfs, etfToUpdate, actions, data } = this.props;
     const updating = this.state.updating
     let exitUpdateButton;
     if (updating) {
@@ -109,7 +109,8 @@ class EtfQuoteForm extends Component {
           etfs={etfs}
           findEtf ={this.findEtf.bind(this)}
           onUpdateETF={this.onUpdateETF.bind(this)}
-          etfToUpdate={this.state} />
+          etfToUpdate={this.state}
+          data={data} />
       </div>
     );
   }

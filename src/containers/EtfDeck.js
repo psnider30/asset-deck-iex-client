@@ -19,24 +19,27 @@ class EtfDeck extends Component {
     };
   }
 
-  // componentWillMount = () => {
-  //   this.setState({
-  //     etfs: [
-  //       ...this.state.etfs,
-  //       {id: uuidV4(), symbol: 'SPY', name: 'S&P 500',
-  //       assetClass: 'Equity', region: 'North America'}
-  //     ]
-  //   })
-  // }
+  componentDidMount() {
+    fetch(`${APIURL}`)
+      .then(response => response.json())
+      .then(etfData => this.setState({
+        fetchingData: false,
+        etfData,
+      }))
+  }
 
   render() {
-    const { fetchingData } = this.state;
+    const { fetchingData, etfData } = this.state;
+    const data = etfData["Meta Data"]
     const { etfs, etfToUpdate, actions } = this.props;
     console.log(fetchingData)
+    console.log("The etf data is:", etfData)
+    console.log(data)
     return (
       <div className='etf-deck'>
         <EtfQuoteForm
           etfs={etfs}
+          data={data}
           etfToUpdate={etfToUpdate} />
       </div>
     );

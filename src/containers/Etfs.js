@@ -60,9 +60,11 @@ handleRemoveClick = (etf, event) => {
           <th><strong>Region</strong></th>
         </tr>
     }
-
+    let sym;
+    if (this.props.data) { sym = this.props.data["2. Symbol"]};
     return (
       <div className="etfs-list">
+        <p>{sym}</p>
         <table>
           <thead>
             {tableHeader}
