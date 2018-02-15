@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 // import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 import Navbar from './Navbar.js'
-
 import EtfDeck from './containers/EtfDeck.js'
 
 class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      timeSeries: '1min',
+    }
+  }
+
+  handleTimeSeriesChange = (timeSeries) => this.setState({timeSeries: timeSeries})
+
   render() {
     return (
       <div className="App">
@@ -18,7 +27,7 @@ class App extends Component {
             <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
           </div>
         </Router> */}
-        <Navbar />
+        <Navbar changeTimeSeries={this.handleTimeSeriesChange} />
         <div className="App-body">
           <EtfDeck />
         </div>

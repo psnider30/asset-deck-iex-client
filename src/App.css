@@ -36,12 +36,17 @@
   font-family: 'Robot Slab', sans-serif;
 }
 
+.navbar {
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
 .navbar-button {
-  font-size: 1em;
+  font-size: 1.2em;
   background-color: rgba(21, 120, 35, 0.85);
   text-shadow: 1.3px 1.3px rgb(1,1,1);
   border: none;
-  padding: 5px;
+  padding: 8px;
 }
 
 .navbar-button:hover {
