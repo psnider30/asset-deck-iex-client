@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { removeEtf } from '../actions/etfActions.js'
+import { removeAsset } from '../actions/assetActions.js'
 
-class Etfs extends Component {
+class Assets extends Component {
 
 // componentWillReceiveProps(nextProps) {
-//   if (this.props.etfToUpdate.id !== nextProps.etfToUpdate.id) {
-//     const etf = this.props.findEtf(nextProps.etfToUpdate.id);
-//     const {id, symbol, name, assetClass, region } = etf
+//   if (this.props.assetToUpdate.id !== nextProps.assetToUpdate.id) {
+//     const asset = this.props.findAsset(nextProps.assetToUpdate.id);
+//     const {id, symbol, name, assetClass, region } = asset
 //     debugger;
 //     this.setState({
 //       id: id,
@@ -20,38 +20,38 @@ class Etfs extends Component {
 //   }
 // }
 
-handleEditClick = (etf, event) => {
-  this.props.onUpdateETF(etf);
+handleEditClick = (asset, event) => {
+  this.props.onUpdateETF(asset);
 }
 
-handleRemoveClick = (etf, event) => {
-  this.props.removeEtf(etf.id);
+handleRemoveClick = (asset, event) => {
+  this.props.removeAsset(asset.id);
 }
 
   render() {
-    const etfsList = this.props.etfs.map((etf, index) => {
+    const assetsList = this.props.assets.map((asset, index) => {
       return (
         <tr key={index} align='left'>
-          <td>{etf.symbol}</td>
-          <td>{etf.name}</td>
-          <td>{etf.assetClass}</td>
-          <td>{etf.region}</td>
+          <td>{asset.symbol}</td>
+          <td>{asset.name}</td>
+          <td>{asset.assetClass}</td>
+          <td>{asset.region}</td>
           <td>
-            <button data-id={etf.id} onClick={(event) => this.handleEditClick(etf, event)}>
+            <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
               Edit
             </button>
           </td>
           <td>
-            <button data-id={etf.id} onClick={(event) => this.handleRemoveClick(etf, event)}>
+            <button data-id={asset.id} onClick={(event) => this.handleRemoveClick(asset, event)}>
               Remove
             </button>
           </td>
         </tr>
       );
     })
-    const anyEtfs = etfsList.length > 0;
+    const anyAssets = assetsList.length > 0;
     let tableHeader;
-    if (anyEtfs) {
+    if (anyAssets) {
       tableHeader =
         <tr>
           <th><strong>Symbol</strong></th>
@@ -63,7 +63,7 @@ handleRemoveClick = (etf, event) => {
     let sym;
     if (this.props.data) { sym = this.props.data["2. Symbol"]};
     return (
-      <div className="etfs-list">
+      <div className="assets-list">
         <p>{sym}</p>
         <table>
           <thead>
@@ -71,7 +71,7 @@ handleRemoveClick = (etf, event) => {
           </thead>
 
           <tbody>
-            {etfsList}
+            {assetsList}
           </tbody>
         </table>
       </div>
@@ -81,15 +81,15 @@ handleRemoveClick = (etf, event) => {
 
 // function mapStateToProps(state) {
 //   return {
-//     etfs: state.etfs,
-//     etfToUpdate: state.etfToUpdate,
+//     assets: state.assets,
+//     assetToUpdate: state.assetToUpdate,
 //   }
 // }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    removeEtf: removeEtf,
+    removeAsset: removeAsset,
   }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Etfs);
+export default connect(null, mapDispatchToProps)(Assets);

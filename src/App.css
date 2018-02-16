@@ -59,7 +59,7 @@
   outline: 0;
 }
 
-.quote-form, .etfs-list {
+.quote-form, .assets-list {
   background-color: rgb(252,252,252);
   margin-top: 10px;
   padding-left: 10px;
@@ -67,7 +67,7 @@
   border: 1px solid rgb(210,210,210);
 }
 
-.etfs-list {
+.assets-list {
   background-color: rgb(252,252,252);
   min-height: 100px;
 }

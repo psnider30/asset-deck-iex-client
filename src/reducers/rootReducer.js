@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import manageEtfs from './manageEtfs.js';
+import manageAssets from './manageAssets.js';
 
 export default combineReducers ({
-  etfDeck: manageEtfs,
+  assetDeck: manageAssets,
 })

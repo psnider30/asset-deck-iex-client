@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/etfActions.js'
+import * as actions from '../actions/assetActions.js'
 
-import Etfs from './Etfs.js';
+import Assets from './Assets.js';
 
 
-class EtfQuoteForm extends Component {
+class AssetQuoteForm extends Component {
   constructor(props) {
     super(props);
 
@@ -25,10 +25,10 @@ class EtfQuoteForm extends Component {
   handleSubmit = (event) => {
       event.preventDefault();
       if (this.state.updating) {
-        const etf = this.state;
-        this.props.actions.updateEtf(etf);
+        const asset = this.state;
+        this.props.actions.updateAsset(asset);
       } else {
-        this.props.actions.addEtf(this.state);
+        this.props.actions.addAsset(this.state);
       }
       this.setState(this.initialState);
     }
@@ -38,12 +38,12 @@ class EtfQuoteForm extends Component {
     this.setState({[name]: value});
   }
 
-  findEtf = (id) => {
-    return this.props.etfs.find(etf => etf.id === id)
+  findAsset = (id) => {
+    return this.props.assets.find(asset => asset.id === id)
   }
 
-  onUpdateETF = (etfToUpdate) => {
-    const {id, symbol, name, assetClass, region } = etfToUpdate
+  onUpdateASSET = (assetToUpdate) => {
+    const {id, symbol, name, assetClass, region } = assetToUpdate
     this.setState({
       id: id,
       symbol: symbol,
@@ -52,7 +52,7 @@ class EtfQuoteForm extends Component {
       region: region,
       updating: true,
    });
-    // this.props.actions.updateEtf(etfToUpdate)
+    // this.props.actions.updateAsset(assetToUpdate)
   }
 
   handleExitUpdate = () => {
@@ -60,11 +60,11 @@ class EtfQuoteForm extends Component {
   }
 
   submitOrUpdate = () => {
-    return this.state.updating ? 'Update Etf' : 'Add Etf'
+    return this.state.updating ? 'Update Asset' : 'Add Asset'
   }
 
   render() {
-    const { etfs, etfToUpdate, actions, data } = this.props;
+    const { assets, assetToUpdate, actions, data } = this.props;
     const updating = this.state.updating
     let exitUpdateButton;
     if (updating) {
@@ -73,15 +73,15 @@ class EtfQuoteForm extends Component {
     return (
       <div>
         <div className='quote-form'>
-          <h2>ETF Quote Form</h2>
+          <h2>Find Asset</h2>
           <form onSubmit={(event) => this.handleSubmit(event) }>
-            <label htmlFor='symbol'>ETF Ticker Symbol </label>
+            <label htmlFor='symbol'>Asset Ticker Symbol </label>
             <input type='text' name='symbol'
               onChange={(event) => this.handleChange(event)}
               value={this.state.symbol} />
             <br />
 
-            <label htmlFor='name'>ETF Name </label>
+            <label htmlFor='name'>Asset Name </label>
             <input type='text' name='name'
               onChange={(event) => this.handleChange(event)}
               value={this.state.name} />
@@ -104,11 +104,11 @@ class EtfQuoteForm extends Component {
           </form>
           <br />
         </div>
-        <Etfs
-          etfs={etfs}
-          findEtf ={this.findEtf.bind(this)}
-          onUpdateETF={this.onUpdateETF.bind(this)}
-          etfToUpdate={this.state}
+        <Assets
+          assets={assets}
+          findAsset ={this.findAsset.bind(this)}
+          onUpdateASSET={this.onUpdateASSET.bind(this)}
+          asssetToUpdate={this.state}
           data={data} />
       </div>
     );
@@ -117,8 +117,8 @@ class EtfQuoteForm extends Component {
 
 // function mapStateToProps(state) {
 //   return {
-//     etfs: state.etfs,
-//     etfToUpdate: state.etfToUpdate,
+//     assets: state.assets,
+//     assetToUpdate: state.assetToUpdate,
 //   }
 // }
 
@@ -126,4 +126,4 @@ const mapDispatchToProps = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch)};
 }
 
-export default connect(null, mapDispatchToProps)(EtfQuoteForm)
+export default connect(null, mapDispatchToProps)(AssetQuoteForm)

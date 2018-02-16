@@ -1,46 +1,46 @@
 import React, { Component } from 'react';
 // import uuidV4 from 'uuid/v4';
 import { connect } from 'react-redux';
-import EtfQuoteForm from './EtfQuoteForm.js';
+import AssetQuoteForm from './AssetQuoteForm.js';
 // import { bindActionCreators } from 'redux';
-// import * as actions from '../actions/etfActions.js'
+// import * as actions from '../actions/assetActions.js'
 
 const APIURL =`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=${process.env.ALPHA_VANTAGE_KEY}`
 
 // Symbol, Name, Asset Class, Region
-class EtfDeck extends Component {
+class AssetDeck extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       fetchingData: true,
-      etfData: {},
-      etfToUpdate: null,
+      financeData: {},
+      assetToUpdate: null,
     };
   }
 
   componentDidMount() {
     fetch(`${APIURL}`)
       .then(response => response.json())
-      .then(etfData => this.setState({
+      .then(financeData => this.setState({
         fetchingData: false,
-        etfData,
+        financeData,
       }))
   }
 
   render() {
-    const { fetchingData, etfData } = this.state;
-    const data = etfData["Meta Data"]
-    const { etfs, etfToUpdate, actions } = this.props;
+    const { fetchingData, financeData } = this.state;
+    const data = financeData["Meta Data"]
+    const { assets, assetToUpdate, actions } = this.props;
     console.log(fetchingData)
-    console.log("The etf data is:", etfData)
+    console.log("The asset data is:", financeData)
     console.log(data)
     return (
-      <div className='etf-deck'>
-        <EtfQuoteForm
-          etfs={etfs}
+      <div className='asset-deck'>
+        <AssetQuoteForm
+          assets={assets}
           data={data}
-          etfToUpdate={etfToUpdate} />
+          assetToUpdate={assetToUpdate} />
       </div>
     );
   }
@@ -48,8 +48,8 @@ class EtfDeck extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    etfs: state.etfDeck.etfs,
-    etfToUpdate: state.etfDeck.etfToUpdate,
+    assets: state.assetDeck.assets,
+    assetToUpdate: state.assetDeck.assetToUpdate,
   }
 }
 
@@ -57,4 +57,4 @@ const mapStateToProps = (state) => {
 //   return { actions: bindActionCreators(actions, dispatch)};
 // }
 
-export default connect(mapStateToProps, null)(EtfDeck);
+export default connect(mapStateToProps, null)(AssetDeck);

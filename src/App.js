@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 // import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 import Navbar from './Navbar.js'
-import EtfDeck from './containers/EtfDeck.js'
+import AssetDeck from './containers/AssetDeck.js'
 
 class App extends Component {
   constructor() {
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h1 className="App-title">ETF Deck</h1>
+          <h1 className="App-title">Asset Deck</h1>
         </div>
         {/* <Router>
           <div className="Nav">
@@ -30,7 +30,7 @@ class App extends Component {
         </Router> */}
         <Navbar changeTimeSeries={this.handleTimeSeriesChange} />
         <div className="App-body">
-          <EtfDeck timeSeries={timeSeries} />
+          <AssetDeck timeSeries={timeSeries} />
         </div>
       </div>
     );
