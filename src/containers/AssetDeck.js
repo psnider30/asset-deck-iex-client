@@ -6,6 +6,7 @@ import Navbar from '../Navbar'
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions'
 import { changeTimeSeries } from '../actions/timeSeriesActions'
+import { startFetchingData, stopFetchingData } from '../actions/fetchingDataActions'
 
 
 const APIURL =`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=${process.env.ALPHA_VANTAGE_KEY}`
@@ -16,7 +17,6 @@ class AssetDeck extends Component {
     super(props);
 
     this.state = {
-      fetchingData: true,
       assetData: {},
     };
   }
@@ -24,10 +24,11 @@ class AssetDeck extends Component {
   componentDidMount() {
     fetch(`${APIURL}`)
       .then(response => response.json())
-      .then(assetData => this.setState({
-        fetchingData: false,
-        assetData,
-      }))
+      .then(assetData => {
+        this.setState({
+          assetData,
+      }), this.props.stopFetchingData();
+    })
   }
 
   handleTimeSeriesChange = (timeSeries) => {
@@ -35,9 +36,9 @@ class AssetDeck extends Component {
   }
 
   render() {
-    const { fetchingData, assetData } = this.state;
+    const { assetData } = this.state;
     const data = assetData["Meta Data"]
-    const { assets, assetToUpdate } = this.props;
+    const { fetchingData, assets, assetToUpdate } = this.props;
     console.log(fetchingData)
     console.log("The asset data is:", assetData)
     console.log(data)
@@ -60,6 +61,7 @@ const mapStateToProps = (state) => {
     assets: state.manageAssets.assets,
     assetToUpdate: state.manageAssets.assetToUpdate,
     timeSeries: state.timeSeriesChange.timeSeries,
+    fetchingData: state.fetchingData
   }
 }
 
@@ -67,6 +69,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     assetActions: bindActionCreators(actions, dispatch),
     changeTimeSeries: bindActionCreators(changeTimeSeries, dispatch),
+    startFetchingData: bindActionCreators(startFetchingData, dispatch),
+    stopFetchingData: bindActionCreators(stopFetchingData, dispatch),
   };
 }
 
