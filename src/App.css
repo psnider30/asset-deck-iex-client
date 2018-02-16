@@ -11,22 +11,24 @@
 }
 
 .App-header {
-  background-color: rgba(21, 120, 35, 0.85);
-  height: 100px;
+  background-color: rgba(21, 120, 35, 0.6);
+  height: 60px;
   padding: 5px;
   margin-bottom: 20px;
+  border-bottom: 0.8px solid rgba(21, 120, 35, 1);
 }
 
 .App-title, .navbar-button {
   margin-left: 20px;
-  color: rgb(230,175,75);
   font-family: 'Roboto Slab', serif;
-
+  color: rgb(255,250,250);
+  text-shadow: 0.8px 0.8px #a67c00;
 }
 
 .App-title {
-  font-size: 2.4em;
-  text-shadow: 1.7px 1.7px rgb(1,1,1);
+  margin-top: 10px;
+  font-size: 2.2em;
+
 }
 
 .App-body {
@@ -43,10 +45,9 @@
 
 .navbar-button {
   font-size: 1.2em;
-  background-color: rgba(21, 120, 35, 0.85);
-  text-shadow: 1.3px 1.3px rgb(1,1,1);
-  border: none;
-  padding: 8px;
+  background-color: rgba(21, 120, 35, 0.6);
+  border: 0.5px solid rgba(21, 120, 35, 1);
+  padding: 5px;
 }
 
 .navbar-button:hover {
@@ -63,7 +64,7 @@
   margin-top: 10px;
   padding-left: 10px;
   padding-top: 10px;
-  border: 2px solid rgba(21, 120, 35, 0.85);
+  border: 1px solid rgb(210,210,210);
 }
 
 .etfs-list {

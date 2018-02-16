@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
 
-export default class Navbar extends Component {
-  render() {
-    return (
-      <div className="navbar">
-        <button className="navbar-button">1 Min</button>
-        <button className="navbar-button">Daily</button>
-        <button className="navbar-button">Weekly</button>
-        <button className="navbar-button">Monthly</button>
-      </div>
-    );
-  }
-}
+const Navbar = ({ changeTimeSeries }) =>
+  <div className="navbar">
+    <button className="navbar-button" onClick={() => changeTimeSeries('1min')}>1 Min</button>
+    <button className="navbar-button" onClick={() => changeTimeSeries('daily')}>Daily</button>
+    <button className="navbar-button" onClick={() => changeTimeSeries('weekly')}>Weekly</button>
+    <button className="navbar-button" onClick={() => changeTimeSeries('monthly')}>Monthly</button>
+  </div>
+
+export default Navbar;

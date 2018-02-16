@@ -16,6 +16,7 @@ class App extends Component {
   handleTimeSeriesChange = (timeSeries) => this.setState({timeSeries: timeSeries})
 
   render() {
+    const { timeSeries } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -29,7 +30,7 @@ class App extends Component {
         </Router> */}
         <Navbar changeTimeSeries={this.handleTimeSeriesChange} />
         <div className="App-body">
-          <EtfDeck />
+          <EtfDeck timeSeries={timeSeries} />
         </div>
       </div>
     );
