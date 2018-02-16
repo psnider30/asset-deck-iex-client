@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 // import { BrowserRouter as Router, NavLink } from 'react-router-dom';
-import Navbar from './Navbar.js'
 import AssetDeck from './containers/AssetDeck.js'
 
 class App extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      timeSeries: '1min',
-    }
-  }
-
-  handleTimeSeriesChange = (timeSeries) => this.setState({timeSeries: timeSeries})
 
   render() {
-    const { timeSeries } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -24,13 +13,13 @@ class App extends Component {
         </div>
         {/* <Router>
           <div className="Nav">
-            <NavLink style={{ marginRight: '10px' }} to="/etfs">Your Portfolio</NavLink>
-            <NavLink style={{ marginRight: '10px' }} to="/etfs/new">Add ETF</NavLink>
+            <NavLink style={{ marginRight: '10px' }} to="/assets">Your Portfolio</NavLink>
+            <NavLink style={{ marginRight: '10px' }} to="/assets/new">Add Asset</NavLink>
           </div>
         </Router> */}
-        <Navbar changeTimeSeries={this.handleTimeSeriesChange} />
+
         <div className="App-body">
-          <AssetDeck timeSeries={timeSeries} />
+          <AssetDeck />
         </div>
       </div>
     );

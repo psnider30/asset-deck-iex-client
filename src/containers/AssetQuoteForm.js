@@ -42,7 +42,7 @@ class AssetQuoteForm extends Component {
     return this.props.assets.find(asset => asset.id === id)
   }
 
-  onUpdateASSET = (assetToUpdate) => {
+  onUpdateAsset = (assetToUpdate) => {
     const {id, symbol, name, assetClass, region } = assetToUpdate
     this.setState({
       id: id,
@@ -107,7 +107,7 @@ class AssetQuoteForm extends Component {
         <Assets
           assets={assets}
           findAsset ={this.findAsset.bind(this)}
-          onUpdateASSET={this.onUpdateASSET.bind(this)}
+          onUpdateAsset={this.onUpdateAsset.bind(this)}
           asssetToUpdate={this.state}
           data={data} />
       </div>

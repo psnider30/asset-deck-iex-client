@@ -21,7 +21,7 @@ class Assets extends Component {
 // }
 
 handleEditClick = (asset, event) => {
-  this.props.onUpdateETF(asset);
+  this.props.onUpdateAsset(asset);
 }
 
 handleRemoveClick = (asset, event) => {

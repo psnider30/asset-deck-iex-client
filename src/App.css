@@ -22,13 +22,12 @@
   margin-left: 20px;
   font-family: 'Roboto Slab', serif;
   color: rgb(255,250,250);
-  text-shadow: 0.8px 0.8px #a67c00;
+  text-shadow: 1.5px 1.5px #a67c00;
 }
 
 .App-title {
   margin-top: 10px;
   font-size: 2.2em;
-
 }
 
 .App-body {
@@ -45,6 +44,7 @@
 
 .navbar-button {
   font-size: 1.2em;
+  text-shadow: 0.8px 0.8px #a67c00;
   background-color: rgba(21, 120, 35, 0.6);
   border: 0.5px solid rgba(21, 120, 35, 1);
   padding: 5px;

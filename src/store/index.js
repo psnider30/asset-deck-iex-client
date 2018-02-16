@@ -1,17 +1,18 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import fetchingData from '../reducers/fetchingDataReducer.js'
-import financeData from '../reducers/financeData.js'
+import timeSeriesChange from '../reducers/timeSeriesChange.js'
+import manageAssets from '../reducers/manageAssets.js';
 
 const middlewares = [thunk];
+const reducers = combineReducers({
+  fetchingData,
+  manageAssets,
+  timeSeriesChange,
+})
 
-export default createStore {
+export default createStore (
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(...middlewares)
-}
-
-// store = {
-//   fetchingData: true,
-//   financeData: {},
-//   assetToUpdate: null,
-//   timeSeries: '1 min',
-// }
+)
