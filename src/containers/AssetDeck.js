@@ -15,7 +15,7 @@ import { fetchAssetData } from '../actions/assetDataActions'
 class AssetDeck extends Component {
 
   componentDidMount() {
-    this.props.fetchAssetData()
+    // this.props.fetchAllSymbols()
   }
 
   handleTimeSeriesChange = (timeSeries) => {
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
     changeTimeSeries: bindActionCreators(changeTimeSeries, dispatch),
     startFetchingData: bindActionCreators(startFetchingData, dispatch),
     stopFetchingData: bindActionCreators(stopFetchingData, dispatch),
-    fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
+    // fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
   };
 }
 

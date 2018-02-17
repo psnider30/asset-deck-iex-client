@@ -2,7 +2,12 @@ import uuidv4 from 'uuid/v4';
 
 export default function manageAssets(state = {
   assets: [],
-  assetToUpdate: null
+  assetToUpdate: {
+    id: null,
+    symbol: '',
+    timeSeries: '1m',
+    updating: false,
+  }
 },
   action) {
 

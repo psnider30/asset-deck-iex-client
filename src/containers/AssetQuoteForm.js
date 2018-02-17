@@ -7,20 +7,18 @@ import Assets from './Assets.js';
 
 
 class AssetQuoteForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.initialState = {
-        id: null,
-        symbol: '',
-        name: '',
-        assetClass: '',
-        region: '',
-        updating: false,
-      };
-
-    this.state = this.initialState
-  }
+  // constructor(props) {
+  //   super(props);
+  //
+  //   this.initialState = {
+  //       id: null,
+  //       symbol: '',
+  //       timeSeries: '1m',
+  //       updating: false,
+  //     };
+  //
+  //   this.state = this.initialState
+  // }
 
   handleSubmit = (event) => {
       event.preventDefault();
@@ -47,9 +45,9 @@ class AssetQuoteForm extends Component {
     this.setState({
       id: id,
       symbol: symbol,
-      name: name,
-      assetClass: assetClass,
-      region: region,
+      // name: name,
+      // assetClass: assetClass,
+      // region: region,
       updating: true,
    });
     // this.props.actions.updateAsset(assetToUpdate)
@@ -79,9 +77,9 @@ class AssetQuoteForm extends Component {
             <input type='text' name='symbol'
               onChange={(event) => this.handleChange(event)}
               value={this.state.symbol} />
-            <br />
+            {/* <br /> */}
 
-            <label htmlFor='name'>Asset Name </label>
+            {/* <label htmlFor='name'>Asset Name </label>
             <input type='text' name='name'
               onChange={(event) => this.handleChange(event)}
               value={this.state.name} />
@@ -97,9 +95,9 @@ class AssetQuoteForm extends Component {
             <input type='region' name='region'
               onChange={(event) => this.handleChange(event)}
               value={this.state.region} />
-            <br /><br />
+            <br /><br /> */}
 
-            <input type='submit' value={this.submitOrUpdate()}/>
+            <span> <input className='col-sm' type='submit' value={this.submitOrUpdate()}/></span>
             <span className='col-sm'> {exitUpdateButton} </span>
           </form>
           <br />
