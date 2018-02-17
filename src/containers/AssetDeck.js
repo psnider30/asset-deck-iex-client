@@ -7,28 +7,15 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions'
 import { changeTimeSeries } from '../actions/timeSeriesActions'
 import { startFetchingData, stopFetchingData } from '../actions/fetchingDataActions'
+import { fetchAssetData } from '../actions/assetDataActions'
 
 
-const APIURL =`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=${process.env.ALPHA_VANTAGE_KEY}`
 
 // Symbol, Name, Asset Class, Region
 class AssetDeck extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      assetData: {},
-    };
-  }
 
   componentDidMount() {
-    fetch(`${APIURL}`)
-      .then(response => response.json())
-      .then(assetData => {
-        this.setState({
-          assetData,
-      }), this.props.stopFetchingData();
-    })
+    this.props.fetchAssetData()
   }
 
   handleTimeSeriesChange = (timeSeries) => {
@@ -36,19 +23,18 @@ class AssetDeck extends Component {
   }
 
   render() {
-    const { assetData } = this.state;
-    const data = assetData["Meta Data"]
-    const { fetchingData, assets, assetToUpdate } = this.props;
-    console.log(fetchingData)
-    console.log("The asset data is:", assetData)
-    console.log(data)
+    // const data = assetData["Meta Data"]
+    const { fetchingData, assetData, assets, assetToUpdate } = this.props;
+    // console.log(fetchingData)
+    // console.log("The asset data is:", assetData)
+    // console.log(data)
     return (
       <div>
         <Navbar changeTimeSeries={this.handleTimeSeriesChange.bind(this)} />
         <div className='asset-deck'>
           <AssetQuoteForm
             assets={assets}
-            data={data}
+            assetData={assetData}
             assetToUpdate={assetToUpdate} />
         </div>
       </div>
@@ -61,7 +47,8 @@ const mapStateToProps = (state) => {
     assets: state.manageAssets.assets,
     assetToUpdate: state.manageAssets.assetToUpdate,
     timeSeries: state.timeSeriesChange.timeSeries,
-    fetchingData: state.fetchingData
+    fetchingData: state.fetchingData,
+    assetData: state.assetData,
   }
 }
 
@@ -71,6 +58,7 @@ const mapDispatchToProps = (dispatch) => {
     changeTimeSeries: bindActionCreators(changeTimeSeries, dispatch),
     startFetchingData: bindActionCreators(startFetchingData, dispatch),
     stopFetchingData: bindActionCreators(stopFetchingData, dispatch),
+    fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
   };
 }
 

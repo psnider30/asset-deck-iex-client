@@ -3,6 +3,5 @@ export function startFetchingData() {
 }
 
 export function stopFetchingData() {
-  debugger;
   return { type: 'STOP_FETCHING_DATA' }
 }
