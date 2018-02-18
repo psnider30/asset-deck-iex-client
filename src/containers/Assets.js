@@ -33,9 +33,14 @@ handleRemoveClick = (asset, event) => {
       return (
         <tr key={index} align='left'>
           <td>{asset.symbol}</td>
-          <td>{asset.name}</td>
-          <td>{asset.assetClass}</td>
-          <td>{asset.region}</td>
+          <td>{asset.companyName}</td>
+          <td>$ {asset.open}</td>
+          <td>$ {asset.close}</td>
+          <td>$ {asset.latestPrice}</td>
+          <td>{asset.changePercent.toFixed(2)} %</td>
+          {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
+          <td>{asset.sector}</td>
+          <td>{asset.latestTime}</td>
           <td>
             <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
               Edit
@@ -56,15 +61,18 @@ handleRemoveClick = (asset, event) => {
         <tr>
           <th><strong>Symbol</strong></th>
           <th><strong>Name</strong></th>
-          <th><strong>Asset Class</strong></th>
-          <th><strong>Region</strong></th>
+          <th><strong>Open</strong></th>
+          <th><strong>Close</strong></th>
+          <th><strong>Latest</strong></th>
+          <th><strong>Change</strong></th>
+          {/* <th><strong>YTD-Change</strong></th> */}
+          <th><strong>Sector</strong></th>
+          <th><strong>Date</strong></th>
         </tr>
     }
-    let sym;
-    if (this.props.data) { sym = this.props.data["2. Symbol"]};
+
     return (
       <div className="assets-list">
-        <p>{sym}</p>
         <table>
           <thead>
             {tableHeader}

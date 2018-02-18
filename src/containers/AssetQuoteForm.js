@@ -5,20 +5,19 @@ import * as actions from '../actions/assetActions.js'
 
 import Assets from './Assets.js';
 
-
 class AssetQuoteForm extends Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  //   this.initialState = {
-  //       id: null,
-  //       symbol: '',
-  //       timeSeries: '1m',
-  //       updating: false,
-  //     };
-  //
-  //   this.state = this.initialState
-  // }
+  constructor(props) {
+    super(props);
+
+    this.initialState = {
+        id: null,
+        symbol: '',
+        timeSeries: '1d',
+        updating: false,
+      };
+
+    this.state = this.initialState
+  }
 
   handleSubmit = (event) => {
       event.preventDefault();
@@ -26,7 +25,7 @@ class AssetQuoteForm extends Component {
         const asset = this.state;
         this.props.actions.updateAsset(asset);
       } else {
-        this.props.actions.addAsset(this.state);
+        this.props.actions.fetchAsset(this.state);
       }
       this.setState(this.initialState);
     }
@@ -41,13 +40,11 @@ class AssetQuoteForm extends Component {
   }
 
   onUpdateAsset = (assetToUpdate) => {
-    const {id, symbol, name, assetClass, region } = assetToUpdate
+    const { id, symbol, timeSeries } = assetToUpdate
     this.setState({
       id: id,
       symbol: symbol,
-      // name: name,
-      // assetClass: assetClass,
-      // region: region,
+      timeSeries: timeSeries,
       updating: true,
    });
     // this.props.actions.updateAsset(assetToUpdate)
@@ -77,28 +74,22 @@ class AssetQuoteForm extends Component {
             <input type='text' name='symbol'
               onChange={(event) => this.handleChange(event)}
               value={this.state.symbol} />
-            {/* <br /> */}
-
-            {/* <label htmlFor='name'>Asset Name </label>
-            <input type='text' name='name'
-              onChange={(event) => this.handleChange(event)}
-              value={this.state.name} />
             <br />
 
-            <label htmlFor='assetClass'>Asset Class </label>
-            <input type='text' name='assetClass'
-              onChange={(event) => this.handleChange(event)}
-              value={this.state.assetClass} />
+            <label htmlFor='timeSeries'>Time Series </label>
+            <select name='timeSeries'
+              onChange={(event) => this.handleChange(event)}>
+              <option value='1d'>Day</option>
+              <option value='1m'>Month</option>
+              <option value='3m'> 3 Month</option>
+              <option value='6m'> 6 Month</option>
+              <option value='ytd'>Year-to-date</option>
+            </select>
             <br />
-
-            <label htmlFor='region'>Region </label>
-            <input type='region' name='region'
-              onChange={(event) => this.handleChange(event)}
-              value={this.state.region} />
-            <br /><br /> */}
-
-            <span> <input className='col-sm' type='submit' value={this.submitOrUpdate()}/></span>
-            <span className='col-sm'> {exitUpdateButton} </span>
+            <div className="submit-form">
+              <span> <input className='col-sm' type='submit' value={this.submitOrUpdate()}/></span>
+              <span className='col-sm'> {exitUpdateButton} </span>
+            </div>
           </form>
           <br />
         </div>
