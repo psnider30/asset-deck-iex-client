@@ -7,7 +7,6 @@ const AV_API =`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJ
 const IEX_API = `https://api.iextrading.com/1.0/stock/`;
 
 export const fetchAsset = (asset) => {
-  debugger;
   return dispatch => {
     fetch(`${IEX_API}/${asset.symbol}/quote`)
       .then(response => response.json())
@@ -37,7 +36,6 @@ export function findAsset(assetId) {
 }
 
 export function updateAsset(asset) {
-  debugger;
   return {
     type: 'UPDATE_ASSET',
     asset
