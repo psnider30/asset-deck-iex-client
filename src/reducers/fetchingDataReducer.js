@@ -1,4 +1,4 @@
-export default (state = true, action) => {
+export default (state = false, action) => {
   switch(action.type) {
     case 'START_FETCHING_DATA':
       return true;

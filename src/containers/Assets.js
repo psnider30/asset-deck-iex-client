@@ -5,21 +5,6 @@ import { removeAsset } from '../actions/assetActions.js'
 
 class Assets extends Component {
 
-// componentWillReceiveProps(nextProps) {
-//   if (this.props.assetToUpdate.id !== nextProps.assetToUpdate.id) {
-//     const asset = this.props.findAsset(nextProps.assetToUpdate.id);
-//     const {id, symbol, name, assetClass, region } = asset
-//     debugger;
-//     this.setState({
-//       id: id,
-//       symbol: symbol,
-//       name: name,
-//       assetClass: assetClass,
-//       region: region,
-//     });
-//   }
-// }
-
 handleEditClick = (asset, event) => {
   this.props.onUpdateAsset(asset);
 }

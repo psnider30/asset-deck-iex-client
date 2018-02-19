@@ -1,16 +1,6 @@
 import uuidv4 from 'uuid/v4';
 
-export default function manageAssets(state = {
-  assets: [],
-  assetToUpdate: {
-    id: null,
-    symbol: '',
-    timeSeries: '1m',
-    updating: false,
-  }
-},
-  action) {
-
+export default function manageAssets(state = { assets: [] }, action) {
   let idx;
   let asset;
 

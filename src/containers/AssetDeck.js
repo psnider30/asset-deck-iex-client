@@ -6,7 +6,6 @@ import Navbar from '../Navbar'
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions'
 import { changeTimeSeries } from '../actions/timeSeriesActions'
-import { startFetchingData, stopFetchingData } from '../actions/fetchingDataActions'
 import { fetchAssetData } from '../actions/assetDataActions'
 
 
@@ -45,7 +44,6 @@ class AssetDeck extends Component {
 const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assets,
-    assetToUpdate: state.manageAssets.assetToUpdate,
     timeSeries: state.timeSeriesChange.timeSeries,
     fetchingData: state.fetchingData,
     assetData: state.assetData,
@@ -56,8 +54,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     assetActions: bindActionCreators(actions, dispatch),
     changeTimeSeries: bindActionCreators(changeTimeSeries, dispatch),
-    startFetchingData: bindActionCreators(startFetchingData, dispatch),
-    stopFetchingData: bindActionCreators(stopFetchingData, dispatch),
+
     // fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
   };
 }
