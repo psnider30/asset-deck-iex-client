@@ -14,15 +14,15 @@ handleRemoveClick = (asset, event) => {
     const assetsList = this.props.assets.map((asset, index) => {
       return (
         <tr key={asset.id} align='left'>
-          <td>{asset.symbol}</td>
-          <td>{asset.companyName}</td>
-          <td>$ {asset.open}</td>
-          <td>$ {asset.close}</td>
-          <td>$ {asset.latestPrice}</td>
-          <td>{asset.changePercent.toFixed(2)} %</td>
+          <td>{asset.quote.symbol}</td>
+          <td>{asset.quote.companyName}</td>
+          <td>$ {asset.quote.open}</td>
+          <td>$ {asset.quote.close}</td>
+          <td>$ {asset.quote.latestPrice}</td>
+          <td>{asset.quote.changePercent.toFixed(2)} %</td>
           {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
-          <td>{asset.sector}</td>
-          <td>{asset.latestTime}</td>
+          <td>{asset.quote.sector}</td>
+          <td>{asset.quote.latestTime}</td>
           <td>
             <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
               Replace

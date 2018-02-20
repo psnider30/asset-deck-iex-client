@@ -4,17 +4,30 @@
 // let type = 'quote'
 //
 // const AV_API =`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NFLX&apikey=${process.env.ALPHA_VANTAGE_KEY}`;
-const IEX_API = `https://api.iextrading.com/1.0/stock/`;
+const IEX_API = `https://api.iextrading.com/1.0/stock`;
+
+let assetData = { quote: {}, fundamentals: {} }
+
+const fetchFundamentals = (symbol) => {
+  return fetch(`${IEX_API}/${symbol}/stats`)
+    .then(response => response.json())
+}
+
+const fetchMain = (symbol) => {
+  return fetch(`${IEX_API}/${symbol}/quote`)
+    .then(response => response.json())
+}
 
 export const fetchAsset = (asset) => {
   return dispatch => {
-    fetch(`${IEX_API}/${asset.symbol}/quote`)
-      .then(response => response.json())
-      .then(assetData => {
+    Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol)])
+      .then(values => {
+        assetData.quote = values[0];
+        assetData.fundamentals = values[1]
         asset.updating ? dispatch(updateAsset({...assetData, id: asset.id})) : dispatch(addAsset(assetData))
         console.log(assetData)
-    })
-    .catch(error => {
+      })
+      .catch(error => {
       alert('Symbol Not Found')
       console.log(error);
     })
