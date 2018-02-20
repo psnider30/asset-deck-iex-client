@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions.js'
 import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActions'
-
-import Assets from './Assets.js';
+import AssetsQuote from '../components/AssetsQuote.js';
 
 class AssetQuoteForm extends Component {
   constructor(props) {
@@ -33,10 +32,6 @@ class AssetQuoteForm extends Component {
     this.setState({[name]: value});
   }
 
-  findAsset = (id) => {
-    return this.props.assets.find(asset => asset.id === id)
-  }
-
   onUpdateAsset = (assetToUpdate) => {
     const { id, symbol, timeSeries } = assetToUpdate
     this.setState({
@@ -52,7 +47,7 @@ class AssetQuoteForm extends Component {
   }
 
   submitOrUpdate = () => {
-    return this.state.updating ? 'Update Asset' : 'Add Asset'
+    return this.state.updating ? 'Replace Asset' : 'Add Asset'
   }
 
   render() {
@@ -90,11 +85,10 @@ class AssetQuoteForm extends Component {
           </form>
           <br />
         </div>
-        <Assets
+        <AssetsQuote
           assets={assets}
-          findAsset ={this.findAsset.bind(this)}
           onUpdateAsset={this.onUpdateAsset.bind(this)}
-          asssetToUpdate={this.state}
+          removeAsset={this.props.actions.removeAsset}
           data={data} />
       </div>
     );

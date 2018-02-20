@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AssetQuoteForm from './AssetQuoteForm';
-import Navbar from '../Navbar'
+import Navbar from '../components/Navbar'
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions'
 import { changeTimeSeries } from '../actions/timeSeriesActions'

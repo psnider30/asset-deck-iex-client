@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { removeAsset } from '../actions/assetActions.js'
 
-class Assets extends Component {
+export default class AssetsQuote extends Component {
 
 handleEditClick = (asset, event) => {
   this.props.onUpdateAsset(asset);
@@ -16,7 +16,7 @@ handleRemoveClick = (asset, event) => {
   render() {
     const assetsList = this.props.assets.map((asset, index) => {
       return (
-        <tr key={index} align='left'>
+        <tr key={asset.id} align='left'>
           <td>{asset.symbol}</td>
           <td>{asset.companyName}</td>
           <td>$ {asset.open}</td>
@@ -28,7 +28,7 @@ handleRemoveClick = (asset, event) => {
           <td>{asset.latestTime}</td>
           <td>
             <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
-              Edit
+              Replace
             </button>
           </td>
           <td>
@@ -71,18 +71,3 @@ handleRemoveClick = (asset, event) => {
     );
   }
 }
-
-// function mapStateToProps(state) {
-//   return {
-//     assets: state.assets,
-//     assetToUpdate: state.assetToUpdate,
-//   }
-// }
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    removeAsset: removeAsset,
-  }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(Assets);
