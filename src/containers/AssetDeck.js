@@ -14,16 +14,20 @@ class AssetDeck extends Component {
     // this.props.fetchAllSymbols()
   }
 
-  handleLayoutChange = (layout) => {
-    this.props.changeLayout(layout)
+  handleLayoutChange = (newLayout) => {
+    const currentLayout = this.props.layout
+    currentLayout !== newLayout ? this.props.changeLayout(newLayout, currentLayout) : null
   }
 
   render() {
-    const { fetchingData, assetData, assets } = this.props;
+    const { assetData, assets } = this.props;
 
     return (
       <div>
-        <Navbar changeLayout={this.handleLayoutChange.bind(this)} />
+        <Navbar
+          changeLayout={this.handleLayoutChange.bind(this)}
+          currentLayout={this.props.layout}
+         />
         <div className='asset-deck'>
           <AssetQuoteForm
             assets={assets}

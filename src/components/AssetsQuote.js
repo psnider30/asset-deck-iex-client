@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { removeAsset } from '../actions/assetActions.js'
 
 export default class AssetsQuote extends Component {
 

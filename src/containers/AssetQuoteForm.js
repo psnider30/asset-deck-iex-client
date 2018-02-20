@@ -51,7 +51,7 @@ class AssetQuoteForm extends Component {
   }
 
   render() {
-    const { assets, assetToUpdate, actions, data } = this.props;
+    const { assets } = this.props;
     const updating = this.state.updating
     let exitUpdateButton;
     if (updating) {
@@ -88,8 +88,7 @@ class AssetQuoteForm extends Component {
         <AssetsQuote
           assets={assets}
           onUpdateAsset={this.onUpdateAsset.bind(this)}
-          removeAsset={this.props.actions.removeAsset}
-          data={data} />
+          removeAsset={this.props.actions.removeAsset} />
       </div>
     );
   }

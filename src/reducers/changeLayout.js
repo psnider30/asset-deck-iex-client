@@ -1,6 +1,10 @@
 export default function changeLayout(state = 'main', action) {
   switch(action.type) {
-    case "CHANGE_LAYOUT":
+    case "MAIN_LAYOUT":
+      return action.layout
+    case "FUNDAMENTALS_LAYOUT":
+      return action.layout
+    case "TIME_SERIES_LAYOUT":
       return action.layout
     default:
       return state;
