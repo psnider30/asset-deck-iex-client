@@ -4,7 +4,7 @@ import AssetQuoteForm from './AssetQuoteForm';
 import Navbar from '../components/Navbar'
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions'
-import { changeTimeSeries } from '../actions/timeSeriesActions'
+import { changeLayout } from '../actions/layoutActions'
 import { fetchAssetData } from '../actions/assetDataActions'
 
 // Symbol, Name, Asset Class, Region
@@ -14,8 +14,8 @@ class AssetDeck extends Component {
     // this.props.fetchAllSymbols()
   }
 
-  handleTimeSeriesChange = (timeSeries) => {
-    this.props.changeTimeSeries(timeSeries)
+  handleLayoutChange = (layout) => {
+    this.props.changeLayout(layout)
   }
 
   render() {
@@ -23,7 +23,7 @@ class AssetDeck extends Component {
 
     return (
       <div>
-        <Navbar changeTimeSeries={this.handleTimeSeriesChange.bind(this)} />
+        <Navbar changeLayout={this.handleLayoutChange.bind(this)} />
         <div className='asset-deck'>
           <AssetQuoteForm
             assets={assets}
@@ -37,7 +37,7 @@ class AssetDeck extends Component {
 const mapStateToProps = (state) => {
   return {
     assets: state.assets,
-    timeSeries: state.timeSeriesChange.timeSeries,
+    layout: state.layout,
     fetchingData: state.fetchingData,
     assetData: state.assetData,
   }
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     assetActions: bindActionCreators(actions, dispatch),
-    changeTimeSeries: bindActionCreators(changeTimeSeries, dispatch),
+    changeLayout: bindActionCreators(changeLayout, dispatch),
     // fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
   };
 }

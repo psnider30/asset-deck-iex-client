@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Navbar = ({ changeTimeSeries }) =>
+const Navbar = ({ changeLayout }) =>
   <div className="navbar">
-    <button className="navbar-button" onClick={() => changeTimeSeries('1min')}>1 Min</button>
-    <button className="navbar-button" onClick={() => changeTimeSeries('daily')}>Daily</button>
-    <button className="navbar-button" onClick={() => changeTimeSeries('weekly')}>Weekly</button>
-    <button className="navbar-button" onClick={() => changeTimeSeries('monthly')}>Monthly</button>
+    <button className="navbar-button" onClick={() => changeLayout('main')}>Quote</button>
+    <button className="navbar-button" onClick={() => changeLayout('fundamentals')}>Fundamentals</button>
+    <button className="navbar-button" onClick={() => changeLayout('timeSeries')}>Time Series</button>
+    {/* <button className="navbar-button" onClick={() => changeLayout('monthly')}>Monthly</button> */}
   </div>
 
 export default Navbar;
