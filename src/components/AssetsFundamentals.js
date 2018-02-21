@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import formatNumber from '../lib/formatNumber'
 
 export default class AssetsFundamentals extends Component {
 
@@ -12,17 +13,17 @@ handleRemoveClick = (asset, event) => {
 
   render() {
     const assetsList = this.props.assets.map((asset, index) => {
+      debugger;
       return (
         <tr key={asset.id} align='left'>
           <td>{asset.quote.symbol}</td>
-          <td>{(asset.fundamentals.marketcap/1000000).toFixed(2)} B</td>
-          <td>$ {asset.quote.open}</td>
-          <td>$ {asset.quote.close}</td>
           <td>$ {asset.quote.latestPrice}</td>
-          <td>{asset.quote.changePercent.toFixed(2)} %</td>
-          {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
-          <td>{asset.quote.sector}</td>
-          <td>{asset.quote.latestTime}</td>
+          <td>{formatNumber(asset.fundamentals.marketcap)}</td>
+          <td>{formatNumber(asset.quote.avgTotalVolume)}</td>
+          <td>{formatNumber(asset.fundamentals.latestEPS)}</td>
+          <td>{formatNumber(asset.quote.peRatio)}</td>
+          <td>{formatNumber(asset.fundamentals.dividendYield)}</td>
+          <td>{formatNumber(asset.fundamentals.priceToBook)}</td>
           <td>
             <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
               Replace
@@ -42,14 +43,13 @@ handleRemoveClick = (asset, event) => {
       tableHeader =
         <tr>
           <th><strong>Symbol</strong></th>
+          <th><strong>Last Price</strong></th>
           <th><strong>Market Cap</strong></th>
-          <th><strong>Open</strong></th>
-          <th><strong>Close</strong></th>
-          <th><strong>Latest</strong></th>
-          <th><strong>Change</strong></th>
-          {/* <th><strong>YTD-Change</strong></th> */}
-          <th><strong>Sector</strong></th>
-          <th><strong>Date</strong></th>
+          <th><strong>Avg Vol</strong></th>
+          <th><strong>Latest EPS</strong></th>
+          <th><strong>P/E</strong></th>
+          <th><strong>Div Yield</strong></th>
+          <th><strong>Price/Book</strong></th>
         </tr>
     }
 
