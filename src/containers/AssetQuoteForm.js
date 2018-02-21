@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/assetActions.js'
-import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActions'
-import AssetsQuote from '../components/AssetsQuote.js';
+import * as actions from '../actions/assetActions';
+import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActions';
+import AssetsQuote from '../components/AssetsQuote';
+import AssetsFundamentals from '../components/AssetsFundamentals';
 
 class AssetQuoteForm extends Component {
   constructor(props) {
@@ -33,11 +34,9 @@ class AssetQuoteForm extends Component {
   }
 
   onUpdateAsset = (assetToUpdate) => {
-    const { id, symbol, timeSeries } = assetToUpdate
     this.setState({
-      id: id,
-      symbol: symbol,
-      timeSeries: timeSeries,
+      id: assetToUpdate.id,
+      symbol: assetToUpdate.quote.symbol,
       updating: true,
    });
   }
@@ -51,8 +50,8 @@ class AssetQuoteForm extends Component {
   }
 
   render() {
-    const { assets } = this.props;
-    const updating = this.state.updating
+    const {layout, fetchingData, assets } = this.props;
+    const updating = this.state.updating;
     let exitUpdateButton;
     if (updating) {
       exitUpdateButton = <button onClick={this.handleExitUpdate}>Exit Without Updating</button>
@@ -85,21 +84,37 @@ class AssetQuoteForm extends Component {
           </form>
           <br />
         </div>
-        <AssetsQuote
-          assets={assets}
-          onUpdateAsset={this.onUpdateAsset.bind(this)}
-          removeAsset={this.props.actions.removeAsset} />
+        {
+            fetchingData ?
+            <p>Fetching</p>
+            :
+            <div className="asset-layout">
+              {layout === 'main' &&
+              <AssetsQuote
+                assets={assets}
+                onUpdateAsset={this.onUpdateAsset.bind(this)}
+                removeAsset={this.props.actions.removeAsset} />
+              }
+              {layout === 'fundamentals' &&
+              <AssetsFundamentals
+                assets={assets}
+                onUpdateAsset={this.onUpdateAsset.bind(this)}
+                removeAsset={this.props.actions.removeAsset} />
+              }
+            </div>
+          }
       </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     assets: state.assets,
-//     assetToUpdate: state.assetToUpdate,
-//   }
-// }
+function mapStateToProps(state) {
+  return {
+    assets: state.assets,
+    layout: state.layout,
+    fetchingData: state.fetchingData,
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -109,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(null, mapDispatchToProps)(AssetQuoteForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AssetQuoteForm)

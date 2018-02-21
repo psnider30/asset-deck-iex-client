@@ -29,9 +29,7 @@ class AssetDeck extends Component {
           currentLayout={this.props.layout}
          />
         <div className='asset-deck'>
-          <AssetQuoteForm
-            assets={assets}
-            assetData={assetData} />
+          <AssetQuoteForm />
         </div>
       </div>
     );
