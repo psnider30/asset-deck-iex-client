@@ -11,7 +11,7 @@ import store from './store'
 
 WebFont.load({
   google: {
-    families: ['Roboto Slab', 'Crimson Text', 'Roboto']
+    families: ['Roboto Slab', 'Mukta Mahee', 'Quicksand']
   }
 });
 

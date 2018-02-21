@@ -5,6 +5,7 @@ import * as actions from '../actions/assetActions';
 import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActions';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
+import '../table.css';
 
 class AssetQuoteForm extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class AssetQuoteForm extends Component {
   }
 
   submitOrUpdate = () => {
-    return this.state.updating ? 'Replace Asset' : 'Add Asset'
+    return this.state.updating ? 'Update Asset' : 'Add Asset'
   }
 
   render() {
@@ -59,10 +60,10 @@ class AssetQuoteForm extends Component {
     return (
       <div>
         <div className='quote-form'>
-          <h2>Find Asset</h2>
           <form onSubmit={(event) => this.handleSubmit(event) }>
-            <label htmlFor='symbol'>Asset Ticker Symbol </label>
-            <input type='text' name='symbol'
+            <label id='asset-lookup-label' htmlFor='symbol'>Asset Lookup </label>
+            <input type='text' id='asset-lookup-input' name='symbol'
+              placeholder='ticker symbol'
               onChange={(event) => this.handleChange(event)}
               value={this.state.symbol} />
             <br />

@@ -1,4 +1,5 @@
 export default function formatNumber(value) {
+  if (!value) { return ' - '}
     const thousand = 1000;
     const million = 1000000;
     const billion = 1000000000;

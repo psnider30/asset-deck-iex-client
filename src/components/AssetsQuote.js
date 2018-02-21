@@ -13,19 +13,20 @@ handleRemoveClick = (asset, event) => {
   render() {
     const assetsList = this.props.assets.map((asset, index) => {
       return (
-        <tr key={asset.id} align='left'>
+        <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
           <td>{asset.quote.companyName}</td>
           <td>$ {asset.quote.open}</td>
           <td>$ {asset.quote.close}</td>
           <td>$ {asset.quote.latestPrice}</td>
-          <td>{asset.quote.changePercent.toFixed(2)} %</td>
+          <td>{asset.quote.change}</td>
+          <td>{(asset.quote.changePercent * 100).toFixed(2)} %</td>
           {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
-          <td>{asset.quote.sector}</td>
+          <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
           <td>{asset.quote.latestTime}</td>
           <td>
             <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
-              Replace
+              Update
             </button>
           </td>
           <td>
@@ -47,9 +48,10 @@ handleRemoveClick = (asset, event) => {
           <th><strong>Close</strong></th>
           <th><strong>Latest</strong></th>
           <th><strong>Change</strong></th>
+          <th><strong>Change %</strong></th>
           {/* <th><strong>YTD-Change</strong></th> */}
           <th><strong>Sector</strong></th>
-          <th><strong>Date</strong></th>
+          <th><strong>Time or Date</strong></th>
         </tr>
     }
 

@@ -72,6 +72,25 @@
   min-height: 100px;
 }
 
+#asset-lookup-label {
+  color: rgb(21, 120, 35);
+  font-size: 1.6em;
+  text-shadow: 0.3px 0.3px darkgreen;
+  font-family: 'Mukta Mahee', sans-serif;
+}
+
+#asset-lookup-input {
+  height: 20px;
+  font-size: 1em;
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid rgba(21, 120, 35, 0.6);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #ddc063;
+    opacity: 1; /* Firefox */
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

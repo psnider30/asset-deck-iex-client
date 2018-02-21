@@ -13,9 +13,8 @@ handleRemoveClick = (asset, event) => {
 
   render() {
     const assetsList = this.props.assets.map((asset, index) => {
-      debugger;
       return (
-        <tr key={asset.id} align='left'>
+        <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
           <td>$ {asset.quote.latestPrice}</td>
           <td>{formatNumber(asset.fundamentals.marketcap)}</td>
@@ -31,7 +30,7 @@ handleRemoveClick = (asset, event) => {
           </td>
           <td>
             <button data-id={asset.id} onClick={(event) => this.handleRemoveClick(asset, event)}>
-              Remove
+              Update
             </button>
           </td>
         </tr>
