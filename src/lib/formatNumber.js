@@ -1,4 +1,4 @@
-export default function formatNumber(value) {
+export function formatNumber(value) {
   if (!value) { return ' - '}
     const thousand = 1000;
     const million = 1000000;
@@ -16,4 +16,11 @@ export default function formatNumber(value) {
     } else {
         return (value/trillion).toFixed(2) + 'T';
     }
+}
+
+export function removeSeconds(time) {
+  if (time.length > 11) {return time}
+  const timeArr = time.split(':')
+  const postFix = timeArr[2].split(' ')[1]
+  return timeArr[0] + ':' + timeArr[1] + ' ' + postFix
 }

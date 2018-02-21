@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { removeSeconds } from '../lib/formatNumber'
 
 export default class AssetsQuote extends Component {
 
@@ -23,14 +24,20 @@ handleRemoveClick = (asset, event) => {
           <td>{(asset.quote.changePercent * 100).toFixed(2)} %</td>
           {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
           <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
-          <td>{asset.quote.latestTime}</td>
-          <td>
-            <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
+          <td>{removeSeconds(asset.quote.latestTime)}</td>
+          <td className='no-background'>
+            <button
+              className='update-button'
+              data-id={asset.id}
+              onClick={(event) => this.handleEditClick(asset, event)}>
               Update
             </button>
           </td>
-          <td>
-            <button data-id={asset.id} onClick={(event) => this.handleRemoveClick(asset, event)}>
+          <td className='no-background'>
+            <button
+              className='remove-button'
+              data-id={asset.id}
+              onClick={(event) => this.handleRemoveClick(asset, event)}>
               Remove
             </button>
           </td>

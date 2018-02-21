@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import formatNumber from '../lib/formatNumber'
+import { formatNumber } from '../lib/formatNumber'
 
 export default class AssetsFundamentals extends Component {
 
@@ -23,14 +23,20 @@ handleRemoveClick = (asset, event) => {
           <td>{formatNumber(asset.quote.peRatio)}</td>
           <td>{formatNumber(asset.fundamentals.dividendYield)}</td>
           <td>{formatNumber(asset.fundamentals.priceToBook)}</td>
-          <td>
-            <button data-id={asset.id} onClick={(event) => this.handleEditClick(asset, event)}>
-              Replace
+          <td className='no-background'>
+            <button
+              className='update-button'
+              data-id={asset.id}
+              onClick={(event) => this.handleEditClick(asset, event)}>
+              Update
             </button>
           </td>
-          <td>
-            <button data-id={asset.id} onClick={(event) => this.handleRemoveClick(asset, event)}>
-              Update
+          <td className='no-background'>
+            <button
+              className='remove-button'
+              data-id={asset.id}
+              onClick={(event) => this.handleRemoveClick(asset, event)}>
+              Remove
             </button>
           </td>
         </tr>

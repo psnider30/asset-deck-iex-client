@@ -6,18 +6,19 @@ table {
 
 thead {
   color: rgb(255,255,255);
-  text-shadow: 0.5px 0.5px #a67c00;
-  background-color: rgba(21, 120, 35, 0.6);
+  font-size: 1.1em;
+  text-shadow: 0.4px 0.4px #a67c00;
+  background-color: rgba(21, 120, 35, 0.75);
   border-bottom: 0.8px solid rgba(21, 120, 35, 1);
-
 }
 
-th {
-  padding: 3px 9px;
+thead th {
+  /* border: 1px solid darkgreen; */
 }
 
 table th, table td {
   text-align: center;
+  padding: 3px 9px;
 }
 
 tr:nth-of-type(even) {
@@ -25,8 +26,11 @@ tr:nth-of-type(even) {
 }
 
 .table-row-data {
-  font-size: 0.9em;
   border-bottom: 1px solid #d0d0d0;
+}
+
+.no-background {
+  background-color: white;
 }
 
 @media screen and (max-width: 700px) {

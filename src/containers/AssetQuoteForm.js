@@ -55,7 +55,10 @@ class AssetQuoteForm extends Component {
     const updating = this.state.updating;
     let exitUpdateButton;
     if (updating) {
-      exitUpdateButton = <button onClick={this.handleExitUpdate}>Exit Without Updating</button>
+      exitUpdateButton =
+      <button className='exit-update-button' onClick={this.handleExitUpdate}>
+        Don't Update
+      </button>
     }
     return (
       <div>
@@ -68,9 +71,8 @@ class AssetQuoteForm extends Component {
               value={this.state.symbol} />
             <br />
 
-            <label htmlFor='timeSeries'>Time Series </label>
-            <select name='timeSeries'
-              onChange={(event) => this.handleChange(event)}>
+            <label htmlFor='timeSeries' id='time-series-label'>Time Series </label>
+            <select name='timeSeries' onChange={(event) => this.handleChange(event)}>
               <option value='1d'>Day</option>
               <option value='1m'>Month</option>
               <option value='3m'> 3 Month</option>
@@ -79,8 +81,8 @@ class AssetQuoteForm extends Component {
             </select>
             <br />
             <div className="submit-form">
-              <span> <input className='col-sm' type='submit' value={this.submitOrUpdate()}/></span>
-              <span className='col-sm'> {exitUpdateButton} </span>
+              <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
+              {exitUpdateButton}
             </div>
           </form>
           <br />
