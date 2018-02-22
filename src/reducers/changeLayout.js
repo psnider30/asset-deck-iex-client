@@ -8,6 +8,8 @@ export default function changeLayout(state = 'main', action) {
       return action.layout
     case "CHANGE_SUMMARY_LAYOUT":
       return action.layout
+    case "FINANCIALS_LAYOUT":
+      return action.layout
     default:
       return state;
   }

@@ -9,6 +9,8 @@ export function changeLayout(newLayout, currentLayout) {
     return timeSeries(newLayout)
   } else if (newLayout === 'changeSummary') {
     return changeSummary(newLayout)
+  } else if (newLayout === 'financials') {
+    return financials(newLayout)
   }
 }
 
@@ -29,6 +31,13 @@ function fundamentals(layout) {
 function changeSummary(layout) {
   return {
     type: 'CHANGE_SUMMARY_LAYOUT',
+    layout
+  }
+}
+
+function financials(layout) {
+  return {
+    type: 'FINANCIALS_LAYOUT',
     layout
   }
 }
