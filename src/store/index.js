@@ -1,14 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import fetchingData from '../reducers/fetchingDataReducer.js'
-import layout from '../reducers/changeLayout.js'
-import assets from '../reducers/manageAssets.js';
-import assetData from '../reducers/assetDataReducer.js';
-
+// import fetchingData from '../reducers/fetchingDataReducer.js'
+import layout from '../reducers/changeLayout'
+import manageAssets from '../reducers/manageAssets';
+import assetData from '../reducers/assetDataReducer'
 const middlewares = [thunk];
 const reducers = combineReducers({
-  fetchingData,
-  assets,
+  manageAssets,
   layout,
   assetData,
 })

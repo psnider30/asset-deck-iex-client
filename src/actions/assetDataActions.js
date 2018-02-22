@@ -1,5 +1,3 @@
-import { stopFetchingData }from './fetchingDataActions'
-
 const IEX_ALL_SYMBOLS_API = 'https://api.iextrading.com/1.0/stock/ref-data/symbols'
 
 const receivedAllSymbols = (allSymbols) => {
@@ -15,7 +13,6 @@ export const fetchAllSymbols = () => {
       .then(response => response.json())
       .then(allSymbols => {
         dispatch(receivedAllSymbols(allSymbols))
-        stopFetchingData()
         console.log(allSymbols)
     })
   }

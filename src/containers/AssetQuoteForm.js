@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions';
-import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActions';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
 import ChangeSummary from '../components/ChangeSummary';
@@ -19,16 +18,14 @@ class AssetQuoteForm extends Component {
         timeSeries: '1d',
         updating: false,
       };
-
     this.state = this.initialState
   }
 
   handleSubmit = (event) => {
       event.preventDefault();
-      this.props.startFetchingData();
+      this.props.actions.startFetchingData();
       this.props.actions.fetchAsset(this.state);
       this.setState(this.initialState);
-      this.props.stopFetchingData()
     }
 
   handleChange = (event) => {
@@ -133,17 +130,15 @@ class AssetQuoteForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    assets: state.assets,
+    assets: state.manageAssets.assets,
+    fetchingData: state.manageAssets.fetchingData,
     layout: state.layout,
-    fetchingData: state.fetchingData,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(actions, dispatch),
-    startFetchingData: bindActionCreators(startFetchingData, dispatch),
-    stopFetchingData: bindActionCreators(stopFetchingData, dispatch),
   };
 }
 

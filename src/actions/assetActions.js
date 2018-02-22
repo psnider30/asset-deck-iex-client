@@ -17,8 +17,6 @@ const fetchFinancials = (symbol) => {
     .then(response => response.json())
 }
 
-
-
 export const fetchAsset = (asset) => {
   return dispatch => {
     Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol), fetchFinancials(asset.symbol)])
@@ -34,6 +32,10 @@ export const fetchAsset = (asset) => {
       console.log(error);
     })
   }
+}
+
+export function startFetchingData() {
+  return { type: 'START_FETCHING_DATA' }
 }
 
 function addAsset(asset) {
