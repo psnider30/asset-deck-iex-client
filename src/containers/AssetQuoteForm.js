@@ -6,6 +6,7 @@ import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
 import ChangeSummary from '../components/ChangeSummary';
 import AssetsFinancials from '../components/AssetsFinancials';
+import TimeSeries from '../components/TimeSeries';
 import '../table.css';
 
 class AssetQuoteForm extends Component {
@@ -121,6 +122,12 @@ class AssetQuoteForm extends Component {
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset} />
               }
+              {layout === 'timeSeries' &&
+              <TimeSeries
+                assets={assets}
+                onUpdateAsset={this.onUpdateAsset.bind(this)}
+                removeAsset={this.props.actions.removeAsset} />
+              }
             </div>
           }
       </div>
@@ -128,7 +135,7 @@ class AssetQuoteForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assets,
     fetchingData: state.manageAssets.fetchingData,
