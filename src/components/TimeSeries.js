@@ -10,4 +10,21 @@ export default class TimeSeries extends Component {
   handleRemoveClick = (asset, event) => {
     this.props.removeAsset(asset.id);
   }
+
+
+  render() {
+    return (
+      <div className="assets-list">
+        <table>
+          <thead>
+            <tr><th>Time Series</th></tr>
+          </thead>
+
+          <tbody>
+            <tr><td>Data</td></tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }

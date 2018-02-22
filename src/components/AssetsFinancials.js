@@ -62,7 +62,6 @@ handleRemoveClick = (asset, event) => {
 
     return (
       <div className="assets-list">
-        <h2>Financials</h2>
         <table>
           <thead>
             {tableHeader}
