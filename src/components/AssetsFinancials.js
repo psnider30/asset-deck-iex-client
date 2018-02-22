@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { formatNumber, decimalToPercentage, addPlus } from '../lib/formatNumber'
 
-export default class Financials extends Component {
+export default class AssetsFinancials extends Component {
 
 handleEditClick = (asset, event) => {
   this.props.onUpdateAsset(asset);

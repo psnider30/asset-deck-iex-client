@@ -6,7 +6,7 @@ import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActio
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
 import ChangeSummary from '../components/ChangeSummary';
-import AssetFinancials from '../components/AssetFinancials';
+import AssetsFinancials from '../components/AssetsFinancials';
 import '../table.css';
 
 class AssetQuoteForm extends Component {
@@ -28,7 +28,7 @@ class AssetQuoteForm extends Component {
       this.props.startFetchingData();
       this.props.actions.fetchAsset(this.state);
       this.setState(this.initialState);
-      this.props.stopFetchingData() 
+      this.props.stopFetchingData()
     }
 
   handleChange = (event) => {
@@ -119,7 +119,7 @@ class AssetQuoteForm extends Component {
                 removeAsset={this.props.actions.removeAsset} />
               }
               {layout === 'financials' &&
-              <AssetFinancials
+              <AssetsFinancials
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset} />

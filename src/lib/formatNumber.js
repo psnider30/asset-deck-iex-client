@@ -1,21 +1,28 @@
 export function formatNumber(value) {
   if (!value) { return ' - '}
-    const thousand = 1000;
-    const million = 1000000;
-    const billion = 1000000000;
-    const trillion = 1000000000000;
+  const thousand = 1000;
+  const million = 1000000;
+  const billion = 1000000000;
+  const trillion = 1000000000000;
+  const absValue = Math.abs(value);
 
-    if (value < thousand && value >= 0) {
-        return value.toFixed(2);
-    } else if (value >= thousand && value <= 1000000) {
-         return  (value/thousand).toFixed(2) + 'k';
-    } else if (value >= million && value <= billion) {
-        return (value/million).toFixed(2) + 'M';
-    } else if (value >= billion && value <= trillion) {
-        return (value/billion).toFixed(2) + 'B';
-    } else {
-        return (value/trillion).toFixed(2) + 'T';
-    }
+  if (absValue < thousand) {
+    return value >= 0 ? absValue.toFixed(2) : '-' + absValue.toFixed(2);
+  } else if (absValue >= thousand && absValue <= million) {
+    return value >= 0 ? (absValue/thousand).toFixed(2) + 'k' :
+    '-' + (absValue/thousand).toFixed(2) + 'k'
+  } else if (absValue >= million && absValue <= billion) {
+    return value >= 0 ? (absValue/million).toFixed(2) + 'M' :
+    '-' + (absValue/million).toFixed(2) + 'M'
+  } else if (absValue >= billion && absValue <= trillion) {
+    return value >= 0 ? (absValue/billion).toFixed(2) + 'B' :
+    '-' + (absValue/billion).toFixed(2) + 'B'
+  } else if (absValue >= trillion) {
+    return value >= 0 ? (absValue/trillion).toFixed(2) + 'T' :
+    '-' + (absValue/trillion).toFixed(2) + 'T'
+  } else {
+    return value >= 0 ? absValue.toFixed(2) : '-' + absValue.toFixed(2);
+  }
 }
 
 export function removeSeconds(time) {
