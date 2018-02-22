@@ -5,7 +5,7 @@ export function formatNumber(value) {
     const billion = 1000000000;
     const trillion = 1000000000000;
 
-    if (value < thousand) {
+    if (value < thousand && value >= 0) {
         return value.toFixed(2);
     } else if (value >= thousand && value <= 1000000) {
          return  (value/thousand).toFixed(2) + 'k';

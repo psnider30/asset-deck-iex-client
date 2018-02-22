@@ -16,14 +16,14 @@ handleRemoveClick = (asset, event) => {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
-          <td>{asset.quote.companyName}</td>
-          <td>$ {asset.quote.open}</td>
-          <td>$ {asset.quote.close}</td>
-          <td>$ {asset.quote.latestPrice}</td>
-          <td>{addPlus(asset.quote.change)}</td>
-          <td>{decimalToPercentage(asset.quote.changePercent)}</td>
-          <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
-          <td>{}</td>
+          <td>{formatNumber(asset.financials.grossProfit)}</td>
+          <td>{formatNumber(asset.financials.totalRevenue)}</td>
+          <td>{formatNumber(asset.financials.operatingIncome)}</td>
+          <td>{formatNumber(asset.financials.totalAssets)}</td>
+          <td>{formatNumber(asset.financials.totalLiabilities)}</td>
+          <td>{formatNumber(asset.financials.cashFlow)}</td>
+          <td>{formatNumber(asset.financials.shareholderEquity)}</td>
+          <td>{asset.financials.reportDate}</td>
           <td className='no-background'>
             <button
               className='update-button'
@@ -49,14 +49,14 @@ handleRemoveClick = (asset, event) => {
       tableHeader =
         <tr>
           <th><strong>Symbol</strong></th>
-          <th><strong>Name</strong></th>
-          <th><strong>Open</strong></th>
-          <th><strong>Close</strong></th>
-          <th><strong>Latest</strong></th>
-          <th><strong>Change</strong></th>
-          <th><strong>Change %</strong></th>
-          <th><strong>Sector</strong></th>
-          <th><strong>Time or Date</strong></th>
+          <th><strong>Gross Profit</strong></th>
+          <th><strong>Total Rev</strong></th>
+          <th><strong>Operating Income</strong></th>
+          <th><strong>Tot Assets</strong></th>
+          <th><strong>Tot Liab</strong></th>
+          <th><strong>Cash FLow</strong></th>
+          <th><strong>SH Equity</strong></th>
+          <th><strong>Date</strong></th>
         </tr>
     }
 
