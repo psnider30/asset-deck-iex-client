@@ -28,7 +28,7 @@ class AssetQuoteForm extends Component {
       this.props.startFetchingData();
       this.props.actions.fetchAsset(this.state);
       this.setState(this.initialState);
-      this.props.stopFetchingData();
+      this.props.stopFetchingData() 
     }
 
   handleChange = (event) => {
@@ -56,12 +56,29 @@ class AssetQuoteForm extends Component {
     const {layout, fetchingData, assets } = this.props;
     const updating = this.state.updating;
     let exitUpdateButton;
+    let timeSeriesMenu;
     if (updating) {
       exitUpdateButton =
       <button className='exit-update-button' onClick={this.handleExitUpdate}>
         Don't Update
       </button>
     }
+
+    if (layout === 'timeSeries') {
+      timeSeriesMenu =
+      <div className='time-series-menu'>
+        <label htmlFor='timeSeries' id='time-series-label'>Time Series </label>
+        <select name='timeSeries' onChange={(event) => this.handleChange(event)}>
+          <option value='1d'>Day</option>
+          <option value='1m'>Month</option>
+          <option value='3m'> 3 Month</option>
+          <option value='6m'> 6 Month</option>
+          <option value='ytd'>Year-to-date</option>
+        </select>
+        <br />
+      </div>
+    }
+
     return (
       <div>
         <div className='quote-form'>
@@ -72,26 +89,15 @@ class AssetQuoteForm extends Component {
               onChange={(event) => this.handleChange(event)}
               value={this.state.symbol} />
             <br />
-
-            <label htmlFor='timeSeries' id='time-series-label'>Time Series </label>
-            <select name='timeSeries' onChange={(event) => this.handleChange(event)}>
-              <option value='1d'>Day</option>
-              <option value='1m'>Month</option>
-              <option value='3m'> 3 Month</option>
-              <option value='6m'> 6 Month</option>
-              <option value='ytd'>Year-to-date</option>
-            </select>
-            <br />
-            <div className="submit-form">
-              <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
-              {exitUpdateButton}
-            </div>
+            {timeSeriesMenu}
+            <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
+            {exitUpdateButton}
           </form>
           <br />
         </div>
         {
             fetchingData ?
-            <p>Fetching</p>
+            <div>Fetching</div>
             :
             <div className="asset-layout">
               {layout === 'main' &&

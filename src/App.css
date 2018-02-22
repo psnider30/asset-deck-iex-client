@@ -99,6 +99,10 @@ input:-webkit-autofill {
   font-family: 'Mukta Mahee', sans-serif;
 }
 
+#time-series-lookup-input {
+  border: 1px solid rgba(21, 120, 35, 0.6);
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #ddc063;
   opacity: 1; /* Firefox */
