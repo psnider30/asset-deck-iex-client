@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { decimalToPercentage, addPlus } from '../lib/formatNumber'
+import { formatNumber, decimalToPercentage, addPlus } from '../lib/formatNumber'
 
 export default class Financials extends Component {
 
