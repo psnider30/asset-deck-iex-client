@@ -5,6 +5,7 @@ import * as actions from '../actions/assetActions';
 import { startFetchingData, stopFetchingData }from '../actions/fetchingDataActions';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
+import ChangeSummary from '../components/ChangeSummary';
 import '../table.css';
 
 class AssetQuoteForm extends Component {
@@ -100,6 +101,12 @@ class AssetQuoteForm extends Component {
               }
               {layout === 'fundamentals' &&
               <AssetsFundamentals
+                assets={assets}
+                onUpdateAsset={this.onUpdateAsset.bind(this)}
+                removeAsset={this.props.actions.removeAsset} />
+              }
+              {layout === 'changeSummary' &&
+              <ChangeSummary
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset} />

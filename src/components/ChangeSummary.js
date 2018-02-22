@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber'
+import { decimalToPercentage } from '../lib/formatNumber'
 
-export default class AssetsQuote extends Component {
+export default class ChangeSummary extends Component {
 
 handleEditClick = (asset, event) => {
   this.props.onUpdateAsset(asset);
@@ -16,15 +16,14 @@ handleRemoveClick = (asset, event) => {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
-          <td>{asset.quote.companyName}</td>
-          <td>$ {asset.quote.open}</td>
-          <td>$ {asset.quote.close}</td>
-          <td>$ {asset.quote.latestPrice}</td>
-          <td>{addPlus(asset.quote.change)}</td>
-          <td>{decimalToPercentage(asset.quote.changePercent)}</td>
-          {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
-          <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
-          <td>{removeSeconds(asset.quote.latestTime)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.day5ChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.month1ChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.month3ChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.month6ChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.ytdChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.year1ChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.year2ChangePercent)}</td>
+          <td>{decimalToPercentage(asset.fundamentals.year5ChangePercent)}</td>
           <td className='no-background'>
             <button
               className='update-button'
@@ -44,21 +43,21 @@ handleRemoveClick = (asset, event) => {
         </tr>
       );
     })
+
     const anyAssets = assetsList.length > 0;
     let tableHeader;
     if (anyAssets) {
       tableHeader =
         <tr>
           <th><strong>Symbol</strong></th>
-          <th><strong>Name</strong></th>
-          <th><strong>Open</strong></th>
-          <th><strong>Close</strong></th>
-          <th><strong>Latest</strong></th>
-          <th><strong>Change</strong></th>
-          <th><strong>Change %</strong></th>
-          {/* <th><strong>YTD-Change</strong></th> */}
-          <th><strong>Sector</strong></th>
-          <th><strong>Time or Date</strong></th>
+          <th><strong>5 Day</strong></th>
+          <th><strong>1 Month</strong></th>
+          <th><strong>3 Month</strong></th>
+          <th><strong>6 Month</strong></th>
+          <th><strong>YTD</strong></th>
+          <th><strong>1 Year</strong></th>
+          <th><strong>2 Year</strong></th>
+          <th><strong>5 year</strong></th>
         </tr>
     }
 

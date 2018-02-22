@@ -24,3 +24,12 @@ export function removeSeconds(time) {
   const postFix = timeArr[2].split(' ')[1]
   return timeArr[0] + ':' + timeArr[1] + ' ' + postFix
 }
+
+export function decimalToPercentage(decimal) {
+  const prefix = decimal > 0 ? '+ ' : '';
+  return prefix + (decimal * 100).toFixed(2) + ' %'
+}
+
+export function addPlus(value) {
+  return value > 0 ? '+ ' + value : value;
+}

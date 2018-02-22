@@ -6,6 +6,8 @@ export default function changeLayout(state = 'main', action) {
       return action.layout
     case "TIME_SERIES_LAYOUT":
       return action.layout
+    case "CHANGE_SUMMARY_LAYOUT":
+      return action.layout
     default:
       return state;
   }

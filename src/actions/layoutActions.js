@@ -7,6 +7,8 @@ export function changeLayout(newLayout, currentLayout) {
     return fundamentals(newLayout)
   } else if (newLayout === 'timeSeries') {
     return timeSeries(newLayout)
+  } else if (newLayout === 'changeSummary') {
+    return changeSummary(newLayout)
   }
 }
 
@@ -20,6 +22,13 @@ function mainLayout(layout) {
 function fundamentals(layout) {
   return {
     type: 'FUNDAMENTALS_LAYOUT',
+    layout
+  }
+}
+
+function changeSummary(layout) {
+  return {
+    type: 'CHANGE_SUMMARY_LAYOUT',
     layout
   }
 }

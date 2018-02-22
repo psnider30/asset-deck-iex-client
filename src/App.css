@@ -5,6 +5,10 @@
   height: 100%;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -55,8 +59,9 @@
   background-color: white;
   text-shadow: none;
 }
+
 .navbar-button:focus {
-  outline: 0;
+  outline: none;
 }
 
 .quote-form, .assets-list {
@@ -108,6 +113,7 @@
   font-size: 0.9em;
   color: white;
   border-radius: 5px;
+  outline: none;
 }
 
 .exit-update-button {
