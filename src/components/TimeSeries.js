@@ -27,13 +27,13 @@ export default class TimeSeries extends Component {
     const assetReturns = asset.timeSeries[`${frequency}`].map((period, index) => {
       return (
       <tr key={index}>
-        <td>{period.date}</td>
-        <td>$ {period.close}</td>
-        <td>$ {period.open}</td>
-        <td>{formatNumber(period.change)}</td>
-        <td>{formatNumber(period.changePercent)} %</td>
-        <td>{formatNumber(period.volume)}</td>
-        <td>{formatNumber(period.vwap)}</td>
+        <td className='time-series-td'>{period.date}</td>
+        <td className='time-series-td'>$ {period.close}</td>
+        <td className='time-series-td'>$ {period.open}</td>
+        <td className='time-series-td'>{formatNumber(period.change)}</td>
+        <td className='time-series-td'>{formatNumber(period.changePercent)} %</td>
+        <td className='time-series-td'>{formatNumber(period.volume)}</td>
+        <td className='time-series-td'>$ {formatNumber(period.vwap)}</td>
       </tr>
       );
     }).reverse();
@@ -51,7 +51,9 @@ export default class TimeSeries extends Component {
             <div className="company-details">
               <h3 className='company-detail'>{asset.quote.companyName}</h3>
               <h5 className='company-detail'>{asset.companyInfo.exchange}</h5>
-              <h5 className='company-detail'><a href={asset.companyInfo.website}>{asset.companyInfo.website}</a></h5>
+              <h5 className='company-detail'>
+                <a target='_blank' href={asset.companyInfo.website}>{asset.companyInfo.website}</a>
+            </h5>
             </div>
             <div className="company-description">
               <p className='company-detail'>{asset.companyInfo.description}</p>
@@ -72,13 +74,13 @@ export default class TimeSeries extends Component {
           <table>
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Close</th>
-                <th>Open</th>
-                <th>Change</th>
-                <th>Change %</th>
-                <th>Volume</th>
-                <th>Vol WAP</th>
+                <th className='time-series-th'>Date</th>
+                <th className='time-series-th'>Close</th>
+                <th className='time-series-th'>Open</th>
+                <th className='time-series-th'>Change</th>
+                <th className='time-series-th'>Change %</th>
+                <th className='time-series-th'>Volume</th>
+                <th className='time-series-th'>Vol Weighted Avg Price</th>
               </tr>
             </thead>
 

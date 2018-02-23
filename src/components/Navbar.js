@@ -4,6 +4,7 @@ export default class Navbar extends Component {
 
   render() {
     const { changeLayout, currentLayout } = this.props;
+    const timeSeriesButton = currentLayout === 'timeSeries' ? <button className="navbar-button-active">Returns</button> : null;
     return (
       <div className="navbar">
         <button
@@ -29,7 +30,8 @@ export default class Navbar extends Component {
           onClick={() => changeLayout('financials', currentLayout)}>
           Financials
         </button>
-        {/* <button className="navbar-button" onClick={() => changeLayout('timeSeries', currentLayout)}>Time Series</button> */}
+
+        {timeSeriesButton}
       </div>
     );
   }
