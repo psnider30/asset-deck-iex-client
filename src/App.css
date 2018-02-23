@@ -77,6 +77,10 @@ input:-webkit-autofill {
   min-height: 100px;
 }
 
+.time-series {
+  padding-top:0;
+}
+
 #asset-lookup-label {
   color: rgb(21, 120, 35);
   font-size: 1.6em;
@@ -126,6 +130,66 @@ input:-webkit-autofill {
 
 .remove-button, .exit-update-button {
   background-color: rgb(255,97,102);
+}
+
+.company-logo {
+  -webkit-transform: scale(0.6);
+  margin: 0;
+  padding: 0;
+}
+
+.logo-container {
+  width: auto !important;
+  height: auto !important;
+}
+
+.company-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+}
+
+.company-name {
+  margin: 0 10px 4px 0;
+  padding: 0;
+}
+
+.company-detail {
+  margin: 0 15px 4px 0;
+  padding: 0;
+}
+
+.company-details {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 15px 4px 8px;
+}
+
+.company-description {
+  margin-top: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  white-space:wrap;
+ -webkit-order:1;
+ -webkit-flex: 0 1 auto; /*important*/
+  text-overflow: ellipsis;
+  overflow:hidden;
+  min-width:0;
+}
+
+.returns {
+  z-index: 10;
+}
+
+.company-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 30px;
+  margin-left: 15px;
 }
 
 @keyframes App-logo-spin {

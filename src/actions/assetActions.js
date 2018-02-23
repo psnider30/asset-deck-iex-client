@@ -32,10 +32,16 @@ const fetchLogo = (symbol) => {
     .then(response => response.json())
 }
 
+const fetchCompanyInfo = (symbol) => {
+  return fetch(`${IEX_API}/${symbol}/company`)
+    .then(response => response.json())
+}
+
 export const fetchAsset = (asset) => {
   return dispatch => {
     Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol), fetchFinancials(asset.symbol),
-    fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol), fetchLogo(asset.symbol)])
+    fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol), fetchLogo(asset.symbol),
+    fetchCompanyInfo(asset.symbol)])
       .then(values => {
         assetData.quote = values[0];
         assetData.fundamentals = values[1];
@@ -43,6 +49,7 @@ export const fetchAsset = (asset) => {
         assetData.timeSeries.monthly = values[3];
         assetData.timeSeries.daily = values[4];
         assetData.logo = values[5];
+        assetData.companyInfo = values[6];
         asset.updating ? dispatch(updateAsset({...assetData, id: asset.id})) : dispatch(addAsset(assetData))
         console.log(assetData)
       })
