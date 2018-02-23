@@ -13,13 +13,14 @@ export default class TimeSeries extends Component {
 
   render() {
     const asset = this.props.assets.find(asset => asset.id === this.props.assetSelected.id);
+    const logo = !asset.logo.url || asset.quote.symbol === "SPY" ? 'dollar_logo.jpg' : asset.logo.url
     return (
       <div className="time-series">
         <div className="company-container">
           <div className="logo-container">
             <img
               className='company-logo'
-              src={asset.logo.url}
+              src={logo}
               alt={asset.quote.symbol} />
           </div>
           <div className='company-info'>

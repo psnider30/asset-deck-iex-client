@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import { formatNumber } from '../lib/formatNumber'
+import { formatNumber } from '../lib/formatNumber';
+import OptionsButton from './OptionsButton';
 
 export default class AssetsFundamentals extends Component {
 
-handleEditClick = (asset, event) => {
-  this.props.onUpdateAsset(asset);
-}
-
-handleRemoveClick = (asset, event) => {
-  this.props.removeAsset(asset.id);
-}
-
   render() {
+    const { asset, onUpdateAsset, removeAsset, changeLayout } = this.props;
     const assetsList = this.props.assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
@@ -24,20 +18,11 @@ handleRemoveClick = (asset, event) => {
           <td>{formatNumber(asset.fundamentals.dividendYield)}</td>
           <td>{formatNumber(asset.fundamentals.priceToBook)}</td>
           <td className='no-background'>
-            <button
-              className='update-button'
-              data-id={asset.id}
-              onClick={(event) => this.handleEditClick(asset, event)}>
-              Update
-            </button>
-          </td>
-          <td className='no-background'>
-            <button
-              className='remove-button'
-              data-id={asset.id}
-              onClick={(event) => this.handleRemoveClick(asset, event)}>
-              Remove
-            </button>
+            <OptionsButton
+              asset={asset}
+              onUpdateAsset={onUpdateAsset}
+              removeAsset={removeAsset}
+              changeLayout={changeLayout} />
           </td>
         </tr>
       );

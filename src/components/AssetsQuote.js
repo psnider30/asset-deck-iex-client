@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
-import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber'
+import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
+import OptionsButton from './OptionsButton';
 
 export default class AssetsQuote extends Component {
-
-handleEditClick = (asset, event) => {
-  this.props.onUpdateAsset(asset);
-}
-
-handleRemoveClick = (asset, event) => {
-  this.props.removeAsset(asset.id);
-}
-
-handleReturnsClick = (asset, event) => {
-  this.props.changeLayout('timeSeries',this.props.layout, asset);
-}
-
   render() {
+    const { asset, onUpdateAsset, removeAsset, changeLayout } = this.props;
     const assetsList = this.props.assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
@@ -29,32 +18,16 @@ handleReturnsClick = (asset, event) => {
           <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
           <td>{removeSeconds(asset.quote.latestTime)}</td>
           <td className='no-background'>
-            <button
-              className='update-button'
-              data-id={asset.id}
-              onClick={(event) => this.handleEditClick(asset, event)}>
-              Update
-            </button>
-          </td>
-          <td className='no-background'>
-            <button
-              className='remove-button'
-              data-id={asset.id}
-              onClick={(event) => this.handleRemoveClick(asset, event)}>
-              Remove
-            </button>
-          </td>
-          <td className='no-background'>
-            <button
-              className='returns-button'
-              data-id={asset.id}
-              onClick={(event) => this.handleReturnsClick(asset, event)}>
-              Returns
-            </button>
+            <OptionsButton
+              asset={asset}
+              onUpdateAsset={onUpdateAsset}
+              removeAsset={removeAsset}
+              changeLayout={changeLayout} />
           </td>
         </tr>
       );
     })
+
     const anyAssets = assetsList.length > 0;
     let tableHeader;
     if (anyAssets) {
