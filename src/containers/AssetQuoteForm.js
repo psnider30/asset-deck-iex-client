@@ -55,6 +55,7 @@ class AssetQuoteForm extends Component {
     const {layout, fetchingData, assets } = this.props;
     const updating = this.state.updating;
     let exitUpdateButton;
+
     let timeSeriesMenu;
     if (updating) {
       exitUpdateButton =
@@ -62,22 +63,24 @@ class AssetQuoteForm extends Component {
         Don't Update
       </button>
     }
+    const quoteForm =
+        <div className='quote-form'>
+        <form onSubmit={(event) => this.handleSubmit(event) }>
+          <label id='asset-lookup-label' htmlFor='symbol'>Asset Lookup </label>
+          <input type='text' id='asset-lookup-input' name='symbol'
+            placeholder='ticker symbol'
+            onChange={(event) => this.handleChange(event)}
+            value={this.state.symbol} />
+          <br />
+          <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
+          {exitUpdateButton}
+        </form>
+        <br />
+      </div>
 
     return (
       <div>
-        <div className='quote-form'>
-          <form onSubmit={(event) => this.handleSubmit(event) }>
-            <label id='asset-lookup-label' htmlFor='symbol'>Asset Lookup </label>
-            <input type='text' id='asset-lookup-input' name='symbol'
-              placeholder='ticker symbol'
-              onChange={(event) => this.handleChange(event)}
-              value={this.state.symbol} />
-            <br />
-            <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
-            {exitUpdateButton}
-          </form>
-          <br />
-        </div>
+        {this.props.layout !== 'timeSeries' ? quoteForm : null}
         {
             fetchingData ?
             <div>Fetching</div>
