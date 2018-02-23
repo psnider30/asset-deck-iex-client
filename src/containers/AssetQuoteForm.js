@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions';
+import { changeLayout } from '../actions/layoutActions';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
 import ChangeSummary from '../components/ChangeSummary';
@@ -23,10 +24,10 @@ class AssetQuoteForm extends Component {
   }
 
   handleSubmit = (event) => {
-      event.preventDefault();
-      this.props.actions.startFetchingData();
-      this.props.actions.fetchAsset(this.state);
-      this.setState(this.initialState);
+    event.preventDefault();
+    this.props.actions.startFetchingData();
+    this.props.actions.fetchAsset(this.state);
+    this.setState(this.initialState);
     }
 
   handleChange = (event) => {
@@ -62,21 +63,6 @@ class AssetQuoteForm extends Component {
       </button>
     }
 
-    if (layout === 'timeSeries') {
-      timeSeriesMenu =
-      <div className='time-series-menu'>
-        <label htmlFor='timeSeries' id='time-series-label'>Time Series </label>
-        <select name='timeSeries' onChange={(event) => this.handleChange(event)}>
-          <option value='1d'>Day</option>
-          <option value='1m'>Month</option>
-          <option value='3m'> 3 Month</option>
-          <option value='6m'> 6 Month</option>
-          <option value='ytd'>Year-to-date</option>
-        </select>
-        <br />
-      </div>
-    }
-
     return (
       <div>
         <div className='quote-form'>
@@ -87,7 +73,6 @@ class AssetQuoteForm extends Component {
               onChange={(event) => this.handleChange(event)}
               value={this.state.symbol} />
             <br />
-            {timeSeriesMenu}
             <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
             {exitUpdateButton}
           </form>
@@ -102,31 +87,42 @@ class AssetQuoteForm extends Component {
               <AssetsQuote
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset} />
+                removeAsset={this.props.actions.removeAsset}
+                changeLayout={this.props.changeLayout}
+                layout={this.props.layout} />
               }
               {layout === 'fundamentals' &&
               <AssetsFundamentals
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset} />
+                removeAsset={this.props.actions.removeAsset}
+                changeLayout={this.props.changeLayout}
+                layout={this.props.layout}  />
               }
               {layout === 'changeSummary' &&
               <ChangeSummary
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset} />
+                removeAsset={this.props.actions.removeAsset}
+                changeLayout={this.props.changeLayout}
+                layout={this.props.layout}  />
               }
               {layout === 'financials' &&
               <AssetsFinancials
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset} />
+                removeAsset={this.props.actions.removeAsset}
+                changeLayout={this.props.changeLayout}
+                layout={this.props.layout}  />
               }
               {layout === 'timeSeries' &&
               <TimeSeries
                 assets={assets}
+                assetSelected={this.props.assetSelected}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset} />
+                removeAsset={this.props.actions.removeAsset}
+                changeLayout={this.props.changeLayout}
+                layout={this.props.layout}  />
               }
             </div>
           }
@@ -139,13 +135,15 @@ const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assets,
     fetchingData: state.manageAssets.fetchingData,
-    layout: state.layout,
+    layout: state.changeLayout.layout,
+    assetSelected: state.changeLayout.asset,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(actions, dispatch),
+    changeLayout: bindActionCreators(changeLayout, dispatch),
   };
 }
 

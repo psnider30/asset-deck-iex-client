@@ -64,7 +64,7 @@ input:-webkit-autofill {
   outline: none;
 }
 
-.quote-form, .assets-list {
+.quote-form, .assets-list, .time-series {
   background-color: rgb(252,252,252);
   margin-top: 10px;
   padding-left: 10px;
@@ -72,7 +72,7 @@ input:-webkit-autofill {
   border: 1px solid rgb(210,210,210);
 }
 
-.assets-list {
+.assets-list, .time-series {
   background-color: rgb(252,252,252);
   min-height: 100px;
 }

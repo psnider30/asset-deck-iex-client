@@ -11,6 +11,10 @@ handleRemoveClick = (asset, event) => {
   this.props.removeAsset(asset.id);
 }
 
+handleReturnsClick = (asset, event) => {
+  this.props.changeLayout('timeSeries',this.props.layout, asset);
+}
+
   render() {
     const assetsList = this.props.assets.map((asset, index) => {
       return (
@@ -22,7 +26,6 @@ handleRemoveClick = (asset, event) => {
           <td>$ {asset.quote.latestPrice}</td>
           <td>{addPlus(asset.quote.change)}</td>
           <td>{decimalToPercentage(asset.quote.changePercent)}</td>
-          {/* <td>{(asset.ytdChange * 100).toFixed(2)} %</td> */}
           <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
           <td>{removeSeconds(asset.quote.latestTime)}</td>
           <td className='no-background'>
@@ -41,6 +44,14 @@ handleRemoveClick = (asset, event) => {
               Remove
             </button>
           </td>
+          <td className='no-background'>
+            <button
+              className='returns-button'
+              data-id={asset.id}
+              onClick={(event) => this.handleReturnsClick(asset, event)}>
+              Returns
+            </button>
+          </td>
         </tr>
       );
     })
@@ -56,7 +67,6 @@ handleRemoveClick = (asset, event) => {
           <th><strong>Latest</strong></th>
           <th><strong>Change</strong></th>
           <th><strong>Change %</strong></th>
-          {/* <th><strong>YTD-Change</strong></th> */}
           <th><strong>Sector</strong></th>
           <th><strong>Time or Date</strong></th>
         </tr>

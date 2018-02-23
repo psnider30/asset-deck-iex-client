@@ -1,16 +1,16 @@
-export function changeLayout(newLayout, currentLayout) {
+export function changeLayout(newLayout, currentLayout, asset=null) {
   if (newLayout === currentLayout) { return }
 
   if (newLayout === 'main') {
     return mainLayout(newLayout)
   } else if (newLayout === 'fundamentals') {
     return fundamentals(newLayout)
-  } else if (newLayout === 'timeSeries') {
-    return timeSeries(newLayout)
   } else if (newLayout === 'changeSummary') {
     return changeSummary(newLayout)
   } else if (newLayout === 'financials') {
     return financials(newLayout)
+  } else if (newLayout === 'timeSeries') {
+    return timeSeries(newLayout, asset)
   }
 }
 
@@ -42,9 +42,10 @@ function financials(layout) {
   }
 }
 
-function timeSeries(layout) {
+function timeSeries(layout, asset) {
   return {
     type: 'TIME_SERIES_LAYOUT',
-    layout
+    layout,
+    asset
   }
 }

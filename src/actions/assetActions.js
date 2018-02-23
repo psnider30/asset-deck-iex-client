@@ -1,6 +1,6 @@
 const IEX_API = `https://api.iextrading.com/1.0/stock`;
 
-let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {} }
+let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} }
 
 const fetchMain = (symbol) => {
   return fetch(`${IEX_API}/${symbol}/quote`)
@@ -27,16 +27,22 @@ const fetchDailyTimeSeries = (symbol) => {
     .then(response => response.json())
 }
 
+const fetchLogo = (symbol) => {
+  return fetch(`${IEX_API}/${symbol}/logo`)
+    .then(response => response.json())
+}
+
 export const fetchAsset = (asset) => {
   return dispatch => {
     Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol), fetchFinancials(asset.symbol),
-    fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol)])
+    fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol), fetchLogo(asset.symbol)])
       .then(values => {
         assetData.quote = values[0];
         assetData.fundamentals = values[1];
         assetData.financials = values[2].financials[0];
-        assetData.timeSeries.monthly = values[3]
-        assetData.timeSeries.daily = values[4]
+        assetData.timeSeries.monthly = values[3];
+        assetData.timeSeries.daily = values[4];
+        assetData.logo = values[5];
         asset.updating ? dispatch(updateAsset({...assetData, id: asset.id})) : dispatch(addAsset(assetData))
         console.log(assetData)
       })
