@@ -30,7 +30,7 @@ export default class TimeSeries extends Component {
         <td>{period.date}</td>
         <td>$ {period.close}</td>
         <td>$ {period.open}</td>
-        <td>{period.change}</td>
+        <td>{formatNumber(period.change)}</td>
         <td>{formatNumber(period.changePercent)} %</td>
         <td>{formatNumber(period.volume)}</td>
         <td>{formatNumber(period.vwap)}</td>

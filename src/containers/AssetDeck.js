@@ -39,7 +39,7 @@ class AssetDeck extends Component {
 const mapStateToProps = (state) => {
   return {
     assets: state.assets,
-    layout: state.layout,
+    layout: state.changeLayout.layout,
     fetchingData: state.fetchingData,
     assetData: state.assetData,
   }

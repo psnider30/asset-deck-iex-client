@@ -22,7 +22,7 @@ input:-webkit-autofill {
   border-bottom: 0.8px solid rgba(21, 120, 35, 1);
 }
 
-.App-title, .navbar-button {
+.App-title, .navbar-button, .navbar-button-active {
   margin-left: 20px;
   font-family: 'Roboto Slab', serif;
   color: rgb(255,250,250);
@@ -46,7 +46,7 @@ input:-webkit-autofill {
   margin-bottom: 15px;
 }
 
-.navbar-button {
+.navbar-button, .navbar-button-active {
   font-size: 1.2em;
   text-shadow: 0.8px 0.8px #a67c00;
   background-color: rgba(21, 120, 35, 0.75);
@@ -54,11 +54,19 @@ input:-webkit-autofill {
   padding: 5px;
 }
 
-.navbar-button:hover {
+.navbar-button:hover, .navbar-button-active {
   color: rgb(21, 120, 35);
   background-color: white;
   text-shadow: none;
+  outline: none;
 }
+
+/* .navbar-button-active {
+  font-size: 1.2em;
+  color: rgb(21, 120, 35);
+  background-color: white;
+  text-shadow: none;
+} */
 
 .navbar-button:focus {
   outline: none;
