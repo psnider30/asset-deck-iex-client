@@ -19,6 +19,7 @@ export default class AssetsFundamentals extends Component {
           <td>{formatNumber(asset.fundamentals.priceToBook)}</td>
           <td className='no-background'>
             <OptionsButton
+              className='options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
               removeAsset={removeAsset}

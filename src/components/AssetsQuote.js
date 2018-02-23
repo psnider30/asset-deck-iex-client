@@ -19,6 +19,7 @@ export default class AssetsQuote extends Component {
           <td>{removeSeconds(asset.quote.latestTime)}</td>
           <td className='no-background'>
             <OptionsButton
+              className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
               removeAsset={removeAsset}

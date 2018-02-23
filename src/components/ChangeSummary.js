@@ -20,6 +20,7 @@ export default class ChangeSummary extends Component {
           <td>{decimalToPercentage(asset.fundamentals.year5ChangePercent)}</td>
           <td className='no-background'>
             <OptionsButton
+              className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
               removeAsset={removeAsset}

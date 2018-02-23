@@ -16,9 +16,11 @@ export default class OptionsButton extends Component {
   }
 
   render() {
+
     const { asset, onUpdateAsset, removeAsset, changeLayout } = this.props;
     return (
       <MenuButton
+        className='options-button'
         id={asset.id}
         label='Options'>
         <button
