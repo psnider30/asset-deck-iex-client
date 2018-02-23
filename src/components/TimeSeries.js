@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber'
+import { formatNumber, removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber'
 
 export default class TimeSeries extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { frequency: 'daily' }
+  }
 
   handleEditClick = (asset, event) => {
     this.props.onUpdateAsset(asset);
@@ -11,8 +15,28 @@ export default class TimeSeries extends Component {
     this.props.removeAsset(asset.id);
   }
 
+  handleChange = (event) =>{
+    this.setState({
+      frequency: event.target.value
+    })
+  }
+
   render() {
     const asset = this.props.assets.find(asset => asset.id === this.props.assetSelected.id);
+    const frequency = this.state.frequency;
+    const assetReturns = asset.timeSeries[`${frequency}`].map((period, index) => {
+      return (
+      <tr key={index}>
+        <td>{period.date}</td>
+        <td>$ {period.close}</td>
+        <td>$ {period.open}</td>
+        <td>{period.change}</td>
+        <td>{formatNumber(period.changePercent)} %</td>
+        <td>{formatNumber(period.volume)}</td>
+        <td>{formatNumber(period.vwap)}</td>
+      </tr>
+      );
+    }).reverse();
     const logo = !asset.logo.url || asset.quote.symbol === "SPY" ? 'dollar_logo.jpg' : asset.logo.url
     return (
       <div className="time-series">
@@ -54,14 +78,12 @@ export default class TimeSeries extends Component {
                 <th>Change</th>
                 <th>Change %</th>
                 <th>Volume</th>
-                <th>VWAP</th>
+                <th>Vol WAP</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr>
-                <td>{asset.timeSeries.daily[0].date}</td>
-              </tr>
+              {assetReturns}
             </tbody>
           </table>
         </div>
