@@ -9,6 +9,7 @@ import ChangeSummary from '../components/ChangeSummary';
 import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
 import '../table.css';
+import close from '../close.svg'
 
 class AssetQuoteForm extends Component {
   constructor(props) {
@@ -83,7 +84,10 @@ class AssetQuoteForm extends Component {
         {this.props.layout !== 'timeSeries' ? quoteForm : null}
         {
             fetchingData ?
-            <div>Fetching</div>
+            <div>
+              <br />
+              <img src={close} className="App-logo" alt="logo" />
+            </div>
             :
             <div className="asset-layout">
               {layout === 'main' &&

@@ -37,7 +37,8 @@ export default class TimeSeries extends Component {
       </tr>
       );
     }).reverse();
-    const logo = !asset.logo.url || asset.quote.symbol === "SPY" ? 'dollar_logo.jpg' : asset.logo.url
+    const logo = !asset.logo.url || asset.quote.symbol === "SPY" ||
+    asset.quote.symbol === "IBM" ? 'dollar_logo.jpg' : asset.logo.url
     return (
       <div className="time-series">
         <div className="company-container">

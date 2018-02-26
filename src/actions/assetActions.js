@@ -54,8 +54,10 @@ export const fetchAsset = (asset) => {
         console.log(assetData)
       })
       .catch(error => {
-      alert('Symbol Not Found')
-      console.log(error);
+        dispatch(stopFetchingData())
+        alert('Symbol Not Found')
+        console.log(error);
+
     })
   }
 }
@@ -64,17 +66,14 @@ export function startFetchingData() {
   return { type: 'START_FETCHING_DATA' }
 }
 
+function stopFetchingData() {
+  return { type: 'STOP_FETCHING_DATA' }
+}
+
 function addAsset(asset) {
   return {
     type: 'ADD_ASSET',
     asset,
-  }
-}
-
-export function findAsset(assetId) {
-  return {
-    type: 'FIND_ASSET',
-    assetId
   }
 }
 

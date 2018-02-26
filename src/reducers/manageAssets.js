@@ -11,6 +11,8 @@ export default function assets(state = {
   switch(action.type) {
     case 'START_FETCHING_DATA':
       return {...state, fetchingData: true };
+    case 'STOP_FETCHING_DATA':
+      return {...state, fetchingData: false };
     case 'ADD_ASSET':
       asset = {...action.asset, id: uuidv4()}
       return {...state, assets: [...state.assets, asset], fetchingData: false};
