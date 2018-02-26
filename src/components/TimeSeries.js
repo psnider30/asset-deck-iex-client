@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { formatNumber, removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber'
+import { formatNumber } from '../lib/formatNumber'
 
 export default class TimeSeries extends Component {
   constructor(props) {

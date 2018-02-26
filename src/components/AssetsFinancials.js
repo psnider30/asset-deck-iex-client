@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { formatNumber, decimalToPercentage, addPlus } from '../lib/formatNumber'
+import { formatNumber } from '../lib/formatNumber'
 import OptionsButton from './OptionsButton';
 
 export default class AssetsFinancials extends Component {
 
   render() {
-    const { asset, onUpdateAsset, removeAsset, changeLayout } = this.props;
+    const { onUpdateAsset, removeAsset, changeLayout } = this.props;
     const assetsList = this.props.assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>

@@ -4,7 +4,7 @@ import OptionsButton from './OptionsButton';
 
 export default class AssetsQuote extends Component {
   render() {
-    const { asset, onUpdateAsset, removeAsset, changeLayout } = this.props;
+    const { onUpdateAsset, removeAsset, changeLayout } = this.props;
     const assetsList = this.props.assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>

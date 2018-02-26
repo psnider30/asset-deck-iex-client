@@ -57,7 +57,6 @@ class AssetQuoteForm extends Component {
     const updating = this.state.updating;
     let exitUpdateButton;
 
-    let timeSeriesMenu;
     if (updating) {
       exitUpdateButton =
       <button className='exit-update-button' onClick={this.handleExitUpdate}>

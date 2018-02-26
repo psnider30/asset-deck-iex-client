@@ -5,9 +5,8 @@ import Navbar from '../components/Navbar'
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions'
 import { changeLayout } from '../actions/layoutActions'
-import { fetchAssetData } from '../actions/assetDataActions'
+// import { fetchAssetData } from '../actions/assetDataActions'
 
-// Symbol, Name, Asset Class, Region
 class AssetDeck extends Component {
 
   componentDidMount() {
@@ -16,12 +15,12 @@ class AssetDeck extends Component {
 
   handleLayoutChange = (newLayout) => {
     const currentLayout = this.props.layout
-    currentLayout !== newLayout ? this.props.changeLayout(newLayout, currentLayout) : null
+    if (currentLayout !== newLayout) {
+      this.props.changeLayout(newLayout, currentLayout)
+    }
   }
 
   render() {
-    const { assetData, assets } = this.props;
-
     return (
       <div>
         <Navbar
