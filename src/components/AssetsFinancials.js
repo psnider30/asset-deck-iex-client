@@ -28,28 +28,22 @@ export default class AssetsFinancials extends Component {
         </tr>
       );
     })
-    const anyAssets = assetsList.length > 0;
-    let tableHeader;
-    if (anyAssets) {
-      tableHeader =
-        <tr>
-          <th><strong>Symbol</strong></th>
-          <th><strong>Gross Profit</strong></th>
-          <th><strong>Total Rev</strong></th>
-          <th><strong>Operating Income</strong></th>
-          <th><strong>Tot Assets</strong></th>
-          <th><strong>Tot Liab</strong></th>
-          <th><strong>Cash FLow</strong></th>
-          <th><strong>SH Equity</strong></th>
-          <th><strong>Date</strong></th>
-        </tr>
-    }
 
     return (
       <div className="assets-list">
         <table>
           <thead>
-            {tableHeader}
+            <tr>
+              <th><strong>Symbol</strong></th>
+              <th><strong>Gross Profit</strong></th>
+              <th><strong>Total Rev</strong></th>
+              <th><strong>Operating Income</strong></th>
+              <th><strong>Tot Assets</strong></th>
+              <th><strong>Tot Liab</strong></th>
+              <th><strong>Cash FLow</strong></th>
+              <th><strong>SH Equity</strong></th>
+              <th><strong>Date</strong></th>
+            </tr>
           </thead>
 
           <tbody>

@@ -30,28 +30,21 @@ export default class ChangeSummary extends Component {
       );
     })
 
-    const anyAssets = assetsList.length > 0;
-    let tableHeader;
-    if (anyAssets) {
-      tableHeader =
-        <tr>
-          <th><strong>Symbol</strong></th>
-          <th><strong>5 Day</strong></th>
-          <th><strong>1 Month</strong></th>
-          <th><strong>3 Month</strong></th>
-          <th><strong>6 Month</strong></th>
-          <th><strong>YTD</strong></th>
-          <th><strong>1 Year</strong></th>
-          <th><strong>2 Year</strong></th>
-          <th><strong>5 year</strong></th>
-        </tr>
-    }
-
     return (
       <div className="assets-list">
         <table>
           <thead>
-            {tableHeader}
+            <tr>
+              <th><strong>Symbol</strong></th>
+              <th><strong>5 Day</strong></th>
+              <th><strong>1 Month</strong></th>
+              <th><strong>3 Month</strong></th>
+              <th><strong>6 Month</strong></th>
+              <th><strong>YTD</strong></th>
+              <th><strong>1 Year</strong></th>
+              <th><strong>2 Year</strong></th>
+              <th><strong>5 year</strong></th>
+            </tr>
           </thead>
 
           <tbody>

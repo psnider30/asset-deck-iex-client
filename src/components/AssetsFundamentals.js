@@ -28,27 +28,21 @@ export default class AssetsFundamentals extends Component {
         </tr>
       );
     })
-    const anyAssets = assetsList.length > 0;
-    let tableHeader;
-    if (anyAssets) {
-      tableHeader =
-        <tr>
-          <th><strong>Symbol</strong></th>
-          <th><strong>Last Price</strong></th>
-          <th><strong>Market Cap</strong></th>
-          <th><strong>Avg Vol</strong></th>
-          <th><strong>Latest EPS</strong></th>
-          <th><strong>P/E</strong></th>
-          <th><strong>Div Yield</strong></th>
-          <th><strong>Price/Book</strong></th>
-        </tr>
-    }
-
+    
     return (
       <div className="assets-list">
         <table>
           <thead>
-            {tableHeader}
+            <tr>
+              <th><strong>Symbol</strong></th>
+              <th><strong>Last Price</strong></th>
+              <th><strong>Market Cap</strong></th>
+              <th><strong>Avg Vol</strong></th>
+              <th><strong>Latest EPS</strong></th>
+              <th><strong>P/E</strong></th>
+              <th><strong>Div Yield</strong></th>
+              <th><strong>Price/Book</strong></th>
+            </tr>
           </thead>
 
           <tbody>

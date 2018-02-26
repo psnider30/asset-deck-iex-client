@@ -29,28 +29,21 @@ export default class AssetsQuote extends Component {
       );
     })
 
-    const anyAssets = assetsList.length > 0;
-    let tableHeader;
-    if (anyAssets) {
-      tableHeader =
-        <tr>
-          <th><strong>Symbol</strong></th>
-          <th><strong>Name</strong></th>
-          <th><strong>Open</strong></th>
-          <th><strong>Close</strong></th>
-          <th><strong>Latest</strong></th>
-          <th><strong>Change</strong></th>
-          <th><strong>Change %</strong></th>
-          <th><strong>Sector</strong></th>
-          <th><strong>Time or Date</strong></th>
-        </tr>
-    }
-
     return (
       <div className="assets-list">
         <table>
           <thead>
-            {tableHeader}
+            <tr>
+              <th><strong>Symbol</strong></th>
+              <th><strong>Name</strong></th>
+              <th><strong>Open</strong></th>
+              <th><strong>Close</strong></th>
+              <th><strong>Latest</strong></th>
+              <th><strong>Change</strong></th>
+              <th><strong>Change %</strong></th>
+              <th><strong>Sector</strong></th>
+              <th><strong>Time or Date</strong></th>
+            </tr>
           </thead>
 
           <tbody>
