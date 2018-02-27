@@ -10,7 +10,7 @@ export default class AssetsQuote extends Component {
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
           <td>{asset.quote.companyName}</td>
-          <td>$ {formatNumber(asset.quote.open)}</td>
+          <td>$ {asset.quote.open}</td>
           <td>$ {asset.quote.close}</td>
           <td>$ {asset.quote.latestPrice}</td>
           <td>{addPlus(asset.quote.change)}</td>
