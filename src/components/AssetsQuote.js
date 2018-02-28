@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { formatNumber, removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
+import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 
 export default class AssetsQuote extends Component {

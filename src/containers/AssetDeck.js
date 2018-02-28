@@ -3,14 +3,23 @@ import { connect } from 'react-redux';
 import AssetQuoteForm from './AssetQuoteForm';
 import Navbar from '../components/Navbar'
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/assetActions'
-import { changeLayout } from '../actions/layoutActions'
+import * as actions from '../actions/assetActions';
+import { changeLayout } from '../actions/layoutActions';
+import AssetService from '../services/AssetService';
+// import AddAsset from '../components/AddAsset';
 // import { fetchAssetData } from '../actions/assetDataActions'
 
 class AssetDeck extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = { userAssets: [] }
+  }
+
   componentDidMount() {
-    // this.props.fetchAllSymbols()
+    AssetService.fetchUserAssets()
+      .then(userAssets => this.setState({ userAssets }))
   }
 
   handleLayoutChange = (newLayout) => {
@@ -20,7 +29,15 @@ class AssetDeck extends Component {
     }
   }
 
+  addAsset = (asset) => {
+    debugger
+    // AssetService.createAsset(asset).then(asset => this.setState({
+    //   assets: this.state.userAssets.concat(asset)
+    // }))
+  }
+
   render() {
+    console.log(this.state.userAssets)
     return (
       <div>
         <Navbar
@@ -29,6 +46,9 @@ class AssetDeck extends Component {
          />
         <div className='asset-deck'>
           <AssetQuoteForm />
+        </div>
+        <div className="rails">
+          {/* <AddAsset addAsset={this.addAsset} /> */}
         </div>
       </div>
     );

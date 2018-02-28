@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions';
+import { Route } from 'react-router-dom';
 import { changeLayout } from '../actions/layoutActions';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
@@ -53,7 +54,7 @@ class AssetQuoteForm extends Component {
   }
 
   render() {
-    const {layout, fetchingData, assets } = this.props;
+    const {assetSelected, layout, fetchingData, assets } = this.props;
     const updating = this.state.updating;
     let exitUpdateButton;
 
@@ -82,55 +83,68 @@ class AssetQuoteForm extends Component {
       <div>
         {this.props.layout !== 'timeSeries' ? quoteForm : null}
         {
-            fetchingData ?
-            <div>
-              <br />
-              <img src={close} className="App-logo" alt="logo" />
-            </div>
-            :
-            <div className="asset-layout">
-              {layout === 'main' &&
+          fetchingData ?
+          <div>
+            <br />
+            <img src={close} className="App-logo" alt="logo" />
+          </div>
+          :
+          <div className="asset-layout">
+            {layout === 'main' &&
+            <Route exact path="/assets/quote" component={ () =>
               <AssetsQuote
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
-                layout={this.props.layout} />
-              }
-              {layout === 'fundamentals' &&
+                layout={this.props.layout} />}
+            />
+            }
+            {layout === 'fundamentals' &&
+            <Route exact path="/assets/fundamentals" component={ () =>
               <AssetsFundamentals
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  />
-              }
-              {layout === 'changeSummary' &&
+                layout={this.props.layout}  /> }
+            />
+            }
+            {layout === 'changeSummary' &&
+            <Route exact path="/assets/change-summary" component={ () =>
               <ChangeSummary
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  />
-              }
-              {layout === 'financials' &&
+                layout={this.props.layout}  /> }
+            />
+            }
+            {layout === 'financials' &&
+            <Route exact path="/assets/financials" component={ () =>
               <AssetsFinancials
                 assets={assets}
                 onUpdateAsset={this.onUpdateAsset.bind(this)}
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  />
+                layout={this.props.layout}  /> }
+            />
+            }
+            {layout === 'timeSeries' &&
+
+              <Route
+                exact path={"/assets" + assetSelected.quote.symbol + "/returns"}
+                component={ () =>
+                  <TimeSeries
+                    assets={assets}
+                    assetSelected={this.props.assetSelected}
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                    removeAsset={this.props.actions.removeAsset}
+                    changeLayout={this.props.changeLayout}
+                    layout={this.props.layout}  /> }
+                />
               }
-              {layout === 'timeSeries' &&
-              <TimeSeries
-                assets={assets}
-                assetSelected={this.props.assetSelected}
-                onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset}
-                changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  />
-              }
-            </div>
+          </div>
           }
       </div>
     );
