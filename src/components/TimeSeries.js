@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import defaultLogo from "../dollar_logo.jpg";
-import { changeLayout } from '../actions/layoutActions';
 
 class TimeSeries extends Component {
   constructor(props) {

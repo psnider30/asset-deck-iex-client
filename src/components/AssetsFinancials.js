@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
-import { changeLayout } from '../actions/layoutActions';
-import { removeAsset } from '../actions/assetActions';
 
 class AssetsFinancials extends Component {
   render() {
-    const { assets, onUpdateAsset, removeAsset, changeLayout, layout } = this.props;
+    const { assets, onUpdateAsset } = this.props;
     const assetsList = assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
