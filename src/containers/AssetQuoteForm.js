@@ -55,6 +55,7 @@ class AssetQuoteForm extends Component {
 
   render() {
     const {assetSelected, layout, fetchingData, assets } = this.props;
+    const symbol = assetSelected ? assetSelected.quote.symbol : ''
     const updating = this.state.updating;
     let exitUpdateButton;
 
@@ -90,7 +91,7 @@ class AssetQuoteForm extends Component {
           </div>
           :
           <div className="asset-layout">
-            {layout === 'main' &&
+
             <Route exact path="/assets/quote" component={ () =>
               <AssetsQuote
                 assets={assets}
@@ -98,9 +99,8 @@ class AssetQuoteForm extends Component {
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
                 layout={this.props.layout} />}
-            />
-            }
-            {layout === 'fundamentals' &&
+              />
+
             <Route exact path="/assets/fundamentals" component={ () =>
               <AssetsFundamentals
                 assets={assets}
@@ -108,9 +108,8 @@ class AssetQuoteForm extends Component {
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
                 layout={this.props.layout}  /> }
-            />
-            }
-            {layout === 'changeSummary' &&
+              />
+
             <Route exact path="/assets/change-summary" component={ () =>
               <ChangeSummary
                 assets={assets}
@@ -118,9 +117,8 @@ class AssetQuoteForm extends Component {
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
                 layout={this.props.layout}  /> }
-            />
-            }
-            {layout === 'financials' &&
+              />
+
             <Route exact path="/assets/financials" component={ () =>
               <AssetsFinancials
                 assets={assets}
@@ -128,12 +126,10 @@ class AssetQuoteForm extends Component {
                 removeAsset={this.props.actions.removeAsset}
                 changeLayout={this.props.changeLayout}
                 layout={this.props.layout}  /> }
-            />
-            }
-            {layout === 'timeSeries' &&
+              />
 
               <Route
-                exact path={"/assets" + assetSelected.quote.symbol + "/returns"}
+                exact path={"/assets" + symbol + "/returns"}
                 component={ () =>
                   <TimeSeries
                     assets={assets}
@@ -143,7 +139,6 @@ class AssetQuoteForm extends Component {
                     changeLayout={this.props.changeLayout}
                     layout={this.props.layout}  /> }
                 />
-              }
           </div>
           }
       </div>

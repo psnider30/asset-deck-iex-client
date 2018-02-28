@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 
-export default class AssetsQuote extends Component {
+class AssetsQuote extends Component {
   render() {
     const { onUpdateAsset, removeAsset, changeLayout } = this.props;
     const assetsList = this.props.assets.map((asset, index) => {
@@ -54,3 +55,13 @@ export default class AssetsQuote extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  debugger;
+  return {
+    assets: state.manageAssets.assets,
+    layout: state.changeLayout.layout,
+  }
+}
+
+export default connect(mapStateToProps)(AssetsQuote)
