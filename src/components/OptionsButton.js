@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MenuButton from 'react-menu-button';
+import { changeLayout } from '../actions/layoutActions';
+import { removeAsset } from '../actions/assetActions';
 
-export default class OptionsButton extends Component {
+class OptionsButton extends Component {
 
   handleEditClick = (asset, event) => {
     this.props.onUpdateAsset(asset);
@@ -23,7 +27,7 @@ export default class OptionsButton extends Component {
         className='options-button'
         id={asset.id}
         label='Options'>
-        <Link to={"/assets" + asset.quote.symbol + "/returns"}>
+        <Link to={"/assets/" + asset.quote.symbol + "/returns"}>
           <button
             className='returns-button'
             data-id={asset.id}
@@ -47,3 +51,19 @@ export default class OptionsButton extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    assets: state.manageAssets.assets,
+    layout: state.changeLayout.layout,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeLayout: bindActionCreators(changeLayout, dispatch),
+    removeAsset: bindActionCreators(removeAsset, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OptionsButton)

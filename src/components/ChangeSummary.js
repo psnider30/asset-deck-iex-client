@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { decimalToPercentage } from '../lib/formatNumber'
 import OptionsButton from './OptionsButton';
+import { changeLayout } from '../actions/layoutActions';
+import { removeAsset } from '../actions/assetActions';
 
-export default class ChangeSummary extends Component {
-
+class ChangeSummary extends Component {
   render() {
-    const { onUpdateAsset, removeAsset, changeLayout } = this.props;
-    const assetsList = this.props.assets.map((asset, index) => {
+    const { assets, onUpdateAsset, removeAsset, changeLayout, layout } = this.props;
+    const assetsList = assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
@@ -23,8 +26,7 @@ export default class ChangeSummary extends Component {
               className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
-              removeAsset={removeAsset}
-              changeLayout={changeLayout} />
+            />
           </td>
         </tr>
       );
@@ -55,3 +57,12 @@ export default class ChangeSummary extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    assets: state.manageAssets.assets,
+    layout: state.changeLayout.layout,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(ChangeSummary))

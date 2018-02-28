@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import defaultLogo from "../dollar_logo.jpg";
+import { changeLayout } from '../actions/layoutActions';
 
-export default class TimeSeries extends Component {
+class TimeSeries extends Component {
   constructor(props) {
     super(props)
     this.state = { frequency: 'daily' }
@@ -95,3 +98,13 @@ export default class TimeSeries extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    assets: state.manageAssets.assets,
+    layout: state.changeLayout.layout,
+    assetSelected: state.changeLayout.asset,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(TimeSeries))

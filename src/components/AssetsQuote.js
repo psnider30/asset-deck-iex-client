@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 
 class AssetsQuote extends Component {
   render() {
-    const { onUpdateAsset, removeAsset, changeLayout } = this.props;
-    const assetsList = this.props.assets.map((asset, index) => {
+    const { assets, onUpdateAsset, layout } = this.props;
+    const assetsList = assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
@@ -23,8 +24,7 @@ class AssetsQuote extends Component {
               className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
-              removeAsset={removeAsset}
-              changeLayout={changeLayout} />
+            />
           </td>
         </tr>
       );
@@ -57,11 +57,10 @@ class AssetsQuote extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  debugger;
   return {
     assets: state.manageAssets.assets,
     layout: state.changeLayout.layout,
   }
 }
 
-export default connect(mapStateToProps)(AssetsQuote)
+export default withRouter(connect(mapStateToProps)(AssetsQuote))

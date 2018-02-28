@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-// import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 import AssetDeck from './containers/AssetDeck.js'
 
 class App extends Component {

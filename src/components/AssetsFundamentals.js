@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
+import { changeLayout } from '../actions/layoutActions';
+import { removeAsset } from '../actions/assetActions';
 
-export default class AssetsFundamentals extends Component {
-
+class AssetsFundamentals extends Component {
   render() {
-    const { onUpdateAsset, removeAsset, changeLayout } = this.props;
-    const assetsList = this.props.assets.map((asset, index) => {
+    const { assets, onUpdateAsset, removeAsset, changeLayout, layout } = this.props;
+    const assetsList = assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
@@ -19,16 +22,15 @@ export default class AssetsFundamentals extends Component {
           <td>{formatNumber(asset.fundamentals.priceToBook)}</td>
           <td className='no-background'>
             <OptionsButton
-              className='options-button'
+              className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
-              removeAsset={removeAsset}
-              changeLayout={changeLayout} />
+            />
           </td>
         </tr>
       );
     })
-    
+
     return (
       <div className="assets-list">
         <table>
@@ -53,3 +55,12 @@ export default class AssetsFundamentals extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    assets: state.manageAssets.assets,
+    layout: state.changeLayout.layout,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(AssetsFundamentals))

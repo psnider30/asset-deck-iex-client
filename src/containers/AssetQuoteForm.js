@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions';
-import { Route } from 'react-router-dom';
-import { changeLayout } from '../actions/layoutActions';
+import { Route, Switch } from 'react-router-dom';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
 import ChangeSummary from '../components/ChangeSummary';
 import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
 import '../table.css';
-import close from '../close.svg'
+import closeLogo from '../close.svg'
 
 class AssetQuoteForm extends Component {
   constructor(props) {
@@ -54,7 +53,7 @@ class AssetQuoteForm extends Component {
   }
 
   render() {
-    const {assetSelected, layout, fetchingData, assets } = this.props;
+    const {assetSelected, fetchingData} = this.props;
     const symbol = assetSelected ? assetSelected.quote.symbol : ''
     const updating = this.state.updating;
     let exitUpdateButton;
@@ -87,58 +86,47 @@ class AssetQuoteForm extends Component {
           fetchingData ?
           <div>
             <br />
-            <img src={close} className="App-logo" alt="logo" />
+            <img src={closeLogo} className="App-logo" alt="logo" />
           </div>
           :
           <div className="asset-layout">
-
-            <Route exact path="/assets/quote" component={ () =>
-              <AssetsQuote
-                assets={assets}
-                onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset}
-                changeLayout={this.props.changeLayout}
-                layout={this.props.layout} />}
+            <Switch>
+              <Route exact path="/assets/quote"
+                component={() =>
+                  <AssetsQuote
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
               />
 
-            <Route exact path="/assets/fundamentals" component={ () =>
-              <AssetsFundamentals
-                assets={assets}
-                onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset}
-                changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  /> }
+              <Route exact path="/assets/fundamentals"
+                component={() =>
+                  <AssetsFundamentals
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
               />
 
-            <Route exact path="/assets/change-summary" component={ () =>
-              <ChangeSummary
-                assets={assets}
-                onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset}
-                changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  /> }
+              <Route exact path="/assets/change-summary"
+                component={() =>
+                  <ChangeSummary
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
               />
 
-            <Route exact path="/assets/financials" component={ () =>
-              <AssetsFinancials
-                assets={assets}
-                onUpdateAsset={this.onUpdateAsset.bind(this)}
-                removeAsset={this.props.actions.removeAsset}
-                changeLayout={this.props.changeLayout}
-                layout={this.props.layout}  /> }
+              <Route exact path="/assets/financials"
+                component={() =>
+                  <AssetsFinancials
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
               />
 
               <Route
-                exact path={"/assets" + symbol + "/returns"}
-                component={ () =>
+                exact path={"/assets/" + symbol + "/returns"}
+                component={() =>
                   <TimeSeries
-                    assets={assets}
-                    assetSelected={this.props.assetSelected}
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
-                    removeAsset={this.props.actions.removeAsset}
-                    changeLayout={this.props.changeLayout}
-                    layout={this.props.layout}  /> }
-                />
+                  />}
+              />
+            </Switch>
           </div>
           }
       </div>
@@ -158,7 +146,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(actions, dispatch),
-    changeLayout: bindActionCreators(changeLayout, dispatch),
   };
 }
 
