@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { formatNumber } from '../lib/formatNumber';
-
+import defaultLogo from "../dollar_logo.jpg";
 
 export default class TimeSeries extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export default class TimeSeries extends Component {
       );
     }).reverse();
     const logo = !asset.logo.url || asset.quote.symbol === "SPY" ||
-    asset.quote.symbol === "IBM" ? 'dollar_logo.jpg' : asset.logo.url;
+    asset.quote.symbol === "IBM" ? defaultLogo : asset.logo.url;
     return (
       <div className="time-series">
         <div className="company-container">
