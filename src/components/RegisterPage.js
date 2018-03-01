@@ -27,12 +27,12 @@ export default class LoginPage extends Component {
     const { username, password } = this.state;
     const { dispatch } = this.props;
     if (username && password) {
-      // dispatch user action to login
+      // dispatch user action to register
     }
   }
 
   render() {
-    // const { loggingIn } = this.props;
+    // const { registering } = this.props;
     const { username, password, submitted } = this.state;
     return (
       <div className= "col-md6 col-md-offset-3">
@@ -60,7 +60,7 @@ export default class LoginPage extends Component {
             <button className="btn btn-primary">Login</button>
           </div>
         </form>
-        <Link to="/register" className="btn btn-link">Register</Link>
+        <Link to="/login" className="btn btn-link">Log In</Link>
       </div>
     );
   }

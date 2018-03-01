@@ -53,7 +53,7 @@ class AssetQuoteForm extends Component {
   }
 
   render() {
-    const {assetSelected, fetchingData} = this.props;
+    const { assetSelected, fetchingData } = this.props;
     const symbol = assetSelected ? assetSelected.quote.symbol : ''
     const updating = this.state.updating;
     let exitUpdateButton;
