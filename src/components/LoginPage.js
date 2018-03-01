@@ -60,7 +60,7 @@ export default class LoginPage extends Component {
             <button className="btn btn-primary">Login</button>
           </div>
         </form>
-        <Link to="/register" className="btn btn-link">Register</Link>
+        <Link to="/register" className="btn btn-link">Sign Up</Link>
       </div>
     );
   }

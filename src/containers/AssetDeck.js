@@ -7,7 +7,7 @@ import AssetQuoteForm from './AssetQuoteForm';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import AssetService from '../services/AssetService';
-import LoginPage from '../components/LoginPage';
+import RegisterPage from '../components/RegisterPage';
 // import AddAsset from '../components/AddAsset';
 // import { fetchAssetData } from '../actions/assetDataActions'
 
@@ -46,7 +46,7 @@ class AssetDeck extends Component {
           changeLayout={this.handleLayoutChange.bind(this)}
           currentLayout={this.props.layout}
          />
-         <LoginPage />
+         <RegisterPage />
         <div className='asset-deck'>
           <AssetQuoteForm />
         </div>
