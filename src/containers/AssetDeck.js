@@ -18,9 +18,12 @@ class AssetDeck extends Component {
   constructor(props) {
     super(props)
     const currentPath = this.props.location.pathname
+    const { loggedIn, currentUser } = this.props;
 
-    if (currentPath !== '/signup' && currentPath !== '/login') {
+    if (loggedIn && currentUser) {
       this.props.history.push('/assets/quote')
+    } else {
+      this.props.history.push('/login')
     }
     this.state = { userAssets: [] }
   }
@@ -38,7 +41,6 @@ class AssetDeck extends Component {
   }
 
   addAsset = (asset) => {
-    debugger
     // AssetService.createAsset(asset).then(asset => this.setState({
     //   assets: this.state.userAssets.concat(asset)
     // }))
@@ -54,6 +56,7 @@ class AssetDeck extends Component {
               currentLayout={this.props.layout}
             />}
           />
+           <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
            <Route path="/signup" component={RegisterPage} />
            <Route path="/login" component={LoginPage} />
            <Route path='/assets' component={AssetQuoteForm} />
@@ -71,6 +74,8 @@ const mapStateToProps = (state) => {
     layout: state.changeLayout.layout,
     fetchingData: state.fetchingData,
     assetData: state.assetData,
+    loggedIn: state.users.loggedIn,
+    currentUser: state.users.currentUser,
   }
 }
 

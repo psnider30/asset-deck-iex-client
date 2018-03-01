@@ -1,5 +1,4 @@
 export function login(data) {
-  debugger;
   return {
     type: "LOGIN",
     data,

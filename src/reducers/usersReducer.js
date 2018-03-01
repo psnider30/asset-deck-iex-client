@@ -5,7 +5,6 @@ export function users(state= {
 }, action) {
   switch(action.type) {
     case 'LOGIN':
-    debugger;
       return { ...state, currentUser: action.data.username, loggedIn: true, registered: true };
     case 'REGISTER':
       return {...state, registered: true};

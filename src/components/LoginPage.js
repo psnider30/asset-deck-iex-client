@@ -32,6 +32,16 @@ class LoginPage extends Component {
     }
   }
 
+  // componentWillUpdate(nextProps) {
+  //   debugger;
+  //   const { loggedIn, currentUser, currentPath } = nextProps;
+  //   if (loggedIn && currentUser && currentPath === '/login') {
+  //     this.props.history.push('/assets/quote')
+  //   } else {
+  //     this.props.history.push('/login')
+  //   }
+  // }
+
   render() {
     // const { loggingIn } = this.props;
     const { username, password, errors, submitted } = this.state;
@@ -74,10 +84,19 @@ class LoginPage extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentUser: state.users.currentUser,
+    loggedIn: state.users.loggedIn,
+    history: ownProps.history,
+    currentPath: ownProps.location.pathname,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     login: bindActionCreators(login, dispatch),
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
