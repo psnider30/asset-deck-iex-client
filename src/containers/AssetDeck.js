@@ -1,62 +1,134 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
-import Navbar from '../components/Navbar'
-import AssetQuoteForm from './AssetQuoteForm';
 import * as actions from '../actions/assetActions';
-import { changeLayout } from '../actions/layoutActions';
-import AssetService from '../services/AssetService';
-// import { fetchAssetData } from '../actions/assetDataActions'
+import { Route, Switch } from 'react-router-dom';
+import AssetsQuote from '../components/AssetsQuote';
+import AssetsFundamentals from '../components/AssetsFundamentals';
+import ChangeSummary from '../components/ChangeSummary';
+import AssetsFinancials from '../components/AssetsFinancials';
+import TimeSeries from '../components/TimeSeries';
+import '../table.css';
+import closeLogo from '../close.svg';
 
 class AssetDeck extends Component {
-
   constructor(props) {
-    super(props)
-    const currentPath = this.props.location.pathname
-    const { loggedIn, currentUser } = this.props;
+    super(props);
 
-    if (loggedIn && currentUser) {
-      this.props.history.push('/assets/quote')
-    } else {
-      this.props.history.push('/login')
+    this.initialState = {
+        id: null,
+        symbol: '',
+        timeSeries: '1d',
+        updating: false,
+      };
+    this.state = this.initialState;
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.actions.startFetchingData();
+    this.props.actions.fetchAsset(this.state);
+    this.setState(this.initialState);
     }
-    this.state = { userAssets: [] }
+
+  handleChange = (event) => {
+    const { name, value } = event.target
+    this.setState({[name]: value});
   }
 
-  componentDidMount() {
-    AssetService.fetchUserAssets()
-      .then(userAssets => this.setState({ userAssets }))
+  onUpdateAsset = (assetToUpdate) => {
+    this.setState({
+      id: assetToUpdate.id,
+      symbol: assetToUpdate.quote.symbol,
+      updating: true,
+   });
   }
 
-  handleLayoutChange = (newLayout) => {
-    const currentLayout = this.props.layout
-    if (currentLayout !== newLayout) {
-      this.props.changeLayout(newLayout, currentLayout)
-    }
+  handleExitUpdate = () => {
+    this.setState(this.initialState)
   }
 
-  addAsset = (asset) => {
-    // AssetService.createAsset(asset).then(asset => this.setState({
-    //   assets: this.state.userAssets.concat(asset)
-    // }))
+  submitOrUpdate = () => {
+    return this.state.updating ? 'Update Asset' : 'Add Asset'
   }
 
   render() {
-    console.log(this.state.userAssets)
+    const { assetSelected, fetchingData } = this.props;
+    const symbol = assetSelected ? assetSelected.quote.symbol : ''
+    const updating = this.state.updating;
+    let exitUpdateButton;
+
+    if (updating) {
+      exitUpdateButton =
+      <button className='exit-update-button' onClick={this.handleExitUpdate}>
+        Don't Update
+      </button>
+    }
+    const quoteForm =
+        <div className='quote-form'>
+        <form onSubmit={(event) => this.handleSubmit(event) }>
+          <label id='asset-lookup-label' htmlFor='symbol'>Asset Lookup </label>
+          <input type='text' id='asset-lookup-input' name='symbol'
+            placeholder='ticker symbol'
+            onChange={(event) => this.handleChange(event)}
+            value={this.state.symbol} />
+          <br />
+          <input className='submit-update-button' type='submit' value={this.submitOrUpdate()}/>
+          {exitUpdateButton}
+        </form>
+        <br />
+      </div>
+
     return (
       <div>
-          <Route path='/assets' component={() =>
-            <Navbar
-              changeLayout={this.handleLayoutChange.bind(this)}
-              currentLayout={this.props.layout}
-            />}
-          />
-          <Route path='/assets' component={AssetQuoteForm} />
-        <div className="rails">
-          {/* <AddAsset addAsset={this.addAsset} /> */}
-        </div>
+        {this.props.layout !== 'timeSeries' ? quoteForm : null}
+        {
+          fetchingData ?
+          <div>
+            <br />
+            <img src={closeLogo} className="App-logo" alt="logo" />
+          </div>
+          :
+          <div className="asset-layout">
+            <Switch>
+              <Route exact path="/assets/quote"
+                component={() =>
+                  <AssetsQuote
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
+              />
+
+              <Route exact path="/assets/fundamentals"
+                component={() =>
+                  <AssetsFundamentals
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
+              />
+
+              <Route exact path="/assets/change-summary"
+                component={() =>
+                  <ChangeSummary
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
+              />
+
+              <Route exact path="/assets/financials"
+                component={() =>
+                  <AssetsFinancials
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
+              />
+
+              <Route
+                exact path={"/assets/" + symbol + "/returns"}
+                component={() =>
+                  <TimeSeries
+                    onUpdateAsset={this.onUpdateAsset.bind(this)}
+                  />}
+              />
+            </Switch>
+          </div>
+          }
       </div>
     );
   }
@@ -64,21 +136,17 @@ class AssetDeck extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    assets: state.assets,
+    assets: state.manageAssets.assets,
+    fetchingData: state.manageAssets.fetchingData,
     layout: state.changeLayout.layout,
-    fetchingData: state.fetchingData,
-    assetData: state.assetData,
-    loggedIn: state.users.loggedIn,
-    currentUser: state.users.currentUser,
+    assetSelected: state.changeLayout.asset,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    assetActions: bindActionCreators(actions, dispatch),
-    changeLayout: bindActionCreators(changeLayout, dispatch),
-    // fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AssetDeck));
+export default connect(mapStateToProps, mapDispatchToProps)(AssetDeck)

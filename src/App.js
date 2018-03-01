@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import AssetDeck from './containers/AssetDeck';
+import AssetDeckEntrance from './containers/AssetDeckEntrance';
 import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
 
@@ -20,7 +20,7 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
           </div>
           <div className="App-body">
-            <AssetDeck />
+            <AssetDeckEntrance />
           </div>
         </div>
       </Router>
