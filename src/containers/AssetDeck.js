@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import AssetQuoteForm from './AssetQuoteForm';
-import Navbar from '../components/Navbar'
 import { bindActionCreators } from 'redux';
+import Navbar from '../components/Navbar'
+import AssetQuoteForm from './AssetQuoteForm';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import AssetService from '../services/AssetService';
+import LoginPage from '../components/LoginPage';
 // import AddAsset from '../components/AddAsset';
 // import { fetchAssetData } from '../actions/assetDataActions'
 
@@ -45,6 +46,7 @@ class AssetDeck extends Component {
           changeLayout={this.handleLayoutChange.bind(this)}
           currentLayout={this.props.layout}
          />
+         <LoginPage />
         <div className='asset-deck'>
           <AssetQuoteForm />
         </div>
