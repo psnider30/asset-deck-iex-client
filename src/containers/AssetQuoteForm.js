@@ -9,7 +9,7 @@ import ChangeSummary from '../components/ChangeSummary';
 import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
 import '../table.css';
-import closeLogo from '../close.svg'
+import closeLogo from '../close.svg';
 
 class AssetQuoteForm extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class AssetQuoteForm extends Component {
         timeSeries: '1d',
         updating: false,
       };
-    this.state = this.initialState
+    this.state = this.initialState;
   }
 
   handleSubmit = (event) => {
