@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
@@ -8,6 +9,7 @@ import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import AssetService from '../services/AssetService';
 import RegisterPage from '../components/RegisterPage';
+import LoginPage from '../components/LoginPage';
 // import AddAsset from '../components/AddAsset';
 // import { fetchAssetData } from '../actions/assetDataActions'
 
@@ -15,7 +17,11 @@ class AssetDeck extends Component {
 
   constructor(props) {
     super(props)
-    this.props.history.push('/assets/quote')
+    const currentPath = this.props.location.pathname
+
+    if (currentPath !== '/signup' && currentPath !== '/login') {
+      this.props.history.push('/assets/quote')
+    }
     this.state = { userAssets: [] }
   }
 
@@ -42,14 +48,15 @@ class AssetDeck extends Component {
     console.log(this.state.userAssets)
     return (
       <div>
-        <Navbar
-          changeLayout={this.handleLayoutChange.bind(this)}
-          currentLayout={this.props.layout}
-         />
-         <RegisterPage />
-        <div className='asset-deck'>
-          <AssetQuoteForm />
-        </div>
+          <Route path='/assets' component={() =>
+            <Navbar
+              changeLayout={this.handleLayoutChange.bind(this)}
+              currentLayout={this.props.layout}
+            />}
+          />
+           <Route path="/signup" component={RegisterPage} />
+           <Route path="/login" component={LoginPage} />
+           <Route path='/assets' component={AssetQuoteForm} />
         <div className="rails">
           {/* <AddAsset addAsset={this.addAsset} /> */}
         </div>
