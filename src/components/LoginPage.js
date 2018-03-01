@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { login } from '../actions/userActions'
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
 
@@ -11,7 +13,8 @@ export default class LoginPage extends Component {
     this.initialState = {
       username: '',
       password: '',
-      submitted: false
+      errors: {},
+      submitted: false,
     };
     this.state = this.initialState;
   }
@@ -23,25 +26,27 @@ export default class LoginPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ submitted: true });
     const { username, password } = this.state;
-    const { dispatch } = this.props;
     if (username && password) {
-      // dispatch user action to login
+      this.props.login(this.state);
     }
   }
 
   render() {
     // const { loggingIn } = this.props;
-    const { username, password, submitted } = this.state;
+    const { username, password, errors, submitted } = this.state;
     return (
       <div className= "col-md6 col-md-offset-3">
         <h2>Login</h2>
-        <form name="form" onSubmit={this.handleSubmit}>
+        <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
             <label htmlFor="username">Username </label>
-            <input type="text" className="form-control" name={username}
-              value={username} onChange={this.handleChange}/>
+            <input
+              type="text"
+              className="form-control"
+              name="username"
+              value={username}
+              onChange={(event) => this.handleChange(event)}/>
             {submitted && !username &&
               <div className="help-block">Username is required</div>
             }
@@ -49,15 +54,17 @@ export default class LoginPage extends Component {
 
           <div className={'form-group' + (submitted && !password ? 'has-error': '')}>
             <label htmlFor="password">Password </label>
-            <input type="password" className="form-control" name={password}
-              value={password} onChange={this.handleChange}/>
+            <input type="password" className="form-control" name="password"
+              value={password} onChange={(event) => this.handleChange(event)}/>
             {submitted && !password &&
               <div className="help-block">Password is required</div>
             }
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary" disabled={submitted}>
+              Login
+            </button>
           </div>
         </form>
         <br />
@@ -66,3 +73,11 @@ export default class LoginPage extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: bindActionCreators(login, dispatch),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginPage);

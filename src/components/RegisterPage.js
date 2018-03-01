@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { register } from '../actions/userActions'
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +29,7 @@ export default class LoginPage extends Component {
     const { username, password } = this.state;
     const { dispatch } = this.props;
     if (username && password) {
-      // dispatch user action to register
+      this.props.register(this.state);
     }
   }
 
@@ -37,11 +39,11 @@ export default class LoginPage extends Component {
     return (
       <div className= "col-md6 col-md-offset-3">
         <h2>Sign Up</h2>
-        <form name="form" onSubmit={this.handleSubmit}>
+        <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
             <label htmlFor="username">Username </label>
             <input type="text" className="form-control" name={username}
-              value={username} onChange={this.handleChange}/>
+              value={username} onChange={(event) => this.handleChange(event)}/>
             {submitted && !username &&
               <div className="help-block">Username is required</div>
             }
@@ -57,7 +59,9 @@ export default class LoginPage extends Component {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary" disabled={submitted}>
+              Login
+            </button>
           </div>
         </form>
         <br />
@@ -66,3 +70,9 @@ export default class LoginPage extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  register: bindActionCreators(register, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(LoginPage);
