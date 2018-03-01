@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login } from '../actions/userActions'
+import { login } from '../actions/userActions';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class LoginPage extends Component {
     const { username, password } = this.state;
     if (username && password) {
       this.props.login(this.state);
+      this.props.history.push('/assets/quote')
     }
   }
 

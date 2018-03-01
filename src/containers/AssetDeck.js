@@ -8,9 +8,6 @@ import AssetQuoteForm from './AssetQuoteForm';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import AssetService from '../services/AssetService';
-import RegisterPage from '../components/RegisterPage';
-import LoginPage from '../components/LoginPage';
-// import AddAsset from '../components/AddAsset';
 // import { fetchAssetData } from '../actions/assetDataActions'
 
 class AssetDeck extends Component {
@@ -56,10 +53,7 @@ class AssetDeck extends Component {
               currentLayout={this.props.layout}
             />}
           />
-           <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
-           <Route path="/signup" component={RegisterPage} />
-           <Route path="/login" component={LoginPage} />
-           <Route path='/assets' component={AssetQuoteForm} />
+          <Route path='/assets' component={AssetQuoteForm} />
         <div className="rails">
           {/* <AddAsset addAsset={this.addAsset} /> */}
         </div>

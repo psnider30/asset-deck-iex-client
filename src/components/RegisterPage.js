@@ -27,7 +27,6 @@ class LoginPage extends Component {
     event.preventDefault();
     this.setState({ submitted: true });
     const { username, password } = this.state;
-    const { dispatch } = this.props;
     if (username && password) {
       this.props.register(this.state);
     }
@@ -72,7 +71,9 @@ class LoginPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  register: bindActionCreators(register, dispatch)
+  return {
+    register: bindActionCreators(register, dispatch)
+  }
 }
 
 export default connect(null, mapDispatchToProps)(LoginPage);
