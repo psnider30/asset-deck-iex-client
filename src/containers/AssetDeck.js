@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import AssetQuoteForm from './AssetQuoteForm';
 import Navbar from '../components/Navbar'
 import { bindActionCreators } from 'redux';
@@ -13,7 +14,7 @@ class AssetDeck extends Component {
 
   constructor(props) {
     super(props)
-
+    this.props.history.push('/assets/quote')
     this.state = { userAssets: [] }
   }
 
@@ -72,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetDeck);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AssetDeck));
