@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 // import fetchingData from '../reducers/fetchingDataReducer.js'
 import changeLayout from '../reducers/changeLayout';
 import manageAssets from '../reducers/manageAssets';
-import { sessionService, sessionReducer } from 'redux-react-session';
+import { sessionReducer } from 'redux-react-session';
 // import assetData from '../reducers/assetDataReducer';
 import { users } from '../reducers/usersReducer';
 const middlewares = [thunk];
