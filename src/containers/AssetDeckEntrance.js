@@ -26,6 +26,7 @@ class AssetDeckEntrance extends Component {
   requireAuth = () => {
     sessionService.checkAuth()
     const { authenticated, currentUser, history, checked } = this.props;
+    debugger;
     authenticated && currentUser && checked ? history.push('/assets/quote') : history.push('/login')
   }
 
@@ -59,6 +60,7 @@ class AssetDeckEntrance extends Component {
             authenticated={this.props.authenticated}
           />}
         />
+        <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
         <Route path='/assets'
           component={AssetDeck}
           onEnter={this.requireAuth}

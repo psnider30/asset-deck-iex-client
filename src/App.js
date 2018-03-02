@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AssetDeckEntrance from './containers/AssetDeckEntrance';
 import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
+import LogoutButton from './components/LogoutButton';
+
 
 class App extends Component {
-
+debugger;
   render() {
     return (
       <Router>
@@ -15,9 +17,9 @@ class App extends Component {
             <h1 className="App-title">Asset Deck</h1>
           </div>
           <div className="users-entrance">
-            <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
             <Route path="/signup" component={RegisterPage} />
             <Route path="/login" component={LoginPage} />
+            <Route path = '/assets' component={LogoutButton} />
           </div>
           <div className="App-body">
             <AssetDeckEntrance />

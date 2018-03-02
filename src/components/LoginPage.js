@@ -27,7 +27,6 @@ class LoginPage extends Component {
     const { username, password } = this.state;
     if (username && password) {
       const user = this.state;
-      debugger;
       const { login, history } = this.props;
       login(user, history);
     }
