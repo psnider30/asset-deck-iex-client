@@ -19,14 +19,13 @@ class AssetDeckEntrance extends Component {
     super(props)
     const currentPath = this.props.location.pathname
     const { authenticated, currentUser, history } = this.props;
-    this.requireAuth()
+    // this.requireAuth()
     this.state = { userAssets: [] }
   }
 
   requireAuth = () => {
     sessionService.checkAuth()
     const { authenticated, currentUser, history, checked } = this.props;
-    debugger;
     authenticated && currentUser && checked ? history.push('/assets/quote') : history.push('/login')
   }
 
@@ -49,26 +48,30 @@ class AssetDeckEntrance extends Component {
   }
 
   render() {
-    console.log(this.state.userAssets)
+    // console.log(this.state.userAssets)
     return (
       <div>
-        <Route path='/assets' component={() =>
-          <Navbar
-            changeLayout={this.handleLayoutChange.bind(this)}
-            currentLayout={this.props.layout}
-            onEnter={this.requireAuth}
-            authenticated={this.props.authenticated}
-          />}
-        />
-        <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
-        <Route path='/assets'
-          component={AssetDeck}
-          onEnter={this.requireAuth}
-          authenticated={this.props.authenticated}
-        />
-        <div className="rails">
-          {/* <AddAsset addAsset={this.addAsset} /> */}
-        </div>
+        { this.props.checked &&
+          <div>
+            <Route path='/assets' component={() =>
+              <Navbar
+                changeLayout={this.handleLayoutChange.bind(this)}
+                currentLayout={this.props.layout}
+                // onEnter={this.requireAuth}
+                authenticated={this.props.authenticated}
+              />}
+            />
+            <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
+            <Route path='/assets'
+              component={AssetDeck}
+              // onEnter={this.requireAuth}
+              authenticated={this.props.authenticated}
+            />
+            <div className="rails">
+              {/* <AddAsset addAsset={this.addAsset} /> */}
+            </div>
+          </div>
+        }
       </div>
     );
   }
