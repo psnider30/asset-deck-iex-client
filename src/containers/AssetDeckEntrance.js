@@ -8,6 +8,8 @@ import AssetDeck from './AssetDeck';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import AssetService from '../services/AssetService';
+import { sessionService } from 'redux-react-session';
+import PropTypes from 'prop-types';
 
 // import { fetchAssetData } from '../actions/assetDataActions'
 
@@ -22,13 +24,14 @@ class AssetDeckEntrance extends Component {
   }
 
   requireAuth = () => {
-    const { loggedIn, currentUser, history } = this.props;
-    loggedIn && currentUser ? history.push('/assets/quote') : history.push('/login')
+    sessionService.checkAuth()
+    const { loggedIn, currentUser, history, checked } = this.props;
+    loggedIn && currentUser && checked ? history.push('/assets/quote') : history.push('/login')
   }
 
   componentDidMount() {
-    AssetService.fetchUserAssets()
-      .then(userAssets => this.setState({ userAssets }))
+    // AssetService.fetchUserAssets()
+    //   .then(userAssets => this.setState({ userAssets }))
   }
 
   handleLayoutChange = (newLayout) => {
@@ -53,11 +56,13 @@ class AssetDeckEntrance extends Component {
             changeLayout={this.handleLayoutChange.bind(this)}
             currentLayout={this.props.layout}
             onEnter={this.requireAuth}
+            authenticated={this.props.authenticated}
           />}
         />
         <Route path='/assets'
           component={AssetDeck}
           onEnter={this.requireAuth}
+          authenticated={this.props.authenticated}
         />
         <div className="rails">
           {/* <AddAsset addAsset={this.addAsset} /> */}
@@ -65,6 +70,13 @@ class AssetDeckEntrance extends Component {
       </div>
     );
   }
+}
+
+const { bool } = PropTypes;
+
+AssetDeckEntrance.propTypes = {
+  authenticated: bool.isRequired,
+  checked: bool.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -75,6 +87,8 @@ const mapStateToProps = (state) => {
     assetData: state.assetData,
     loggedIn: state.users.loggedIn,
     currentUser: state.users.currentUser,
+    checked: state.sessions.checked,
+    authenticated: state.sessions.authenticated,
   }
 }
 

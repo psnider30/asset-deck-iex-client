@@ -11,7 +11,7 @@ const reducers = combineReducers({
   manageAssets,
   changeLayout,
   users,
-  sessionReducer,
+  sessions: sessionReducer,
 })
 
 export default createStore (

@@ -15,7 +15,7 @@ WebFont.load({
 });
 
 // Init the sessions service
-SessionService.initSessionService(store);
+sessionService.initSessionService(store);
 
 ReactDOM.render(
   <Provider store={store}>
