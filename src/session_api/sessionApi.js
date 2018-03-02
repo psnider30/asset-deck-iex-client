@@ -4,7 +4,7 @@ export const loginApi = (user) => {
   const response = {
     token: '1b2a3d4c',
     data: {
-      email: user.email,
+      email: user.username,
       firstName: 'test',
       lastName: 'test',
     }

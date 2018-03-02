@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login } from '../actions/userActions';
+import { login, logout } from '../actions/userActions';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -13,8 +13,6 @@ class LoginPage extends Component {
     this.initialState = {
       username: '',
       password: '',
-      errors: {},
-      submitted: false,
     };
     this.state = this.initialState;
   }
@@ -28,15 +26,17 @@ class LoginPage extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     if (username && password) {
-      this.props.login(this.state);
-      this.props.history.push('/assets/quote')
+      const user = this.state;
+      debugger;
+      const { login, history } = this.props;
+      login(user, history);
     }
   }
 
   // componentWillUpdate(nextProps) {
   //   debugger;
-  //   const { loggedIn, currentUser, currentPath } = nextProps;
-  //   if (loggedIn && currentUser && currentPath === '/login') {
+  //   const { authenticated, currentUser, currentPath } = nextProps;
+  //   if (authenticated && currentUser && currentPath === '/login') {
   //     this.props.history.push('/assets/quote')
   //   } else {
   //     this.props.history.push('/login')
@@ -87,8 +87,8 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentUser: state.users.currentUser,
-    loggedIn: state.users.loggedIn,
+    currentUser: state.sessions.user.email,
+    authenticated: state.sessions.user.authenticated,
     history: ownProps.history,
     currentPath: ownProps.location.pathname,
   }
@@ -97,6 +97,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: bindActionCreators(login, dispatch),
+    logout: bindActionCreators(logout, dispatch)
   }
 }
 

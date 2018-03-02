@@ -18,15 +18,15 @@ class AssetDeckEntrance extends Component {
   constructor(props) {
     super(props)
     const currentPath = this.props.location.pathname
-    const { loggedIn, currentUser, history } = this.props;
+    const { authenticated, currentUser, history } = this.props;
     this.requireAuth()
     this.state = { userAssets: [] }
   }
 
   requireAuth = () => {
     sessionService.checkAuth()
-    const { loggedIn, currentUser, history, checked } = this.props;
-    loggedIn && currentUser && checked ? history.push('/assets/quote') : history.push('/login')
+    const { authenticated, currentUser, history, checked } = this.props;
+    authenticated && currentUser && checked ? history.push('/assets/quote') : history.push('/login')
   }
 
   componentDidMount() {
@@ -85,8 +85,7 @@ const mapStateToProps = (state) => {
     layout: state.changeLayout.layout,
     fetchingData: state.fetchingData,
     assetData: state.assetData,
-    loggedIn: state.users.loggedIn,
-    currentUser: state.users.currentUser,
+    currentUser: state.sessions.user.email,
     checked: state.sessions.checked,
     authenticated: state.sessions.authenticated,
   }

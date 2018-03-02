@@ -2,16 +2,18 @@ import { sessionService } from 'redux-react-session';
 import { loginApi, logoutApi } from '../session_api/sessionApi';
 
 export const login = (user, history) => {
-  return loginApi(user).then(response => {
-    const { token } = response;
-    sessionService.saveSession({ token })
-    .then(() => {
-      sessionService.saveUser(response.data)
+  return () => {
+    loginApi(user).then(response => {
+      const { token } = response;
+      sessionService.saveSession({ token })
       .then(() => {
-        history.push('/assets/quote');
+        sessionService.saveUser(response.data)
+        .then(() => {
+          history.push('/assets/quote');
+        }).catch(error => console.error(error));
       }).catch(error => console.error(error));
-    }).catch(error => console.error(error));
-  });
+    })
+  }
 };
 
 export const logout = (history) => {
