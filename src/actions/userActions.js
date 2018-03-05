@@ -8,11 +8,13 @@ export function logInSuccess(username) {
    }
 }
 
-export function logInUser(credentials) {
+export function logInUser(credentials, history) {
   return function(dispatch) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       dispatch(logInSuccess(credentials.username));
+    }).then(() => {
+      history.push('/assets/quote');
     }).catch(error => {
       throw(error);
     });
