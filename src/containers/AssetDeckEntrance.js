@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import Navbar from '../components/Navbar'
 import AssetDeck from './AssetDeck';
@@ -22,10 +22,7 @@ class AssetDeckEntrance extends Component {
     this.state = { userAssets: [] }
   }
 
-  requireAuth = () => {
-    const { loggedIn, currentUser, history } = this.props;
-    loggedIn && currentUser ? history.push('/assets/quote') : history.push('/login')
-  }
+
 
   componentDidMount() {
     // AssetService.fetchUserAssets()
@@ -47,19 +44,22 @@ class AssetDeckEntrance extends Component {
 
   render() {
     // console.log(this.state.userAssets)
+    const { loggedIn, currentUser, history } = this.props;
     return (
       <div>
         <Route path='/assets' component={() =>
           <Navbar
             changeLayout={this.handleLayoutChange.bind(this)}
             currentLayout={this.props.layout}
-            // onEnter={this.requireAuth}
           />}
         />
-        <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
+        <Route path='/assets' render={() =>
+          !loggedIn ? <Redirect to='/login' />
+          :
+          <h2>Welcome, {currentUser}</h2>
+          }/>
         <Route path='/assets'
           component={AssetDeck}
-          // onEnter={this.requireAuth}
         />
         <div className="rails">
           {/* <AddAsset addAsset={this.addAsset} /> */}

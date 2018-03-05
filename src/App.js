@@ -8,7 +8,7 @@ import LogoutButton from './components/LogoutButton';
 
 
 class App extends Component {
-debugger;
+
   render() {
     return (
       <Router>
