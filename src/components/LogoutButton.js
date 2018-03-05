@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../actions/userActions';
+import { logOutUser } from '../actions/userActions';
 
-const LogoutButton = ({history, logout}) => (
-  <button onClick={logout(history)}>
+const LogoutButton = ({history, logOutUser}) => (
+  <button onClick={logOutUser()}>
     Logout
   </button>
 );
@@ -19,7 +19,7 @@ LogoutButton.propTypes = ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: logout
+    logOutUser,
   };
 }
 

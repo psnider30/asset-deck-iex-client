@@ -1,6 +1,5 @@
 import sessionApi from '../api/sessionApi';
-import sessionService from 'redux-react-session';
-import types from './actionTypes';
+import * as types from './actionTypes';
 
 export function logInSuccess() {
   return { type: types.LOG_IN_SUCCESS }
@@ -15,6 +14,11 @@ export function logInUser(credentials) {
       throw(error);
     });
   };
+}
+
+export function logOutUser() {
+  sessionStorage.removeItem('jwt');
+  return { type: types.LOG_OUT }
 }
 
 
@@ -33,18 +37,18 @@ export function logInUser(credentials) {
 //   }
 // };
 //
-export const logout = (history) => {
-  return () => {
-    return logoutApi().then(() => {
-      sessionService.deleteSession();
-      sessionService.deleteUser();
-      history.push('/login');
-    }).catch(error => {
-      throw(error);
-    });
-  };
-};
-
+// export const logout = (history) => {
+//   return () => {
+//     return logoutApi().then(() => {
+//       sessionService.deleteSession();
+//       sessionService.deleteUser();
+//       history.push('/login');
+//     }).catch(error => {
+//       throw(error);
+//     });
+//   };
+// };
+//
 
 
 
