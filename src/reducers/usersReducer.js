@@ -1,13 +1,11 @@
-export function users(state= {
-  currentUser: null,
-  loggedIn: false,
-  registered: false,
-}, action) {
+import * as types from '../actions/actionTypes';
+import { BrowserRouter } from 'react-router-dom'
+
+export default function users(state= !!sessionStorage.jwt, action) {
   switch(action.type) {
-    case 'LOGIN':
-      return { ...state, currentUser: action.data.username, loggedIn: true, registered: true };
-    case 'REGISTER':
-      return {...state, registered: true};
+    case types.LOG_IN_SUCCESS:
+      BrowserRouter.push('/assets/quote')
+      return !!sessionStorage.jwt
     default:
       return state
   }
