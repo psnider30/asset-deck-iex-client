@@ -1,5 +1,5 @@
 import * as types from '../actions/actionTypes';
-import { BrowserRouter } from 'react-router-dom'
+import history from '../history';
 
 export default function users(state = {
   loggedIn: !!sessionStorage.jwt,
@@ -7,7 +7,7 @@ export default function users(state = {
 }, action) {
   switch(action.type) {
     case types.LOG_IN_SUCCESS:
-      BrowserRouter.push('/assets/quote')
+      history.push('/assets/quote')
       return {...state, loggedIn: !!sessionStorage.jwt, currentUser: action.username}
     default:
       return state

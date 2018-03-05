@@ -140,7 +140,7 @@ const mapStateToProps = (state) => {
     fetchingData: state.manageAssets.fetchingData,
     layout: state.changeLayout.layout,
     assetSelected: state.changeLayout.asset,
-    user: state.sessions.user,
+    // currentUser: state.users.currentUser,
   }
 }
 
