@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, logout } from '../actions/userActions';
+import { logInUser } from '../actions/userActions';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -26,9 +26,9 @@ class LoginPage extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     if (username && password) {
-      const user = this.state;
-      const { login, history } = this.props;
-      login(user, history);
+      const credentials = this.state;
+      const { logInUser, history } = this.props;
+      logInUser(credentials);
     }
   }
 
@@ -95,8 +95,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: bindActionCreators(login, dispatch),
-    logout: bindActionCreators(logout, dispatch)
+    logInUser: bindActionCreators(logInUser, dispatch),
+    // logout: bindActionCreators(logout, dispatch)
   }
 }
 
