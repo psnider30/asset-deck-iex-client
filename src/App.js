@@ -5,6 +5,7 @@ import AssetDeckEntrance from './containers/AssetDeckEntrance';
 import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
 import Header from './components/Header';
+import history from './history';
 
 class App extends Component {
 
@@ -16,7 +17,6 @@ class App extends Component {
           <div className="users-entrance">
             <Route path="/signup" component={RegisterPage} />
             <Route path="/login" component={LoginPage} />
-            {/* <Route path = '/assets' component={LogoutButton} /> */}
           </div>
           <div className="App-body">
             <AssetDeckEntrance />

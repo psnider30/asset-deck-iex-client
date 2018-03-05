@@ -53,14 +53,17 @@ class AssetDeckEntrance extends Component {
             currentLayout={this.props.layout}
           />}
         />
-        <Route path='/assets' render={() =>
+        <Route path='/' render={() =>
           !loggedIn ? <Redirect to='/login' />
           :
-          <h2>Welcome, {currentUser}</h2>
-          }/>
-        <Route path='/assets'
-          component={AssetDeck}
-        />
+          <Redirect to='/assets/quote' />
+        }/>
+        <Route path='/assets' render={() =>
+          <div>
+            <h2>Welcome, {currentUser}</h2>
+            <AssetDeck />
+          </div>
+        }/>
         <div className="rails">
           {/* <AddAsset addAsset={this.addAsset} /> */}
         </div>

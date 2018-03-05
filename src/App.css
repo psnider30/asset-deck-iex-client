@@ -147,13 +147,10 @@ label {
   padding: 3px 5px;
   font-family: 'Quicksand', sans-serif;
   font-size: 0.9em;
+  margin-top: 15px;
   color: white;
   border-radius: 4px;
   outline: none;
-}
-
-.login-button, .register-button {
-  margin-top: 15px;
 }
 
 .exit-update-button {
