@@ -36,6 +36,9 @@ class LoginPage extends Component {
     const { username, password, errors, submitted } = this.state;
     return (
       <div>
+        {this.props.logInFail &&
+          <div className="help-block">Username and Password combination are incorrect</div>
+        }
         <h2 className='large-green'>Login</h2>
         <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
@@ -75,6 +78,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: state.users.currentUser,
     loggedIn: state.users.loggedIn,
+    logInFail: state.users.logInFail,
     history: ownProps.history,
     currentPath: ownProps.location.pathname,
   }
