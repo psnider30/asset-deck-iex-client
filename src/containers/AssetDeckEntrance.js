@@ -22,8 +22,6 @@ class AssetDeckEntrance extends Component {
     this.state = { userAssets: [] }
   }
 
-
-
   componentDidMount() {
     // AssetService.fetchUserAssets()
     //   .then(userAssets => this.setState({ userAssets }))
@@ -44,7 +42,7 @@ class AssetDeckEntrance extends Component {
 
   render() {
     // console.log(this.state.userAssets)
-    const { loggedIn, currentUser, history } = this.props;
+    const { loggedIn, currentUser, history, location } = this.props;
     return (
       <div>
         <Route path='/assets' component={() =>
@@ -54,9 +52,11 @@ class AssetDeckEntrance extends Component {
           />}
         />
         <Route path='/' render={() =>
-          !loggedIn ? <Redirect to='/login' />
+          !loggedIn ?
+          location.pathname === '/login' ? null : location.pathname === '/signup' ? null : <Redirect to='/login' />
           :
-          <Redirect to='/assets/quote' />
+          location.pathname === '/' || location.pathname === '/assets'  || location.pathname === '/assets/' ?
+           <Redirect to='/assets/quote' /> : null
         }/>
         <Route path='/assets' render={() =>
           <div>
