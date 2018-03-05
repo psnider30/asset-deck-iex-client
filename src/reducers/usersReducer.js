@@ -7,6 +7,8 @@ export default function users(state = {
   switch(action.type) {
     case types.LOG_IN_SUCCESS:
       return {...state, loggedIn: !!sessionStorage.jwt, currentUser: action.username}
+    case types.LOG_OUT:
+      return {...state, loggedIn: !!sessionStorage.jwt, currentUser: null}
     default:
       return state
   }

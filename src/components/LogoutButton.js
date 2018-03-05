@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { logOutUser } from '../actions/userActions';
 
-const LogoutButton = ({history, logOutUser}) => (
+const LogoutButton = ({logOutUser}) => (
   <button onClick={logOutUser}>
     Logout
   </button>
 );
 
-const { object, func } = PropTypes;
+const { func } = PropTypes;
 
 LogoutButton.propTypes = ({
-  history: object.isRequired,
+  logOutUser: func.isRequired,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOutUser,
+    logOutUser: bindActionCreators(logOutUser, dispatch),
   };
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(LogoutButton))
+export default connect(null, mapDispatchToProps)(LogoutButton)
