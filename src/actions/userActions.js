@@ -1,10 +1,10 @@
 import sessionApi from '../api/sessionApi';
 import * as types from './actionTypes';
 
-function logInSuccess(username, valid) {
-  if (!valid) { username = null }
+function logInAttempt(username, valid) {
+  if (!valid) { username = null; }
   return {
-    type: types.LOG_IN_SUCCESS,
+    type: types.LOG_IN_ATTEMPT,
     username,
     valid
    }
@@ -16,10 +16,9 @@ export function logInUser(credentials, history) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       if (!sessionStorage.jwt || sessionStorage.jwt === "undefined") {
-        debugger
         valid = false
       }
-      dispatch(logInSuccess(credentials.username, valid));
+      dispatch(logInAttempt(credentials.username, valid));
     }).then(() => {
       history.push('/assets/quote');
     }).catch(error => {

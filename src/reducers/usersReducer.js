@@ -5,7 +5,7 @@ export default function users(state = {
   currentUser: null,
 }, action) {
   switch(action.type) {
-    case types.LOG_IN_SUCCESS:
+    case types.LOG_IN_ATTEMPT:
     debugger;
       return {...state, loggedIn: action.valid, currentUser: action.username}
     case types.LOG_OUT:
