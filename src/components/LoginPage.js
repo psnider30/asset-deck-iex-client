@@ -86,8 +86,8 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentUser: state.sessions.user.email,
-    authenticated: state.sessions.user.authenticated,
+    currentUser: state.users.currentUser,
+    loggedIn: state.users.loggedIn,
     history: ownProps.history,
     currentPath: ownProps.location.pathname,
   }

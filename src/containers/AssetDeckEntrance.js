@@ -8,7 +8,6 @@ import AssetDeck from './AssetDeck';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import AssetService from '../services/AssetService';
-import { sessionService } from 'redux-react-session';
 import PropTypes from 'prop-types';
 
 // import { fetchAssetData } from '../actions/assetDataActions'
@@ -24,9 +23,8 @@ class AssetDeckEntrance extends Component {
   }
 
   requireAuth = () => {
-    sessionService.checkAuth()
-    const { authenticated, currentUser, history, checked } = this.props;
-    authenticated && currentUser && checked ? history.push('/assets/quote') : history.push('/login')
+    const { loggedIn, currentUser, history } = this.props;
+    loggedIn && currentUser ? history.push('/assets/quote') : history.push('/login')
   }
 
   componentDidMount() {
@@ -51,27 +49,21 @@ class AssetDeckEntrance extends Component {
     // console.log(this.state.userAssets)
     return (
       <div>
-        { this.props.checked &&
-          <div>
-            <Route path='/assets' component={() =>
-              <Navbar
-                changeLayout={this.handleLayoutChange.bind(this)}
-                currentLayout={this.props.layout}
-                // onEnter={this.requireAuth}
-                authenticated={this.props.authenticated}
-              />}
-            />
-            <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
-            <Route path='/assets'
-              component={AssetDeck}
-              // onEnter={this.requireAuth}
-              authenticated={this.props.authenticated}
-            />
-            <div className="rails">
-              {/* <AddAsset addAsset={this.addAsset} /> */}
-            </div>
-          </div>
-        }
+        <Route path='/assets' component={() =>
+          <Navbar
+            changeLayout={this.handleLayoutChange.bind(this)}
+            currentLayout={this.props.layout}
+            // onEnter={this.requireAuth}
+          />}
+        />
+        <Route path='/assets' render={() => <h2>Welcome, {this.props.currentUser}</h2>} />
+        <Route path='/assets'
+          component={AssetDeck}
+          // onEnter={this.requireAuth}
+        />
+        <div className="rails">
+          {/* <AddAsset addAsset={this.addAsset} /> */}
+        </div>
       </div>
     );
   }
@@ -80,19 +72,16 @@ class AssetDeckEntrance extends Component {
 const { bool } = PropTypes;
 
 AssetDeckEntrance.propTypes = {
-  authenticated: bool.isRequired,
-  checked: bool.isRequired,
+  loggedIn: bool.isRequired,
 }
 
 const mapStateToProps = (state) => {
   return {
-    assets: state.assets,
+    assets: state.manageAssets.assets,
     layout: state.changeLayout.layout,
-    fetchingData: state.fetchingData,
-    assetData: state.assetData,
-    currentUser: state.sessions.user.email,
-    checked: state.sessions.checked,
-    authenticated: state.sessions.authenticated,
+    fetchingData: state.manageAssets.fetchingData,
+    currentUser: state.users.currentUser,
+    loggedIn: state.users.loggedIn,
   }
 }
 
