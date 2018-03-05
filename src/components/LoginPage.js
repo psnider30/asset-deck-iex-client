@@ -8,11 +8,10 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
 
-    //reset login status by dispatching action to logout user
-
     this.initialState = {
       username: '',
       password: '',
+      submitted: false,
     };
     this.state = this.initialState;
   }
@@ -24,6 +23,7 @@ class LoginPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ submitted: true })
     const { username, password } = this.state;
     if (username && password) {
       const credentials = this.state;
@@ -32,25 +32,14 @@ class LoginPage extends Component {
     }
   }
 
-  // componentWillUpdate(nextProps) {
-  //   debugger;
-  //   const { authenticated, currentUser, currentPath } = nextProps;
-  //   if (authenticated && currentUser && currentPath === '/login') {
-  //     this.props.history.push('/assets/quote')
-  //   } else {
-  //     this.props.history.push('/login')
-  //   }
-  // }
-
   render() {
-    // const { loggingIn } = this.props;
     const { username, password, errors, submitted } = this.state;
     return (
-      <div className= "col-md6 col-md-offset-3">
-        <h2>Login</h2>
+      <div>
+        <h2 className='large-green'>Login</h2>
         <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
-            <label htmlFor="username">Username </label>
+            <label className='med-green' htmlFor="username">Username </label>
             <input
               type="text"
               className="form-control"
@@ -63,7 +52,7 @@ class LoginPage extends Component {
           </div>
 
           <div className={'form-group' + (submitted && !password ? 'has-error': '')}>
-            <label htmlFor="password">Password </label>
+            <label className='med-green' htmlFor="password">Password </label>
             <input type="password" className="form-control" name="password"
               value={password} onChange={(event) => this.handleChange(event)}/>
             {submitted && !password &&
@@ -72,13 +61,11 @@ class LoginPage extends Component {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary" disabled={submitted}>
+            <button className="login-button" disabled={submitted}>
               Login
             </button>
           </div>
         </form>
-        <br />
-        <Link to="/register" className="btn btn-link">Sign Up</Link>
       </div>
     );
   }
@@ -96,7 +83,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logInUser: bindActionCreators(logInUser, dispatch),
-    // logout: bindActionCreators(logout, dispatch)
   }
 }
 

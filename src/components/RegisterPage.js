@@ -36,11 +36,11 @@ class LoginPage extends Component {
     // const { registering } = this.props;
     const { username, password, submitted } = this.state;
     return (
-      <div className= "col-md6 col-md-offset-3">
-        <h2>Sign Up</h2>
+      <div>
+        <h2 className='large-green'>Sign Up</h2>
         <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
-            <label htmlFor="username">Username </label>
+            <label className='med-green' htmlFor="username">Username </label>
             <input type="text" className="form-control" name={username}
               value={username} onChange={(event) => this.handleChange(event)}/>
             {submitted && !username &&
@@ -48,8 +48,17 @@ class LoginPage extends Component {
             }
           </div>
 
+          <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
+            <label className='med-green' htmlFor="username">Email </label>
+            <input type="text" className="form-control" name={username}
+              value={username} onChange={(event) => this.handleChange(event)}/>
+            {submitted && !username &&
+              <div className="help-block">Email is required</div>
+            }
+          </div>
+
           <div className={'form-group' + (submitted && !password ? 'has-error': '')}>
-            <label htmlFor="password">Password </label>
+            <label className='med-green' htmlFor="password">Password </label>
             <input type="password" className="form-control" name={password}
               value={password} onChange={this.handleChange}/>
             {submitted && !password &&
@@ -58,13 +67,11 @@ class LoginPage extends Component {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary" disabled={submitted}>
-              Login
+            <button className="register-button" disabled={submitted}>
+              Signup
             </button>
           </div>
         </form>
-        <br />
-        <Link to="/login" className="btn btn-link">Log In</Link>
       </div>
     );
   }
