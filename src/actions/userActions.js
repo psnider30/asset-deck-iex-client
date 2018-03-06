@@ -3,7 +3,7 @@ import signUpApi from '../api/signUpApi';
 import * as types from './actionTypes';
 
 function logInAttempt(username, valid) {
-  if (!valid) { username = null; }
+  valid ? sessionStorage.setItem('username', username) : username = null;
 
   return {
     type: types.LOG_IN_ATTEMPT,
@@ -17,11 +17,10 @@ export function logInUser(credentials, history) {
   return function(dispatch) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
-      sessionStorage.setItem('username', credentials.username);
       if (!sessionStorage.jwt || sessionStorage.jwt === "undefined") {
         valid = false
       }
-      dispatch(logInAttempt(sessionStorage.username, valid));
+      dispatch(logInAttempt(credentials.username, valid));
       history.push('/assets/quote');
     }).catch(error => {
       throw(error);
