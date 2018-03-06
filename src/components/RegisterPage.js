@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signUpUser } from '../actions/userActions'
-import history from '../history';
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +30,7 @@ class LoginPage extends Component {
     this.setState({ submitted: true });
     const { username, email, password, passwordConfirm } = this.state;
     if (username && email && password && passwordConfirm && password === passwordConfirm) {
-      this.props.signUpUser(this.state, history);
+      this.props.signUpUser(this.state, this.props.history);
     }
   }
 
@@ -92,10 +91,17 @@ class LoginPage extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loggedIn: state.users.loggedIn,
+    history: ownProps.history,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     signUpUser: bindActionCreators(signUpUser, dispatch)
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

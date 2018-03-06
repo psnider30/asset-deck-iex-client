@@ -21,7 +21,7 @@ class Header extends Component {
         <div className="App-header">
           <h1 className="App-title">Asset Deck</h1>
           <div className="nav">
-            <a href='#'onClick={(event) => this.handleLogOut(event)}>Logout</a>
+            <a onClick={(event) => this.handleLogOut(event)}>Logout</a>
           </div>
         </div>
       );

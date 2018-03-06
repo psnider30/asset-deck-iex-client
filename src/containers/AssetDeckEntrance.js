@@ -55,7 +55,8 @@ class AssetDeckEntrance extends Component {
           !loggedIn ?
           location.pathname === '/login' ? null : location.pathname === '/signup' ? null : <Redirect to='/login' />
           :
-          location.pathname === '/' || location.pathname === '/assets'  || location.pathname === '/assets/' ?
+          location.pathname === '/' || location.pathname === '/assets'  || location.pathname === '/assets/' ||
+          location.pathname === '/login' || location.pathname === '/signup' ?
            <Redirect to='/assets/quote' /> : null
         }/>
         <Route path='/assets' render={() =>
