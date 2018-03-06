@@ -10,6 +10,8 @@ export default function users(state = {
       return {...state, loggedIn: action.valid, logInFail: !action.valid, currentUser: action.username}
     case types.LOG_OUT:
       return {...state, loggedIn: !!sessionStorage.jwt, logInFail: false, currentUser: null}
+    case types.SIGN_UP_ATTEMPT:
+      debugger;
     default:
       return state
   }

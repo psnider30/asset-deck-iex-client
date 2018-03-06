@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { register } from '../actions/userActions'
+import { signUpUser } from '../actions/userActions'
 
 class LoginPage extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class LoginPage extends Component {
 
     this.initialState = {
       username: '',
+      email: '',
       password: '',
       submitted: false
     };
@@ -28,20 +29,20 @@ class LoginPage extends Component {
     this.setState({ submitted: true });
     const { username, password } = this.state;
     if (username && password) {
-      this.props.register(this.state);
+      this.props.signUpUser(this.state);
     }
   }
 
   render() {
     // const { registering } = this.props;
-    const { username, password, submitted } = this.state;
+    const { username, password, email, submitted } = this.state;
     return (
       <div>
         <h2 className='large-green'>Sign Up</h2>
         <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
             <label className='med-green' htmlFor="username">Username </label>
-            <input type="text" className="form-control" name={username}
+            <input type="text" className="form-control" name='username'
               value={username} onChange={(event) => this.handleChange(event)}/>
             {submitted && !username &&
               <div className="help-block">Username is required</div>
@@ -50,8 +51,8 @@ class LoginPage extends Component {
 
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
             <label className='med-green' htmlFor="username">Email </label>
-            <input type="text" className="form-control" name={username}
-              value={username} onChange={(event) => this.handleChange(event)}/>
+            <input type="text" className="form-control" name='email'
+              value={email} onChange={(event) => this.handleChange(event)}/>
             {submitted && !username &&
               <div className="help-block">Email is required</div>
             }
@@ -59,7 +60,7 @@ class LoginPage extends Component {
 
           <div className={'form-group' + (submitted && !password ? 'has-error': '')}>
             <label className='med-green' htmlFor="password">Password </label>
-            <input type="password" className="form-control" name={password}
+            <input type="password" className="form-control" name='password'
               value={password} onChange={this.handleChange}/>
             {submitted && !password &&
               <div className="help-block">Password is required</div>
@@ -79,7 +80,7 @@ class LoginPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: bindActionCreators(register, dispatch)
+    register: bindActionCreators(signUpUser, dispatch)
   }
 }
 

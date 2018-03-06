@@ -1,4 +1,5 @@
 import sessionApi from '../api/sessionApi';
+import signUpApi from '../api/signUpApi';
 import * as types from './actionTypes';
 
 function logInAttempt(username, valid) {
@@ -32,9 +33,22 @@ export function logOutUser() {
   return { type: types.LOG_OUT }
 }
 
-export function register(data) {
+export function signUpAttempt(userInfo) {
   return {
-    type: "REGISTER",
-    data,
+    type: types.SIGN_UP_ATTEMPT,
+    userInfo,
   }
+}
+
+export function signUpUser(userInfo, history) {
+  return function(dispatch) {
+    return signUpApi.signup(userInfo).then(response => {
+      console.log(response)
+      dispatch(signUpAttempt(userInfo));
+    }).then(() => {
+      history.push('/login');
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
