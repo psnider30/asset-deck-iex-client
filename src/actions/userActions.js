@@ -33,18 +33,20 @@ export function logOutUser() {
   return { type: types.LOG_OUT }
 }
 
-export function signUpAttempt(userInfo) {
-  return {
-    type: types.SIGN_UP_ATTEMPT,
-    userInfo,
+function signUpAttempt(user) {
+  if (user.id) {
+    return {
+      type: types.SIGN_UP_ATTEMPT,
+    }
   }
 }
 
 export function signUpUser(userInfo, history) {
+  debugger;
   return function(dispatch) {
-    return signUpApi.signup(userInfo).then(response => {
-      console.log(response)
-      dispatch(signUpAttempt(userInfo));
+    return signUpApi.signup(userInfo).then(user => {
+      console.log(user)
+      dispatch(signUpAttempt(user));
     }).then(() => {
       history.push('/login');
     }).catch(error => {

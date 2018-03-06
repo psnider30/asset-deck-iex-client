@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signUpUser } from '../actions/userActions'
+import history from '../history';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class LoginPage extends Component {
       username: '',
       email: '',
       password: '',
+      passwordConfirm: '',
       submitted: false
     };
     this.state = this.initialState;
@@ -27,15 +29,15 @@ class LoginPage extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({ submitted: true });
-    const { username, password } = this.state;
-    if (username && password) {
-      this.props.signUpUser(this.state);
+    const { username, email, password, passwordConfirm } = this.state;
+    if (username && email && password && passwordConfirm && password === passwordConfirm) {
+      this.props.signUpUser(this.state, history);
     }
   }
 
   render() {
     // const { registering } = this.props;
-    const { username, password, email, submitted } = this.state;
+    const { username, email, password, passwordConfirm, submitted } = this.state;
     return (
       <div>
         <h2 className='large-green'>Sign Up</h2>
@@ -67,6 +69,18 @@ class LoginPage extends Component {
             }
           </div>
 
+          <div className={'form-group' + (submitted && !passwordConfirm ? 'has-error': '')}>
+            <label className='med-green' htmlFor="passwordConfirm">Password Confirm </label>
+            <input type="password" className="form-control" name='passwordConfirm'
+              value={passwordConfirm} onChange={this.handleChange}/>
+            {submitted && !passwordConfirm &&
+              <div className="help-block">Password Confirmation is required</div>
+            }
+            {submitted && passwordConfirm && passwordConfirm !== password &&
+              <div className="help-block">Password and Password Confirmation must match</div>
+            }
+          </div>
+
           <div className="form-group">
             <button className="register-button" disabled={submitted}>
               Signup
@@ -80,7 +94,7 @@ class LoginPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: bindActionCreators(signUpUser, dispatch)
+    signUpUser: bindActionCreators(signUpUser, dispatch)
   }
 }
 

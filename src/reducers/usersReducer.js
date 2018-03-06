@@ -4,6 +4,7 @@ export default function users(state = {
   loggedIn: !!sessionStorage.jwt && sessionStorage.jwt !== 'undefined',
   currentUser: null,
   logInFail: false,
+  newRegister: false,
 }, action) {
   switch(action.type) {
     case types.LOG_IN_ATTEMPT:
@@ -12,6 +13,7 @@ export default function users(state = {
       return {...state, loggedIn: !!sessionStorage.jwt, logInFail: false, currentUser: null}
     case types.SIGN_UP_ATTEMPT:
       debugger;
+      return {...state, newRegister: true}
     default:
       return state
   }
