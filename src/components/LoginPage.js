@@ -14,9 +14,7 @@ class LoginPage extends Component {
       submitted: false,
     };
     this.state = this.initialState;
-  }
 
-  componentWillMount() {
     if (this.props.registerFail) {
       this.props.history.push('/signup')
      }
