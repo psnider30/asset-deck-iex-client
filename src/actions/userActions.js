@@ -1,6 +1,5 @@
 import sessionApi from '../api/sessionApi';
 import signUpApi from '../api/signUpApi';
-import userAssetsApi from '../api/userAssetsApi';
 import * as types from './actionTypes';
 
 function logInAttempt(username, valid) {
