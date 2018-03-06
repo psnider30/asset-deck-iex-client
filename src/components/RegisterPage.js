@@ -39,6 +39,9 @@ class RegisterPage extends Component {
     const { username, email, password, passwordConfirm, submitted } = this.state;
     return (
       <div>
+        {this.props.registerFail &&
+          <div className="help-block">Sorry, that username or password is already in use</div>
+        }
         <h2 className='large-green'>Sign Up</h2>
         <form name="form" onSubmit={(event) => this.handleSubmit(event)}>
           <div className={'form-group' + (submitted && !username ? 'has-error': '')}>
@@ -95,6 +98,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     loggedIn: state.users.loggedIn,
     history: ownProps.history,
+    registerFail: state.users.registerFail,
   }
 }
 

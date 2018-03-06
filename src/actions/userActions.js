@@ -20,7 +20,6 @@ export function logInUser(credentials, history) {
         valid = false
       }
       dispatch(logInAttempt(credentials.username, valid));
-    }).then(() => {
       history.push('/assets/quote');
     }).catch(error => {
       throw(error);
@@ -34,23 +33,24 @@ export function logOutUser() {
 }
 
 function signUpAttempt(user) {
-  if (user.id) {
-    return {
-      type: types.SIGN_UP_ATTEMPT,
-    }
+  return {
+    type: types.SIGN_UP_ATTEMPT,
+    registerFail: !user
   }
 }
 
 export function signUpUser(userInfo, history) {
-  debugger;
   return function(dispatch) {
     return signUpApi.signup(userInfo).then(user => {
       console.log(user)
       dispatch(signUpAttempt(user));
-    }).then(() => {
       history.push('/login');
     }).catch(error => {
       throw(error);
     });
   };
+}
+
+export function resetRegisterFail() {
+  return { type: types.RESET_REGISTER_FAIL }
 }

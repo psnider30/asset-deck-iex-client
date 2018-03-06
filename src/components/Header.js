@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import { logOutUser } from '../actions/userActions';
+import { resetRegisterFail } from '../actions/userActions';
 
 // import LogoutButton from './components/LogoutButton'
 import * as userActions from '../actions/userActions';
@@ -12,6 +13,13 @@ class Header extends Component {
 
   handleLogOut = (event) => {
     this.props.logOutUser();
+  }
+
+  handleLoginClick = (event) => {
+    const { registerFail, resetRegisterFail } = this.props;
+    if (registerFail) {
+      resetRegisterFail()
+    }
   }
 
   render() {
@@ -35,7 +43,7 @@ class Header extends Component {
             Signup
           </Link>
           :
-          <Link to="/login">
+          <Link to="/login" onClick={(event) => this.handleLoginClick(event)}>
             Login
           </Link>
         }
@@ -48,13 +56,15 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.users.loggedIn
+    loggedIn: state.users.loggedIn,
+    registerFail: state.users.registerFail,
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     logOutUser: bindActionCreators(logOutUser, dispatch),
+    resetRegisterFail: bindActionCreators(resetRegisterFail, dispatch),
   };
 }
 

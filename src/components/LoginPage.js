@@ -16,6 +16,12 @@ class LoginPage extends Component {
     this.state = this.initialState;
   }
 
+  componentWillMount() {
+    if (this.props.registerFail) {
+      this.props.history.push('/signup')
+     }
+  }
+
   handleChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value });
@@ -26,7 +32,7 @@ class LoginPage extends Component {
     this.setState({ submitted: true })
     const { username, password } = this.state;
     if (username && password) {
-      const credentials = this.state;
+      const credentials = {username: username, password: password};
       const { logInUser, history } = this.props;
       logInUser(credentials, history);
     }
@@ -34,9 +40,10 @@ class LoginPage extends Component {
 
   render() {
     const { username, password, errors, submitted } = this.state;
+    const { history, logInFail, registerFail } = this.props;
     return (
       <div>
-        {this.props.logInFail &&
+        {logInFail &&
           <div className="help-block">Username and Password combination are incorrect</div>
         }
         <h2 className='large-green'>Login</h2>
@@ -79,6 +86,7 @@ const mapStateToProps = (state, ownProps) => {
     loggedIn: state.users.loggedIn,
     logInFail: state.users.logInFail,
     history: ownProps.history,
+    registerFail: state.users.registerFail,
   }
 }
 
