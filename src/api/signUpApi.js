@@ -1,6 +1,8 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default class SignUpApi {
   static signup(userInfo) {
-    const request = new Request('http://localhost:3001/api/signup', {
+    const request = new Request(`${API_URL}/signup`, {
       method: 'POST',
       headers: new Headers({
         'Content-type': 'application/json'
