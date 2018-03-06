@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 
 export default function users(state = {
   loggedIn: !!sessionStorage.jwt && sessionStorage.jwt !== 'undefined',
-  currentUser: null,
+  currentUser: sessionStorage.username,
   logInFail: false,
   registerFail: false,
 }, action) {

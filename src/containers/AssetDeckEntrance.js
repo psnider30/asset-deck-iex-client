@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar'
 import AssetDeck from './AssetDeck';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
-import AssetService from '../services/AssetService';
+// import AssetService from '../services/AssetService';
 import PropTypes from 'prop-types';
 
 // import { fetchAssetData } from '../actions/assetDataActions'
@@ -16,9 +16,6 @@ class AssetDeckEntrance extends Component {
 
   constructor(props) {
     super(props)
-    const currentPath = this.props.location.pathname
-    const { authenticated, currentUser, history } = this.props;
-    // this.requireAuth()
     this.state = { userAssets: [] }
   }
 
@@ -42,7 +39,7 @@ class AssetDeckEntrance extends Component {
 
   render() {
     // console.log(this.state.userAssets)
-    const { loggedIn, currentUser, history, location } = this.props;
+    const { loggedIn, currentUser, location } = this.props;
     return (
       <div>
         <Route path='/assets' component={() =>
@@ -61,7 +58,7 @@ class AssetDeckEntrance extends Component {
         }/>
         <Route path='/assets' render={() =>
           <div>
-            <h2>Welcome, {currentUser}</h2>
+            <h2 className='large-green'>Welcome, {currentUser}</h2>
             <AssetDeck />
           </div>
         }/>

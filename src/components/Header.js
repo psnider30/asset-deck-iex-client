@@ -6,9 +6,6 @@ import { withRouter } from 'react-router';
 import { logOutUser } from '../actions/userActions';
 import { resetRegisterFail } from '../actions/userActions';
 
-// import LogoutButton from './components/LogoutButton'
-import * as userActions from '../actions/userActions';
-
 class Header extends Component {
 
   handleLogOut = (event) => {
@@ -29,7 +26,7 @@ class Header extends Component {
         <div className="App-header">
           <h1 className="App-title">Asset Deck</h1>
           <div className="nav">
-            <a onClick={(event) => this.handleLogOut(event)}>Logout</a>
+            <a href='' onClick={(event) => this.handleLogOut(event)}>Logout</a>
           </div>
         </div>
       );

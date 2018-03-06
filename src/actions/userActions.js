@@ -4,6 +4,7 @@ import * as types from './actionTypes';
 
 function logInAttempt(username, valid) {
   if (!valid) { username = null; }
+
   return {
     type: types.LOG_IN_ATTEMPT,
     username,
@@ -16,10 +17,11 @@ export function logInUser(credentials, history) {
   return function(dispatch) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
+      sessionStorage.setItem('username', credentials.username);
       if (!sessionStorage.jwt || sessionStorage.jwt === "undefined") {
         valid = false
       }
-      dispatch(logInAttempt(credentials.username, valid));
+      dispatch(logInAttempt(sessionStorage.username, valid));
       history.push('/assets/quote');
     }).catch(error => {
       throw(error);
@@ -29,6 +31,7 @@ export function logInUser(credentials, history) {
 
 export function logOutUser() {
   sessionStorage.removeItem('jwt');
+  sessionStorage.removeItem('username');
   return { type: types.LOG_OUT }
 }
 

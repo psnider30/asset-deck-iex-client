@@ -5,7 +5,6 @@ import AssetDeckEntrance from './containers/AssetDeckEntrance';
 import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
 import Header from './components/Header';
-import history from './history';
 
 class App extends Component {
 

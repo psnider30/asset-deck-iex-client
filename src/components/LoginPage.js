@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logInUser } from '../actions/userActions';
@@ -37,8 +36,8 @@ class LoginPage extends Component {
   }
 
   render() {
-    const { username, password, errors, submitted } = this.state;
-    const { history, logInFail, registerFail } = this.props;
+    const { username, password, submitted } = this.state;
+    const { logInFail } = this.props;
     return (
       <div>
         {logInFail &&
