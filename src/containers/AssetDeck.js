@@ -10,6 +10,7 @@ import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
 import '../table.css';
 import closeLogo from '../close.svg';
+import { addUserAsset } from '../actions/userAssetsActions';
 
 class AssetDeck extends Component {
   constructor(props) {
@@ -25,9 +26,11 @@ class AssetDeck extends Component {
   }
 
   handleSubmit = (event) => {
+    const { actions, addUserAsset, currentUser } = this.props;
     event.preventDefault();
-    this.props.actions.startFetchingData();
-    this.props.actions.fetchAsset(this.state);
+    actions.startFetchingData();
+    actions.fetchAsset(this.state);
+    addUserAsset(this.state.symbol, currentUser);
     this.setState(this.initialState);
     }
 
@@ -140,13 +143,14 @@ const mapStateToProps = (state) => {
     fetchingData: state.manageAssets.fetchingData,
     layout: state.changeLayout.layout,
     assetSelected: state.changeLayout.asset,
-    // currentUser: state.users.currentUser,
+    currentUser: state.users.currentUser,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(actions, dispatch),
+    addUserAsset: bindActionCreators(addUserAsset, dispatch),
   };
 }
 
