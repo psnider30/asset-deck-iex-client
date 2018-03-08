@@ -16,6 +16,7 @@ class AssetDeck extends Component {
     super(props);
 
     this.initialState = {
+        id: null,
         symbol: '',
         updating: false,
       };

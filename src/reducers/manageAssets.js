@@ -22,9 +22,12 @@ export default function assets(state = {
       return {...state, assets: [...state.assets, asset], userAssets: [...state.userAssets, symbol.toUpperCase()], fetchingData: false};
     case types.UPDATE_ASSET:
       idx = state.assets.findIndex(asset => asset.id === action.asset.id);
+      symbol = action.asset.quote.symbol;
+      // idx2 = state.userAssets.findIndex(userAsset => userAsset.id === action.userAsset.id);
       return {
         ...state,
         assets: [...state.assets.slice(0, idx), action.asset, ...state.assets.slice(idx + 1)],
+        userAssets: [...state.userAssets.slice(0, idx), symbol, ...state.userAssets.slice(idx + 1)],
         fetchingData: false
       };
     case types.REMOVE_ASSET:

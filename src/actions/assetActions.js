@@ -39,9 +39,22 @@ const fetchCompanyInfo = (symbol) => {
     .then(response => response.json())
 }
 
+// const checkIfFetchable = async (symbol) => {
+//   const response = await fetch(`${IEX_API}/${symbol}/logo`);
+//   status = await response.status
+//   return status
+// }
+
 export const addUserAsset = (asset, username) => {
   return dispatch => {
-    userAssetsApi.saveUserAsset(asset, username, dispatch)
+    fetch(`${IEX_API}/${asset.symbol}/logo`).then(response => {
+      if (response.status === 200) {
+         userAssetsApi.saveUserAsset(asset, username, dispatch)
+      } else {
+        dispatch(stopFetchingData())
+        alert('Invalid Sybol')
+      }
+    })
   }
 }
 
@@ -57,7 +70,7 @@ export const fetchAsset = (asset, username, dispatch) => {
         assetData.timeSeries.daily = values[4];
         assetData.logo = values[5];
         assetData.companyInfo = values[6];
-        asset.updating ? dispatch(updateAsset(assetData, asset.symbol)) :
+        asset.updating ? dispatch(updateAsset({...assetData, id: asset.id}, asset.symbol, username)) :
         dispatch(addAsset(assetData, username))
         console.log(assetData)
       })
