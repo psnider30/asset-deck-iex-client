@@ -1,6 +1,8 @@
+import userAssetsApi from '../api/userAssetsApi';
+import * as types from './actionTypes';
 const IEX_API = `https://api.iextrading.com/1.0/stock`;
 
-let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} }
+let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} };
 
 const fetchMain = (symbol) => {
   return fetch(`${IEX_API}/${symbol}/quote`)
@@ -37,8 +39,13 @@ const fetchCompanyInfo = (symbol) => {
     .then(response => response.json())
 }
 
-export const fetchAsset = (asset) => {
+export const addUserAsset = (asset, username) => {
   return dispatch => {
+    userAssetsApi.saveUserAsset(asset, username, dispatch)
+  }
+}
+
+export const fetchAsset = (asset, username, dispatch) => {
     Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol), fetchFinancials(asset.symbol),
     fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol), fetchLogo(asset.symbol),
     fetchCompanyInfo(asset.symbol)])
@@ -50,43 +57,43 @@ export const fetchAsset = (asset) => {
         assetData.timeSeries.daily = values[4];
         assetData.logo = values[5];
         assetData.companyInfo = values[6];
-        asset.updating ? dispatch(updateAsset({...assetData, id: asset.id})) : dispatch(addAsset(assetData))
+        asset.updating ? dispatch(updateAsset(assetData, asset.symbol)) :
+        dispatch(addAsset(assetData, username))
         console.log(assetData)
       })
       .catch(error => {
         dispatch(stopFetchingData())
         alert('Symbol Not Found')
         console.log(error);
-
     })
-  }
+
 }
 
 export function startFetchingData() {
-  return { type: 'START_FETCHING_DATA' }
+  return { type: types.START_FETCHING_DATA }
 }
 
-function stopFetchingData() {
-  return { type: 'STOP_FETCHING_DATA' }
+export function stopFetchingData() {
+  return { type: types.STOP_FETCHING_DATA }
 }
 
 function addAsset(asset) {
   return {
-    type: 'ADD_ASSET',
+    type: types.ADD_ASSET,
     asset,
   }
 }
 
 export function updateAsset(asset) {
   return {
-    type: 'UPDATE_ASSET',
+    type: types.UPDATE_ASSET,
     asset
   }
 }
 
 export function removeAsset(assetId) {
   return {
-    type: 'REMOVE_ASSET',
+    type: types.REMOVE_ASSET,
     assetId
   }
 }

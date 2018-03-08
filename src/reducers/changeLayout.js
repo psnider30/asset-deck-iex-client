@@ -1,17 +1,19 @@
+import * as types from '../actions/actionTypes';
+
 export default function changeLayout(state = {
   layout: 'main',
   asset: null,
 }, action) {
   switch(action.type) {
-    case "MAIN_LAYOUT":
+    case types.MAIN_LAYOUT:
       return {...state, layout: action.layout, asset: null}
-    case "FUNDAMENTALS_LAYOUT":
+    case types.FUNDAMENTALS_LAYOUT:
       return {...state, layout: action.layout, asset: null}
-    case "CHANGE_SUMMARY_LAYOUT":
+    case types.CHANGE_SUMMARY_LAYOUT:
       return {...state, layout: action.layout, asset: null}
-    case "FINANCIALS_LAYOUT":
+    case types.FINANCIALS_LAYOUT:
       return {...state, layout: action.layout, asset: null}
-    case "TIME_SERIES_LAYOUT":
+    case types.TIME_SERIES_LAYOUT:
       return {...state, layout: action.layout, asset: action.asset}
     default:
       return state;

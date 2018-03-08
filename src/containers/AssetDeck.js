@@ -10,27 +10,23 @@ import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
 import '../table.css';
 import closeLogo from '../close.svg';
-import { addUserAsset } from '../actions/userAssetsActions';
 
 class AssetDeck extends Component {
   constructor(props) {
     super(props);
 
     this.initialState = {
-        id: null,
         symbol: '',
-        timeSeries: '1d',
         updating: false,
       };
     this.state = this.initialState;
   }
 
   handleSubmit = (event) => {
-    const { actions, addUserAsset, currentUser } = this.props;
+    const { actions, currentUser } = this.props;
     event.preventDefault();
     actions.startFetchingData();
-    actions.fetchAsset(this.state);
-    addUserAsset(this.state.symbol, currentUser);
+    actions.addUserAsset(this.state, currentUser);
     this.setState(this.initialState);
     }
 
@@ -150,7 +146,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(actions, dispatch),
-    addUserAsset: bindActionCreators(addUserAsset, dispatch),
   };
 }
 

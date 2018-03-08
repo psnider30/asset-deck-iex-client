@@ -1,3 +1,5 @@
+import * as types from './actionTypes';
+
 export function changeLayout(newLayout, currentLayout, asset=null) {
   if (newLayout === currentLayout) { return }
 
@@ -16,35 +18,35 @@ export function changeLayout(newLayout, currentLayout, asset=null) {
 
 function mainLayout(layout) {
   return {
-    type: 'MAIN_LAYOUT',
+    type: types.MAIN_LAYOUT,
     layout
   }
 }
 
 function fundamentals(layout) {
   return {
-    type: 'FUNDAMENTALS_LAYOUT',
+    type: types.FUNDAMENTALS_LAYOUT,
     layout
   }
 }
 
 function changeSummary(layout) {
   return {
-    type: 'CHANGE_SUMMARY_LAYOUT',
+    type: types.CHANGE_SUMMARY_LAYOUT,
     layout
   }
 }
 
 function financials(layout) {
   return {
-    type: 'FINANCIALS_LAYOUT',
+    type: types.FINANCIALS_LAYOUT,
     layout
   }
 }
 
 function timeSeries(layout, asset) {
   return {
-    type: 'TIME_SERIES_LAYOUT',
+    type: types.TIME_SERIES_LAYOUT,
     layout,
     asset
   }
