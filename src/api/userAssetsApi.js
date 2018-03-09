@@ -17,15 +17,35 @@ export default class userAssetsApi {
       body: JSON.stringify({asset:
         {
           symbol: asset.symbol,
-          username: username
+          username: username,
         }
       })
     });
-    return makeRequest(request, asset, username, dispatch)
+    return makeSaveRequest(request, asset, username, dispatch)
+  }
+
+  static deleteUserAsset(asset, username) {
+    const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+    const request = new Request(`${API_URL}/assets/delete`, {
+      method: 'DELETE',
+      headers: headers,
+      body: JSON.stringify({asset:
+        {
+          symbol: asset.symbol,
+          username: username,
+        }
+      })
+    });
+
+    return fetch(request).then(response => {
+      debugger;
+      console.log(response);
+      return response.json();
+    }).catch(error => console.log(error))
   }
 }
 
-  const makeRequest = async (request, asset, username, dispatch) => {
+  const makeSaveRequest = async (request, asset, username, dispatch) => {
     const response = await fetch(request).catch(error => console.log(error))
     const json = await response.json();
     if (!json.errors) {
@@ -39,6 +59,8 @@ export default class userAssetsApi {
       }
     }
   }
+
+
 
 
 // function fetchWithPromise(request) {

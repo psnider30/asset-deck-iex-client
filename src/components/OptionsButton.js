@@ -14,7 +14,11 @@ class OptionsButton extends Component {
   }
 
   handleRemoveClick = (asset, event) => {
-    this.props.removeAsset(asset.id);
+    const assetToDelete = {
+      symbol: asset.quote.symbol,
+      id: asset.id
+    }
+    this.props.removeAsset(assetToDelete, this.props.currentUser);
   }
 
   handleReturnsClick = (asset, event) => {
@@ -65,6 +69,7 @@ const mapStateToProps = (state, ownProps) => {
     assets: state.manageAssets.assets,
     layout: state.changeLayout.layout,
     assetsInMemorys: state.manageAssets.assetsInMemory,
+    currentUser: state.users.currentUser,
   }
 }
 

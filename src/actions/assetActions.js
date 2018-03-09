@@ -84,6 +84,13 @@ export function stopFetchingData() {
   return { type: types.STOP_FETCHING_DATA }
 }
 
+function deleteAssetSuccess(asset) {
+  return {
+    type: types.REMOVE_ASSET,
+    assetId: asset.id,
+  }
+}
+
 function addAsset(asset) {
   return {
     type: types.ADD_ASSET,
@@ -98,11 +105,12 @@ export function updateAsset(asset) {
   }
 }
 
-export function removeAsset(assetId) {
-  return {
-    type: types.REMOVE_ASSET,
-    assetId
-  }
+export function removeAsset(asset, username) {
+  return dispatch => {
+    return userAssetsApi.deleteUserAsset(asset, username).then(response => {
+      response.success ? dispatch(deleteAssetSuccess(asset)) : console.log(response.erros.message)
+    }).catch(error => console.log(error));
+  };
 }
 
 export function updateAssetsInMemory() {
