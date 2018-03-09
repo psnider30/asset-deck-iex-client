@@ -100,7 +100,7 @@ class TimeSeries extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    assets: state.manageAssets.assets,
+    assets: state.manageAssets.assetsInMemory,
     layout: state.changeLayout.layout,
     assetSelected: state.changeLayout.asset,
   }

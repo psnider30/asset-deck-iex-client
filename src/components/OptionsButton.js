@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import MenuButton from 'react-menu-button';
 import { changeLayout } from '../actions/layoutActions';
 import { removeAsset } from '../actions/assetActions';
+import { updateAssetsInMemory } from '../actions/assetActions';
 
 class OptionsButton extends Component {
 
@@ -19,6 +20,13 @@ class OptionsButton extends Component {
   handleReturnsClick = (asset, event) => {
     this.props.changeLayout('timeSeries',this.props.layout, asset);
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   debugger;
+  //   const assets = nextProps.assets;
+  //   if (assets ) { sessionStorage.setItem('assets', JSON.stringify(assets))}
+  //
+  // }
 
   render() {
     const { asset } = this.props;
@@ -56,6 +64,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     assets: state.manageAssets.assets,
     layout: state.changeLayout.layout,
+    assetsInMemorys: state.manageAssets.assetsInMemory,
   }
 }
 
@@ -63,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeLayout: bindActionCreators(changeLayout, dispatch),
     removeAsset: bindActionCreators(removeAsset, dispatch),
+    updateAssetsInMemory: bindActionCreators(updateAssetsInMemory, dispatch)
   }
 }
 

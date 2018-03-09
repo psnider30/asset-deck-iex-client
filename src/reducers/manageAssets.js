@@ -5,6 +5,7 @@ export default function assets(state = {
   assets: [],
   fetchingData: false,
   userAssets: [],
+  assetsInMemory: sessionStorage.assets ? JSON.parse(sessionStorage.assets) : []
 }, action) {
 
   let idx;
@@ -19,7 +20,7 @@ export default function assets(state = {
     case types.ADD_ASSET:
       asset = {...action.asset, id: uuidv4()};
       symbol = action.asset.quote.symbol;
-      return {...state, assets: [...state.assets, asset], userAssets: [...state.userAssets, symbol.toUpperCase()], fetchingData: false};
+      return {...state, assets: [...state.assets, asset], userAssets: [...state.userAssets, symbol.toUpperCase()], fetchingData: false };
     case types.UPDATE_ASSET:
       idx = state.assets.findIndex(asset => asset.id === action.asset.id);
       symbol = action.asset.quote.symbol;
@@ -31,8 +32,16 @@ export default function assets(state = {
         fetchingData: false
       };
     case types.REMOVE_ASSET:
+      idx = state.assets.findIndex(asset => asset.id === action.assetId);
       const assets = state.assets.filter(asset => asset.id !== action.assetId);
-      return {...state, assets: assets};
+      return {
+        ...state,
+        assets: assets,
+        userAssets: [...state.userAssets.slice(0, idx), ...state.userAssets.slice(idx + 1)],
+        assetsInMemory: JSON.parse(sessionStorage.assets),
+      };
+    case types.UPDATE_ASSETS_IN_MEMORY:
+      return {...state, assetsInMemory: JSON.parse(sessionStorage.assets)};
     default:
       return state;
   }

@@ -26,14 +26,17 @@ export default class userAssetsApi {
 }
 
   const makeRequest = async (request, asset, username, dispatch) => {
-
     const response = await fetch(request).catch(error => console.log(error))
     const json = await response.json();
     if (!json.errors) {
       fetchAsset(asset, username, dispatch)
     } else {
-      dispatch(stopFetchingData())
-      alert("Symbol already added")
+      if (asset.updating) {
+        fetchAsset(asset, username, dispatch)
+      } else {
+        dispatch(stopFetchingData())
+        alert("Symbol already added")
+      }
     }
   }
 

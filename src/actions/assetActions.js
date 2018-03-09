@@ -39,12 +39,6 @@ const fetchCompanyInfo = (symbol) => {
     .then(response => response.json())
 }
 
-// const checkIfFetchable = async (symbol) => {
-//   const response = await fetch(`${IEX_API}/${symbol}/logo`);
-//   status = await response.status
-//   return status
-// }
-
 export const addUserAsset = (asset, username) => {
   return dispatch => {
     fetch(`${IEX_API}/${asset.symbol}/logo`).then(response => {
@@ -73,13 +67,13 @@ export const fetchAsset = (asset, username, dispatch) => {
         asset.updating ? dispatch(updateAsset({...assetData, id: asset.id}, asset.symbol, username)) :
         dispatch(addAsset(assetData, username))
         console.log(assetData)
+        dispatch(updateAssetsInMemory())
       })
       .catch(error => {
         dispatch(stopFetchingData())
         alert('Symbol Not Found')
         console.log(error);
     })
-
 }
 
 export function startFetchingData() {
@@ -108,5 +102,11 @@ export function removeAsset(assetId) {
   return {
     type: types.REMOVE_ASSET,
     assetId
+  }
+}
+
+export function updateAssetsInMemory() {
+  return {
+    type: types.UPDATE_ASSETS_IN_MEMORY
   }
 }

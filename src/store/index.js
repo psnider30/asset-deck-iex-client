@@ -5,6 +5,7 @@ import manageAssets from '../reducers/manageAssets';
 // import assetData from '../reducers/assetDataReducer';
 import users from '../reducers/usersReducer';
 const middlewares = [thunk];
+
 const reducers = combineReducers({
   manageAssets,
   changeLayout,

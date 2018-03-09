@@ -21,6 +21,18 @@ class AssetDeck extends Component {
         updating: false,
       };
     this.state = this.initialState;
+
+    const assets = this.props.assets;
+    if (assets ) { sessionStorage.setItem('assets', JSON.stringify(assets)) }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.assets === this.props.assets) { return }
+    const assets = nextProps.assets;
+    if (assets ) { sessionStorage.setItem('assets', JSON.stringify(assets))}
+    if (nextProps.assets.length !== this.props.assetsInMemory.length) {
+      this.props.actions.updateAssetsInMemory()
+    }
   }
 
   handleSubmit = (event) => {
@@ -141,6 +153,7 @@ const mapStateToProps = (state) => {
     layout: state.changeLayout.layout,
     assetSelected: state.changeLayout.asset,
     currentUser: state.users.currentUser,
+    assetsInMemory: state.manageAssets.assetsInMemory,
   }
 }
 
