@@ -25,13 +25,6 @@ class OptionsButton extends Component {
     this.props.changeLayout('timeSeries',this.props.layout, asset);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   debugger;
-  //   const assets = nextProps.assets;
-  //   if (assets ) { sessionStorage.setItem('assets', JSON.stringify(assets))}
-  //
-  // }
-
   render() {
     const { asset } = this.props;
     return (

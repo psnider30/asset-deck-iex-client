@@ -1,5 +1,4 @@
 import * as types from '../actions/actionTypes';
-import uuidv4 from 'uuid/v4';
 
 export default function assets(state = {
   assets: [],
@@ -18,9 +17,8 @@ export default function assets(state = {
     case types.STOP_FETCHING_DATA:
       return {...state, fetchingData: false };
     case types.ADD_ASSET:
-      asset = {...action.asset, id: uuidv4()};
       symbol = action.asset.quote.symbol;
-      return {...state, assets: [...state.assets, asset], userAssets: [...state.userAssets, symbol.toUpperCase()], fetchingData: false };
+      return {...state, assets: [...state.assets, action.asset], userAssets: [...state.userAssets, symbol.toUpperCase()], fetchingData: false };
     case types.UPDATE_ASSET:
       idx = state.assets.findIndex(asset => asset.id === action.asset.id);
       symbol = action.asset.quote.symbol;

@@ -39,11 +39,12 @@ const fetchCompanyInfo = (symbol) => {
     .then(response => response.json())
 }
 
-export const addUserAsset = (asset, username) => {
+export const addUserAsset = (asset, username, userAssets) => {
   return dispatch => {
+    // This first fetch checks if asset is fetchable before sending post request to create or update in the rails api
     fetch(`${IEX_API}/${asset.symbol}/logo`).then(response => {
       if (response.status === 200) {
-         userAssetsApi.saveUserAsset(asset, username, dispatch)
+         userAssetsApi.saveUserAsset(asset, username, userAssets, dispatch)
       } else {
         dispatch(stopFetchingData())
         alert('Invalid Sybol')
@@ -64,8 +65,12 @@ export const fetchAsset = (asset, username, dispatch) => {
         assetData.timeSeries.daily = values[4];
         assetData.logo = values[5];
         assetData.companyInfo = values[6];
-        asset.updating ? dispatch(updateAsset({...assetData, id: asset.id}, asset.symbol, username)) :
-        dispatch(addAsset(assetData, username))
+        assetData.id = asset.id
+        if (asset.updating) {
+          dispatch(updateAsset({...assetData, id: asset.id}, asset.symbol, username))
+        } else {
+          dispatch(addAsset({...assetData, id: asset.id}, username))
+        }
         console.log(assetData)
         dispatch(updateAssetsInMemory())
       })

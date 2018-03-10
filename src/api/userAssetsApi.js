@@ -9,19 +9,43 @@ export default class userAssetsApi {
     return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
   }
 
-  static saveUserAsset(asset, username, dispatch) {
+  static saveUserAsset(asset, username, userAssets, dispatch) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+    const body = JSON.stringify({asset:
+      {
+        symbol: asset.symbol,
+        username: username,
+        uuid: asset.id,
+      }
+    })
+
+    asset.updating ?
+    this.updateAsset(asset, username, userAssets, dispatch, headers, body) :
+    this.saveNewAsset(asset, username, dispatch, headers, body)
+
+  }
+
+  static saveNewAsset(asset, username, dispatch, headers, body) {
     const request = new Request(`${API_URL}/assets`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({asset:
-        {
-          symbol: asset.symbol,
-          username: username,
-        }
-      })
+      body: body
     });
+
     return makeSaveRequest(request, asset, username, dispatch)
+  }
+
+  static updateAsset(asset, username, userAssets, dispatch, headers, body) {
+    const request = new Request(`${API_URL}/assets/update`, {
+      method: 'PUT',
+      headers: headers,
+      body: body
+    });
+    if (userAssets.includes(asset.symbol)) {
+      return fetchAsset(asset, username, dispatch)
+    } else {
+      return makeSaveRequest(request, asset, username, dispatch)
+    }
   }
 
   static deleteUserAsset(asset, username) {
@@ -33,12 +57,12 @@ export default class userAssetsApi {
         {
           symbol: asset.symbol,
           username: username,
+          uuid: asset.id,
         }
       })
     });
 
     return fetch(request).then(response => {
-      debugger;
       console.log(response);
       return response.json();
     }).catch(error => console.log(error))
@@ -51,12 +75,8 @@ export default class userAssetsApi {
     if (!json.errors) {
       fetchAsset(asset, username, dispatch)
     } else {
-      if (asset.updating) {
-        fetchAsset(asset, username, dispatch)
-      } else {
-        dispatch(stopFetchingData())
-        alert("Symbol already added")
-      }
+      dispatch(stopFetchingData())
+      alert(`${json.errors.message}`)
     }
   }
 

@@ -10,6 +10,7 @@ import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
 import '../table.css';
 import closeLogo from '../close.svg';
+import uuidv4 from 'uuid/v4';
 
 class AssetDeck extends Component {
   constructor(props) {
@@ -36,10 +37,11 @@ class AssetDeck extends Component {
   }
 
   handleSubmit = (event) => {
-    const { actions, currentUser } = this.props;
+    const { actions, currentUser, userAssets } = this.props;
     event.preventDefault();
     actions.startFetchingData();
-    actions.addUserAsset(this.state, currentUser);
+    const asset = this.state.updating ? this.state : {...this.state, id: uuidv4()};
+    actions.addUserAsset(asset, currentUser, userAssets);
     this.setState(this.initialState);
     }
 
@@ -154,6 +156,7 @@ const mapStateToProps = (state) => {
     assetSelected: state.changeLayout.asset,
     currentUser: state.users.currentUser,
     assetsInMemory: state.manageAssets.assetsInMemory,
+    userAssets: state.manageAssets.userAssets,
   }
 }
 
