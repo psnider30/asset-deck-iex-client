@@ -9,15 +9,19 @@ export default class userAssetsApi {
     return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
   }
 
-  static saveUserAsset(asset, username, userAssets, dispatch) {
-    const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
-    const body = JSON.stringify({asset:
+  static requestBody(asset, username) {
+    return JSON.stringify({asset:
       {
         symbol: asset.symbol,
         username: username,
         uuid: asset.id,
       }
     })
+  }
+
+  static saveUserAsset(asset, username, userAssets, dispatch) {
+    const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+    const body = this.requestBody(asset, username);
 
     asset.updating ?
     this.updateAsset(asset, username, userAssets, dispatch, headers, body) :
@@ -50,22 +54,23 @@ export default class userAssetsApi {
 
   static deleteUserAsset(asset, username) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+    const body = this.requestBody(asset, username);
     const request = new Request(`${API_URL}/assets/delete`, {
       method: 'DELETE',
       headers: headers,
-      body: JSON.stringify({asset:
-        {
-          symbol: asset.symbol,
-          username: username,
-          uuid: asset.id,
-        }
-      })
+      body: body
     });
 
     return fetch(request).then(response => {
       console.log(response);
       return response.json();
     }).catch(error => console.log(error))
+  }
+
+  static getUserAssets() {
+    // Make Request to fetch list of user assets symbols
+    // Compare fetched assets symbols to userAssets array
+    // If Symbol in db, but not userAssets, then fetch with addUserAsset (username from currentUser)
   }
 }
 
@@ -79,26 +84,3 @@ export default class userAssetsApi {
       alert(`${json.errors.message}`)
     }
   }
-
-
-
-
-// function fetchWithPromise(request) {
-//   new Promise((resolve, reject) => {
-//    fetch(request).then(response => {
-//      if (response.ok) {
-//        resolve(response)
-//        debugger
-//        console.log(response)
-//      } else {
-//        debugger
-//         console.log('error')
-//      }
-//    });
-//  });
-// }
-
-
-// }).catch(error => {
-//   console.log(error);
-// });

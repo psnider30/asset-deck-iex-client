@@ -8,7 +8,6 @@ export default function assets(state = {
 }, action) {
 
   let idx;
-  let asset;
   let symbol;
 
   switch(action.type) {
@@ -22,7 +21,6 @@ export default function assets(state = {
     case types.UPDATE_ASSET:
       idx = state.assets.findIndex(asset => asset.id === action.asset.id);
       symbol = action.asset.quote.symbol;
-      // idx2 = state.userAssets.findIndex(userAsset => userAsset.id === action.userAsset.id);
       return {
         ...state,
         assets: [...state.assets.slice(0, idx), action.asset, ...state.assets.slice(idx + 1)],
