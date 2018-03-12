@@ -21,18 +21,61 @@ class AssetDeck extends Component {
         symbol: '',
         updating: false,
       };
-    this.state = this.initialState;
 
-    const assets = this.props.assets;
-    if (assets ) { sessionStorage.setItem('assets', JSON.stringify(assets)) }
+    this.state = this.initialState;
+    // if sessionStorage.assets is undefined, then make fetch requests to api to set assets and assetsInMemory
+    // Otherwise don't fetch or set sessionStorage and have it set below from nextProps
+    const { actions, currentUser } = this.props;
+    if (sessionStorage.assets === undefined) { actions.loadUserAssets(currentUser) }
+    this.onUnload = this.onUnload.bind(this);
   }
 
+  onUnload(event) {
+    // if page is refreshed re-fetch the assets if assets in state are removed but assetsinMemory remain
+    const { assets, assetsInMemory, actions, currentUser } = this.props;
+    if (sessionStorage.assets && (assetsInMemory.length !== assets.length)) {
+      sessionStorage.removeItem('assets')
+      actions.loadUserAssets(currentUser)
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener("load", this.onUnload)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("load", this.onUnload)
+  }
+
+  // Assets in Memory not updated when asset replaced b/c length of nextProps Assets and Assets is not different
+  // SO... check if next Props symbols are different or just check if state updating?
+
+  // Update Asset Deck with lifecycle methods to retrieve userAssets from rails api when logging in
+  // Use window load event listener to load userAssets from api if the redux state is loss due to page refreshes. This also allows fresh stock info to be fetched
+  // Keeps assetsinMemory up to date in componentWillReceiveProps.
+  // Add replacingAsset to redux state when asset is udpated with symbol change and the reset the value with new action after allowing assets inMemory to be updated
+  // even though nextProps.assets and this.props. assets are same size.
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.assets === this.props.assets) { return }
-    const assets = nextProps.assets;
-    if (assets ) { sessionStorage.setItem('assets', JSON.stringify(assets))}
-    if (nextProps.assets.length !== this.props.assetsInMemory.length) {
-      this.props.actions.updateAssetsInMemory()
+    const { assets, assetsInMemory, userAssets, actions, currentUser } = this.props;
+    if (! nextProps.assets ) { return }
+    if (nextProps.assets.length !== assets.length) {
+      sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
+    }
+    // Check if an asset is being added, removed, or repalced and if so update assets in memory
+    if (nextProps.assets.length < assets.length) {
+      actions.updateAssetsInMemory()
+    }
+
+    if (this.props.replacingAsset) {
+      sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
+      actions.updateAssetsInMemory()
+      actions.resetReplacingAsset()
+    }
+
+    if (sessionStorage.assets && (assetsInMemory.length !== assets.length)) {
+      // sessionStorage.removeItem('assets')
+      // actions.loadUserAssets(currentUser)
     }
   }
 
@@ -42,8 +85,12 @@ class AssetDeck extends Component {
     actions.startFetchingData();
     const asset = this.state.updating ? this.state : {...this.state, id: uuidv4()};
     actions.addUserAsset(asset, currentUser, userAssets);
-    this.setState(this.initialState);
-    }
+    this.setState({
+      id: null,
+      symbol: '',
+      updating: false,
+    });
+  }
 
   handleChange = (event) => {
     const { name, value } = event.target
@@ -111,28 +158,24 @@ class AssetDeck extends Component {
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
                   />}
               />
-
               <Route exact path="/assets/fundamentals"
                 component={() =>
                   <AssetsFundamentals
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
                   />}
               />
-
               <Route exact path="/assets/change-summary"
                 component={() =>
                   <ChangeSummary
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
                   />}
               />
-
               <Route exact path="/assets/financials"
                 component={() =>
                   <AssetsFinancials
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
                   />}
               />
-
               <Route
                 exact path={"/assets/" + symbol + "/returns"}
                 component={() =>
@@ -157,6 +200,7 @@ const mapStateToProps = (state) => {
     currentUser: state.users.currentUser,
     assetsInMemory: state.manageAssets.assetsInMemory,
     userAssets: state.manageAssets.userAssets,
+    replacingAsset: state.manageAssets.replacingAsset,
   }
 }
 

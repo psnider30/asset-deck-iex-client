@@ -77,7 +77,7 @@ input:-webkit-autofill {
   outline: none;
 }
 
-.navbar-button:focus {
+button:hover, button:focus, button:active {
   outline: none;
 }
 
@@ -150,6 +150,10 @@ label {
   margin-top: 15px;
   color: white;
   border-radius: 4px;
+  outline: none;
+}
+
+.returns-button:hover, .returns-button:active {
   outline: none;
 }
 

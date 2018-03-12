@@ -31,6 +31,7 @@ export function logInUser(credentials, history) {
 export function logOutUser() {
   sessionStorage.removeItem('jwt');
   sessionStorage.removeItem('username');
+  sessionStorage.removeItem('assets');
   return { type: types.LOG_OUT }
 }
 

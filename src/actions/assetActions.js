@@ -44,7 +44,13 @@ export const addUserAsset = (asset, username, userAssets) => {
     // This first fetch checks if asset is fetchable before sending post request to create or update in the rails api
     fetch(`${IEX_API}/${asset.symbol}/logo`).then(response => {
       if (response.status === 200) {
-         userAssetsApi.saveUserAsset(asset, username, userAssets, dispatch)
+        const replacing = !userAssets.includes(asset.symbol);
+        // send request to save asset to rails if the asset is being replaced or this is saving a new asset (not updating)
+        if (replacing || !asset.updating) {
+          userAssetsApi.saveUserAsset(asset, username, userAssets, dispatch, replacing)
+        } else {
+          return fetchAsset(asset, dispatch)
+        }
       } else {
         dispatch(stopFetchingData())
         alert('Invalid Sybol')
@@ -53,7 +59,19 @@ export const addUserAsset = (asset, username, userAssets) => {
   }
 }
 
-export const fetchAsset = (asset, username, dispatch) => {
+export const loadUserAssets = (username) => {
+  return dispatch => {
+    userAssetsApi.fetchUserAssets(username, dispatch)
+  }
+}
+
+export const loadUserAsset = (userAsset, dispatch) => {
+  dispatch(startFetchingData())
+  const asset = { ...userAsset, id: userAsset.uuid, updating: false}
+    return fetchAsset(asset, dispatch)
+}
+
+export const fetchAsset = (asset, dispatch, replacing = false) => {
     Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol), fetchFinancials(asset.symbol),
     fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol), fetchLogo(asset.symbol),
     fetchCompanyInfo(asset.symbol)])
@@ -67,16 +85,16 @@ export const fetchAsset = (asset, username, dispatch) => {
         assetData.companyInfo = values[6];
         assetData.id = asset.id
         if (asset.updating) {
-          dispatch(updateAsset({...assetData, id: asset.id}, asset.symbol, username))
+          dispatch(updateAsset({...assetData, id: asset.id, replacing: replacing}))
         } else {
-          dispatch(addAsset({...assetData, id: asset.id}, username))
+          dispatch(addAsset({...assetData, id: asset.id}))
         }
         console.log(assetData)
         dispatch(updateAssetsInMemory())
       })
       .catch(error => {
+        debugger;
         dispatch(stopFetchingData())
-        alert('Symbol Not Found')
         console.log(error);
     })
 }
@@ -120,6 +138,12 @@ export function removeAsset(asset, username) {
 
 export function updateAssetsInMemory() {
   return {
-    type: types.UPDATE_ASSETS_IN_MEMORY
+    type: types.UPDATE_ASSETS_IN_MEMORY,
+  }
+}
+
+export function resetReplacingAsset() {
+  return {
+    type: types.RESET_REPLACING_ASSET
   }
 }
