@@ -31,7 +31,7 @@ const fetchDailyTimeSeries = (symbol) => {
 
 const fetchLogo = (symbol) => {
   return fetch(`${IEX_API}/${symbol}/logo`)
-    .then(response => response.json())
+  .then(response => response.json())
 }
 
 const fetchCompanyInfo = (symbol) => {
@@ -42,7 +42,7 @@ const fetchCompanyInfo = (symbol) => {
 export const addUserAsset = (asset, username, userAssets) => {
   return dispatch => {
     // This first fetch checks if asset is fetchable before sending post request to create or update in the rails api
-    fetch(`${IEX_API}/${asset.symbol}/logo`).then(response => {
+    fetch(`${IEX_API}/${asset.symbol}/company`).then(response => {
       if (response.status === 200) {
         const replacing = !userAssets.includes(asset.symbol);
         // send request to save asset to rails if the asset is being replaced or this is saving a new asset (not updating)

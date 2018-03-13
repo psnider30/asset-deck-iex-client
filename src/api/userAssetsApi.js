@@ -37,7 +37,7 @@ export default class userAssetsApi {
       body: body
     });
 
-    return makeSaveRequest(request, asset, username, dispatch)
+    return this.makeSaveRequest(request, asset, username, dispatch)
   }
 
   static updateAsset(asset, username, userAssets, dispatch, headers, body, replacing) {
@@ -46,7 +46,7 @@ export default class userAssetsApi {
       headers: headers,
       body: body
     });
-    return makeSaveRequest(request, asset, username, dispatch, replacing)
+    return this.makeSaveRequest(request, asset, username, dispatch, replacing)
   }
 
   static deleteUserAsset(asset, username) {
@@ -75,7 +75,7 @@ export default class userAssetsApi {
     return fetch(request).then(response => {
       if (response.ok) { return response.json() }
         }).then(data => {
-          data.forEach(userAsset => loadUserAsset(userAsset, dispatch))
+          if (data) { data.forEach(userAsset => loadUserAsset(userAsset, dispatch)) }
         }).catch(error => {
           return Promise.reject(Error(error.message))
         })
@@ -84,15 +84,45 @@ export default class userAssetsApi {
     // Make Request to fetch list of user assets symbols
     // Compare fetched assets symbols to userAssets array
     // If Symbol in db, but not userAssets, then fetch with addUserAsset (username from currentUser)
-  }
-
-  const makeSaveRequest = async (request, asset, username, dispatch, replacing = false) => {
-    const response = await fetch(request).catch(error => console.log(error))
-    const json = await response.json();
-    if (!json.errors) {
-      fetchAsset(asset, dispatch, replacing)
-    } else {
+  static makeSaveRequest(request, asset, username, dispatch, replacing = false) {
+    return fetch(request).then(response => {
+      if (response.ok) {
+        response.json()
+        fetchAsset(asset, dispatch, replacing)
+      } else {
+        alert(`status: ${response.status}, ${response.statusText}`)
+        dispatch(stopFetchingData())
+      }
+    }).catch(error => {
+      console.log(error)
       dispatch(stopFetchingData())
-      alert(`${json.errors.message}`)
-    }
+      alert(error)
+    })
   }
+}
+
+  // const makeSaveRequest = async (request, asset, username, dispatch, replacing = false) => {
+  //   const response = await fetch(request).catch(error => console.log(error))
+  //   const json = await response.json();
+  //   debugger;
+  //   if (!json.error) {
+  //     fetchAsset(asset, dispatch, replacing)
+  //   } else {
+  //     dispatch(stopFetchingData())
+  //     alert(`${json.errors.message}`)
+  //   }
+  // }
+
+  // static makeSaveRequest(request, asset, username, dispatch, replacing = false) {
+  //   return fetch(request).then(response => {
+  //     if (response.ok) { return response.json() }
+  //   }).then(data => {
+  //     console.log(data)
+  //     debugger
+  //     fetchAsset(asset, dispatch, replacing)
+  //   }).catch(error => {
+  //     console.log(error)
+  //     dispatch(stopFetchingData())
+  //     // alert(`${json.errors.message}`)
+  //   })
+  // }

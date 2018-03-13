@@ -50,14 +50,8 @@ class AssetDeck extends Component {
   // Assets in Memory not updated when asset replaced b/c length of nextProps Assets and Assets is not different
   // SO... check if next Props symbols are different or just check if state updating?
 
-  // Update Asset Deck with lifecycle methods to retrieve userAssets from rails api when logging in
-  // Use window load event listener to load userAssets from api if the redux state is loss due to page refreshes. This also allows fresh stock info to be fetched
-  // Keeps assetsinMemory up to date in componentWillReceiveProps.
-  // Add replacingAsset to redux state when asset is udpated with symbol change and the reset the value with new action after allowing assets inMemory to be updated
-  // even though nextProps.assets and this.props. assets are same size.
-
   componentWillReceiveProps(nextProps) {
-    const { assets, assetsInMemory, userAssets, actions, currentUser } = this.props;
+    const { assets, assetsInMemory, actions } = this.props;
     if (! nextProps.assets ) { return }
     if (nextProps.assets.length !== assets.length) {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
@@ -82,14 +76,14 @@ class AssetDeck extends Component {
   handleSubmit = (event) => {
     const { actions, currentUser, userAssets } = this.props;
     event.preventDefault();
-    actions.startFetchingData();
     const asset = this.state.updating ? this.state : {...this.state, id: uuidv4()};
-    actions.addUserAsset(asset, currentUser, userAssets);
-    this.setState({
-      id: null,
-      symbol: '',
-      updating: false,
-    });
+    if (userAssets.includes(asset.symbol.toUpperCase())) {
+      alert(`You already added "${asset.symbol.toUpperCase()}"`)
+    } else {
+      actions.startFetchingData();
+      actions.addUserAsset(asset, currentUser, userAssets);
+    }
+    this.setState(this.initialState);
   }
 
   handleChange = (event) => {
