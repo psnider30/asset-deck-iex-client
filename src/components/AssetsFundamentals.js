@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
+import refreshLogo from "../refresh-icon.png";
 
 class AssetsFundamentals extends Component {
 
   refreshData = (event) => {
     window.location.reload()
   }
-  
+
   render() {
     const { assets, onUpdateAsset } = this.props;
     const assetsList = assets.map((asset, index) => {
@@ -49,7 +50,7 @@ class AssetsFundamentals extends Component {
               <th><strong>Price/Book</strong></th>
               <th>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
-                  Refresh All
+                  <img src={refreshLogo} />
                 </button>
               </th>
             </tr>

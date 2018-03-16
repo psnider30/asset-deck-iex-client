@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
+import refreshLogo from "../refresh-icon.png";
+
 
 class AssetsQuote extends Component {
 
@@ -51,7 +53,7 @@ class AssetsQuote extends Component {
               <th><strong>Time or Date</strong></th>
               <th className='refresh'>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
-                  Refresh All
+                  <img src={refreshLogo} />
                 </button>
               </th>
             </tr>
