@@ -5,6 +5,11 @@ import { decimalToPercentage } from '../lib/formatNumber'
 import OptionsButton from './OptionsButton';
 
 class ChangeSummary extends Component {
+
+  refreshData = (event) => {
+    window.location.reload()
+  }
+  
   render() {
     const { assets, onUpdateAsset } = this.props;
     const assetsList = assets.map((asset, index) => {
@@ -44,6 +49,11 @@ class ChangeSummary extends Component {
               <th><strong>1 Year</strong></th>
               <th><strong>2 Year</strong></th>
               <th><strong>5 year</strong></th>
+              <th>
+                <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
+                  Refresh All
+                </button>
+              </th>
             </tr>
           </thead>
 

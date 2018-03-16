@@ -10,14 +10,14 @@ export default class Navbar extends Component {
       <div className="navbar">
         <Link to="/assets/quote">
           <button
-            className={this.props.currentLayout === "main" ? "navbar-button-active" : "navbar-button"}
-            onClick={() => changeLayout('main', currentLayout)}>
+            className={this.props.currentLayout === "quote" ? "navbar-button-active" : "navbar-button"}
+            onClick={() => changeLayout('quote', currentLayout)}>
             Quote
           </button>
         </Link>
         <Link to="/assets/change-summary">
           <button
-            className={this.props.currentLayout === "changeSummary" ? "navbar-button-active" : "navbar-button"}
+            className={this.props.currentLayout === "change-summary" ? "navbar-button-active" : "navbar-button"}
             onClick={() => changeLayout('changeSummary', currentLayout)}>
             Change Summary
           </button>

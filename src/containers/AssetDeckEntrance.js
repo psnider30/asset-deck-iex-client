@@ -7,21 +7,20 @@ import Navbar from '../components/Navbar'
 import AssetDeck from './AssetDeck';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
-// import AssetService from '../services/AssetService';
 import PropTypes from 'prop-types';
 
-// import { fetchAssetData } from '../actions/assetDataActions'
 
 class AssetDeckEntrance extends Component {
 
   constructor(props) {
-    super(props)
-    this.state = { userAssets: [] }
-  }
+    super(props);
 
-  componentDidMount() {
-    // AssetService.fetchUserAssets()
-    //   .then(userAssets => this.setState({ userAssets }))
+    const currentLayout = this.props.layout
+    const pathArr = this.props.location.pathname.split('/')
+    const layoutPath = pathArr[pathArr.length - 1]
+    if (layoutPath !== currentLayout) {
+      this.props.changeLayout(layoutPath, currentLayout)
+    }
   }
 
   handleLayoutChange = (newLayout) => {
@@ -31,14 +30,7 @@ class AssetDeckEntrance extends Component {
     }
   }
 
-  addAsset = (asset) => {
-    // AssetService.createAsset(asset).then(asset => this.setState({
-    //   assets: this.state.userAssets.concat(asset)
-    // }))
-  }
-
   render() {
-    // console.log(this.state.userAssets)
     const { loggedIn, currentUser, location } = this.props;
     return (
       <div>
@@ -62,9 +54,6 @@ class AssetDeckEntrance extends Component {
             <AssetDeck />
           </div>
         }/>
-        <div className="rails">
-          {/* <AddAsset addAsset={this.addAsset} /> */}
-        </div>
       </div>
     );
   }
@@ -90,7 +79,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     assetActions: bindActionCreators(actions, dispatch),
     changeLayout: bindActionCreators(changeLayout, dispatch),
-    // fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
   };
 }
 

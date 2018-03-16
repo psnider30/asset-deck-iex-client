@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/assetActions';
+import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import AssetsQuote from '../components/AssetsQuote';
 import AssetsFundamentals from '../components/AssetsFundamentals';
@@ -27,10 +28,10 @@ class AssetDeck extends Component {
     // Otherwise don't fetch or set sessionStorage and have it set below from nextProps
     const { actions, currentUser } = this.props;
     if (sessionStorage.assets === undefined) { actions.loadUserAssets(currentUser) }
-    this.onUnload = this.onUnload.bind(this);
+    this.onLoad = this.onLoad.bind(this);
   }
 
-  onUnload(event) {
+  onLoad(event) {
     // if page is refreshed re-fetch the assets if assets in state are removed but assetsinMemory remain
     const { assets, assetsInMemory, actions, currentUser } = this.props;
     if (sessionStorage.assets && (assetsInMemory.length !== assets.length)) {
@@ -40,11 +41,11 @@ class AssetDeck extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("load", this.onUnload)
+    window.addEventListener("load", this.onLoad)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("load", this.onUnload)
+    window.removeEventListener("load", this.onLoad)
   }
 
   // Assets in Memory not updated when asset replaced b/c length of nextProps Assets and Assets is not different
@@ -77,7 +78,7 @@ class AssetDeck extends Component {
     const { actions, currentUser, userAssets } = this.props;
     event.preventDefault();
     const asset = this.state.updating ? this.state : {...this.state, id: uuidv4()};
-    if (userAssets.includes(asset.symbol.toUpperCase())) {
+    if (!asset.updating && userAssets.includes(asset.symbol.toUpperCase())) {
       alert(`You already added "${asset.symbol.toUpperCase()}"`)
     } else {
       actions.startFetchingData();
@@ -204,4 +205,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetDeck)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AssetDeck))

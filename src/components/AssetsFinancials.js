@@ -5,6 +5,11 @@ import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 
 class AssetsFinancials extends Component {
+
+  refreshData = (event) => {
+    window.location.reload()
+  }
+  
   render() {
     const { assets, onUpdateAsset } = this.props;
     const assetsList = assets.map((asset, index) => {
@@ -44,6 +49,11 @@ class AssetsFinancials extends Component {
               <th><strong>Cash FLow</strong></th>
               <th><strong>SH Equity</strong></th>
               <th><strong>Date</strong></th>
+              <th>
+                <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
+                  Refresh All
+                </button>
+              </th>
             </tr>
           </thead>
 

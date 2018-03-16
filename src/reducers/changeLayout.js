@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 export default function changeLayout(state = {
-  layout: 'main',
+  layout: '',
   asset: null,
 }, action) {
   switch(action.type) {

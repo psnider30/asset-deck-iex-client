@@ -128,6 +128,10 @@ export function updateAsset(asset) {
   }
 }
 
+export function clearAssets() {
+  return { type: types.CLEAR_ASSETS }
+}
+
 export function removeAsset(asset, username) {
   return dispatch => {
     return userAssetsApi.deleteUserAsset(asset, username).then(response => {

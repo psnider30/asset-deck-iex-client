@@ -5,6 +5,11 @@ import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber
 import OptionsButton from './OptionsButton';
 
 class AssetsQuote extends Component {
+
+  refreshData = (event) => {
+    window.location.reload()
+  }
+
   render() {
     const { assets, onUpdateAsset } = this.props;
     const assetsList = assets.map((asset, index) => {
@@ -44,6 +49,11 @@ class AssetsQuote extends Component {
               <th><strong>Change %</strong></th>
               <th><strong>Sector</strong></th>
               <th><strong>Time or Date</strong></th>
+              <th className='refresh'>
+                <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
+                  Refresh All
+                </button>
+              </th>
             </tr>
           </thead>
 

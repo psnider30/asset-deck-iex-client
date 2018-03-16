@@ -133,9 +133,33 @@ label {
   opacity: 1; /* Firefox */
 }
 
-.submit-update-button, .update-button, .login-button, .register-button {
+.submit-update-button, .update-button, .login-button, .register-button{
   background-color: rgb(0,153,216);
 }
+
+.refresh {
+  background-color: rgb(252,252,252);
+}
+
+.refresh-data {
+  color: rgb(21, 120, 35);
+  background-color: rgb(235,235,235);
+  font-size: 1em;
+  font-family: 'Roboto Slab', serif;
+  color: rgb(21, 120, 35);
+  text-shadow: 0.15px 0.15px darkgreen;
+  border: 0.5px solid rgba(21, 120, 35, 1);
+  padding: 3px 5px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.refresh-data:hover {
+  background-color: white;
+  text-shadow: 0.3px 0.3px darkgreen;
+  border: 0.8px solid rgba(21, 120, 35, 1);
+}
+
 .options-button {
   background-color: rgb(230,230,230);
   border: 1px solid rgba(21, 120, 35, 0.6);

@@ -38,6 +38,8 @@ export default function assets(state = {
         userAssets: [...state.userAssets.slice(0, idx), ...state.userAssets.slice(idx + 1)],
         assetsInMemory: JSON.parse(sessionStorage.assets),
       };
+    case types.CLEAR_ASSETS:
+      return {...state, assets: [], userAssets: []};
     case types.UPDATE_ASSETS_IN_MEMORY:
       return {...state, assetsInMemory: JSON.parse(sessionStorage.assets)};
     case types.RESET_REPLACING_ASSET:

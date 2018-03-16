@@ -3,16 +3,18 @@ import * as types from './actionTypes';
 export function changeLayout(newLayout, currentLayout, asset=null) {
   if (newLayout === currentLayout) { return }
 
-  if (newLayout === 'main') {
+  if (newLayout === 'quote') {
     return mainLayout(newLayout)
   } else if (newLayout === 'fundamentals') {
     return fundamentals(newLayout)
-  } else if (newLayout === 'changeSummary') {
+  } else if (newLayout === 'change-summary') {
     return changeSummary(newLayout)
   } else if (newLayout === 'financials') {
     return financials(newLayout)
   } else if (newLayout === 'timeSeries') {
     return timeSeries(newLayout, asset)
+  } else {
+    return mainLayout('/')
   }
 }
 
