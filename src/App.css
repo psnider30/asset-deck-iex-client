@@ -1,11 +1,10 @@
 .App {
-  background-color: rgb(230,230,230);
   margin: 0px;
   height: 100%;
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 .App-logo {
@@ -81,8 +80,16 @@ button:hover, button:focus, button:active {
   outline: none;
 }
 
+.quote-form {
+  background-color: rgba(255,255,255, 0.9);
+}
+
+.assets-list, .time-series {
+  background-color: rgb(250,250,250);
+  margin-bottom: 20px;
+}
+
 .quote-form, .assets-list, .time-series {
-  background-color: rgb(252,252,252);
   margin-top: 10px;
   padding-left: 10px;
   padding-top: 10px;
@@ -291,7 +298,6 @@ label {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 
 @media only screen and  (max-width : 300px) { body { font-size: 0.5em} }
 @media only screen and (min-width : 300px) and (max-width : 595px) { body { font-size: 0.6em} }

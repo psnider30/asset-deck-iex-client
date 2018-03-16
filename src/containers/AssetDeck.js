@@ -48,11 +48,8 @@ class AssetDeck extends Component {
     window.removeEventListener("load", this.onLoad)
   }
 
-  // Assets in Memory not updated when asset replaced b/c length of nextProps Assets and Assets is not different
-  // SO... check if next Props symbols are different or just check if state updating?
-
   componentWillReceiveProps(nextProps) {
-    const { assets, assetsInMemory, actions } = this.props;
+    const { currentUser, assets, assetsInMemory, actions } = this.props;
     if (! nextProps.assets ) { return }
     if (nextProps.assets.length !== assets.length) {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
@@ -66,11 +63,6 @@ class AssetDeck extends Component {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
       actions.updateAssetsInMemory()
       actions.resetReplacingAsset()
-    }
-
-    if (sessionStorage.assets && (assetsInMemory.length !== assets.length)) {
-      // sessionStorage.removeItem('assets')
-      // actions.loadUserAssets(currentUser)
     }
   }
 

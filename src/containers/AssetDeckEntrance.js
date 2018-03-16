@@ -9,7 +9,6 @@ import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
 import PropTypes from 'prop-types';
 
-
 class AssetDeckEntrance extends Component {
 
   constructor(props) {
