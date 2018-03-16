@@ -255,7 +255,46 @@ label {
   margin-left: 15px;
 }
 
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+.has-error, .help-block {
+  color: #D8000C;
+}
+
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+@media only screen and  (max-width : 300px) { body { font-size: 0.5em} }
+@media only screen and (min-width : 300px) and (max-width : 595px) { body { font-size: 0.6em} }
+@media only screen and (min-width : 595px) and (max-width : 690px) { body { font-size: 0.7em} }
+@media only screen and (min-width : 690px) and (max-width : 800px) { body { font-size: 0.75em} }
+@media only screen and (min-width : 800px) and (max-width : 1024px) { body { font-size: 0.9em}}
