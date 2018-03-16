@@ -5,7 +5,6 @@ import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber
 import OptionsButton from './OptionsButton';
 import refreshLogo from "../refresh-icon.png";
 
-
 class AssetsQuote extends Component {
 
   refreshData = (event) => {

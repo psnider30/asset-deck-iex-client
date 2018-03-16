@@ -7,8 +7,6 @@ class RegisterPage extends Component {
   constructor(props) {
     super(props);
 
-    //reset login status by dispatching action to logout user
-
     this.initialState = {
       username: '',
       email: '',
@@ -34,7 +32,6 @@ class RegisterPage extends Component {
   }
 
   render() {
-    // const { registering } = this.props;
     const { username, email, password, passwordConfirm, submitted } = this.state;
     return (
       <div>
