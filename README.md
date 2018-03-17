@@ -3,7 +3,7 @@
 Get real time and historical stock market quotes and data! This a finance web app built with react and redux on the front end which contains a user authentication system connected to a rails api backend to persist new users, assets, and associations of assets to users. The app includes a layout for stock quotes, change summary, fundamentals, financials, and daily or monthly historical returns. All symbols are saved to the rails api backend for each user and fresh stock data can easily be fetched at the click of a button.
 
 ## Instructions
-To run: clone this repository and the corresponding API repository located at:
+To run: clone this repository and the corresponding API repository located at:                                 
 [https://github.com/psnider30/asset-deck-iex-app]
 
 Run the rails api server with rails s -p 3001. It must be run on port 3001 or the app will not work.
