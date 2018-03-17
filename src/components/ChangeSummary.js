@@ -52,7 +52,7 @@ class ChangeSummary extends Component {
               <th><strong>5 year</strong></th>
               <th>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
-                  <img src={refreshLogo} />
+                  <img src={refreshLogo} alt='refresh' />
                 </button>
               </th>
             </tr>

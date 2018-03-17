@@ -18,7 +18,7 @@ export default class Navbar extends Component {
         <Link to="/assets/change-summary">
           <button
             className={this.props.currentLayout === "change-summary" ? "navbar-button-active" : "navbar-button"}
-            onClick={() => changeLayout('changeSummary', currentLayout)}>
+            onClick={() => changeLayout('change-summary', currentLayout)}>
             Change Summary
           </button>
         </Link>

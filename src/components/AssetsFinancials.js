@@ -52,7 +52,7 @@ class AssetsFinancials extends Component {
               <th><strong>Date</strong></th>
               <th>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
-                  <img src={refreshLogo} />
+                  <img src={refreshLogo} alt='refresh' />
                 </button>
               </th>
             </tr>

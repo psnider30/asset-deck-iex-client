@@ -2,7 +2,6 @@ import * as types from './actionTypes';
 
 export function changeLayout(newLayout, currentLayout, asset=null) {
   if (newLayout === currentLayout) { return }
-
   if (newLayout === 'quote') {
     return mainLayout(newLayout)
   } else if (newLayout === 'fundamentals') {
@@ -14,7 +13,7 @@ export function changeLayout(newLayout, currentLayout, asset=null) {
   } else if (newLayout === 'timeSeries') {
     return timeSeries(newLayout, asset)
   } else {
-    return mainLayout('/')
+    return mainLayout('quote')
   }
 }
 

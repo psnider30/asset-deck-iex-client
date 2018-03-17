@@ -49,16 +49,16 @@ class AssetDeck extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { currentUser, assets, assetsInMemory, actions } = this.props;
-    if (! nextProps.assets ) { return }
+    const { assets, actions } = this.props;
+    if (!nextProps.assets ) { return }
     if (nextProps.assets.length !== assets.length) {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
     }
-    // Check if an asset is being added, removed, or repalced and if so update assets in memory
+    // Check if an asset is being added, removed and if so update assets in memory
     if (nextProps.assets.length < assets.length) {
       actions.updateAssetsInMemory()
     }
-
+   // Check if an asset is being replaced and if so update assets in memory
     if (this.props.replacingAsset) {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
       actions.updateAssetsInMemory()

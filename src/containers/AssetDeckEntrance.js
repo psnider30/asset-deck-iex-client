@@ -11,9 +11,7 @@ import PropTypes from 'prop-types';
 
 class AssetDeckEntrance extends Component {
 
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     const currentLayout = this.props.layout
     const pathArr = this.props.location.pathname.split('/')
     const layoutPath = pathArr[pathArr.length - 1]
