@@ -100,29 +100,3 @@ export default class userAssetsApi {
     })
   }
 }
-
-  // const makeSaveRequest = async (request, asset, username, dispatch, replacing = false) => {
-  //   const response = await fetch(request).catch(error => console.log(error))
-  //   const json = await response.json();
-  //   debugger;
-  //   if (!json.error) {
-  //     fetchAsset(asset, dispatch, replacing)
-  //   } else {
-  //     dispatch(stopFetchingData())
-  //     alert(`${json.errors.message}`)
-  //   }
-  // }
-
-  // static makeSaveRequest(request, asset, username, dispatch, replacing = false) {
-  //   return fetch(request).then(response => {
-  //     if (response.ok) { return response.json() }
-  //   }).then(data => {
-  //     console.log(data)
-  //     debugger
-  //     fetchAsset(asset, dispatch, replacing)
-  //   }).catch(error => {
-  //     console.log(error)
-  //     dispatch(stopFetchingData())
-  //     // alert(`${json.errors.message}`)
-  //   })
-  // }

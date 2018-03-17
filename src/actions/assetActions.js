@@ -1,43 +1,10 @@
 import userAssetsApi from '../api/userAssetsApi';
 import * as types from './actionTypes';
+import * as iex from '../api/fetchAssetData';
+
 const IEX_API = `https://api.iextrading.com/1.0/stock`;
 
 let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} };
-
-const fetchMain = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/quote`)
-    .then(response => response.json())
-}
-
-const fetchFundamentals = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/stats`)
-    .then(response => response.json())
-}
-
-const fetchFinancials = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/financials`)
-    .then(response => response.json())
-}
-
-const fetchMonthlyTimeSeries = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/chart/5y?chartInterval=21`)
-    .then(response => response.json())
-}
-
-const fetchDailyTimeSeries = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/chart/1y`)
-    .then(response => response.json())
-}
-
-const fetchLogo = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/logo`)
-  .then(response => response.json())
-}
-
-const fetchCompanyInfo = (symbol) => {
-  return fetch(`${IEX_API}/${symbol}/company`)
-    .then(response => response.json())
-}
 
 export const addUserAsset = (asset, username, userAssets) => {
   return dispatch => {
@@ -72,9 +39,9 @@ export const loadUserAsset = (userAsset, dispatch) => {
 }
 
 export const fetchAsset = (asset, dispatch, replacing = false) => {
-    Promise.all([fetchMain(asset.symbol), fetchFundamentals(asset.symbol), fetchFinancials(asset.symbol),
-    fetchMonthlyTimeSeries(asset.symbol), fetchDailyTimeSeries(asset.symbol), fetchLogo(asset.symbol),
-    fetchCompanyInfo(asset.symbol)])
+    Promise.all([iex.fetchMain(asset.symbol), iex.fetchFundamentals(asset.symbol), iex.fetchFinancials(asset.symbol),
+    iex.fetchMonthlyTimeSeries(asset.symbol), iex.fetchDailyTimeSeries(asset.symbol), iex.fetchLogo(asset.symbol),
+    iex.fetchCompanyInfo(asset.symbol)])
       .then(values => {
         assetData.quote = values[0];
         assetData.fundamentals = values[1];
@@ -93,7 +60,6 @@ export const fetchAsset = (asset, dispatch, replacing = false) => {
         dispatch(updateAssetsInMemory())
       })
       .catch(error => {
-        debugger;
         dispatch(stopFetchingData())
         console.log(error);
     })
