@@ -12,7 +12,8 @@ class RegisterPage extends Component {
       email: '',
       password: '',
       passwordConfirm: '',
-      submitted: false
+      submitted: false,
+      passwordLengthOk: true,
     };
     this.state = this.initialState;
   }
@@ -20,21 +21,35 @@ class RegisterPage extends Component {
   handleChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value });
+    if (this.state.password.length > 5 && this.state.password.length < 21) {
+      this.setState({ passwordLengthOk: true });
+    }
   }
 
   handleSubmit = (event) => {
+    const { username, email, password, passwordConfirm, passwordLengthOk } = this.state;
     event.preventDefault();
     this.setState({ submitted: true });
-    const { username, email, password, passwordConfirm } = this.state;
+
     if (username && email && password && passwordConfirm && password === passwordConfirm) {
-      this.props.signUpUser(this.state, this.props.history);
+      if (password.length > 5 && password.length < 21) {
+        this.setState({ passwordLengthOk: true });
+        this.props.signUpUser(this.state, this.props.history);
+      } else {
+        this.setState({
+          passwordLengthOk: false,
+          submitted: false
+        });
+      }
     }
   }
 
   render() {
-    const { username, email, password, passwordConfirm, submitted } = this.state;
+    const { username, email, password, passwordConfirm, passwordLengthOk, submitted } = this.state;
     return (
       <div>
+        {!passwordLengthOk &&
+          <div className="help-block">Password Length must be within 6 to 20 characters</div>}
         {this.props.registerFail &&
           <div className="help-block">Sorry, that username or password is already in use</div>
         }
