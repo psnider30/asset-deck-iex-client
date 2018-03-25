@@ -99,4 +99,12 @@ export default class userAssetsApi {
       alert(error)
     })
   }
+
+  static saveAssetBuy(asset, username) {
+
+  }
+
+  static saveAssetSell(asset, username) {
+
+  }
 }

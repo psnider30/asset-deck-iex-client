@@ -117,3 +117,33 @@ export function resetReplacingAsset() {
     type: types.RESET_REPLACING_ASSET
   }
 }
+
+export function buyAsset(asset, username) {
+  return dispatch => {
+    return userAssetsApi.SaveAssetBuy(asset, username).then(response => {
+      response.success ? dispatch(buyAssetSuccess(asset)) : console.log(response.errors.message)
+    }).catch(error => console.log(error));
+  };
+}
+
+export function sellAsset(asset, username) {
+  return dispatch => {
+    return userAssetsApi.SaveAssetSell(asset, username).then(response => {
+      response.success ? dispatch(sellAssetSuccess(asset)) : console.log(response.errors.message)
+    }).catch(error => console.log(error));
+  };
+}
+
+function buyAssetSuccess(asset) {
+  return {
+    type: types.UPDATE_ASSET_SHARES,
+    asset: { ...asset, shares: asset.shares + 1 }
+  }
+}
+
+function sellAssetSuccess(asset) {
+  return {
+    type: types.UPDATE_ASSET_SHARES,
+    asset: { ...asset, shares: asset.shares - 1 }
+  }
+}

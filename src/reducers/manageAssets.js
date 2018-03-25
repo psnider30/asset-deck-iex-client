@@ -44,6 +44,9 @@ export default function assets(state = {
       return {...state, assetsInMemory: JSON.parse(sessionStorage.assets)};
     case types.RESET_REPLACING_ASSET:
       return {...state, replacingAsset: false}
+    case types.UPDATE_ASSET_SHARES:
+      idx = state.assets.findIndex(asset => asset.id === action.assetId);
+      return {...state, assets: [...state.assets.slice(0, idx), action.asset, ...state.assets.slice(idx + 1)]}
     default:
       return state;
   }

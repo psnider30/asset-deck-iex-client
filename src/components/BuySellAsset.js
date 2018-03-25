@@ -1,6 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { buyAsset, sellAsset } from '../actions/assetActions';
 
-export default class BuySellAsset extends Component {
+class BuySellAsset extends Component {
 
   constructor(props) {
     super(props)
@@ -35,3 +38,16 @@ export default class BuySellAsset extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    buyAsset: bindActionCreators(buyAsset, dispatch),
+    sellAsset: bindActionCreators(sellAsset, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(BuySellAsset);
