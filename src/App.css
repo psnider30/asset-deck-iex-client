@@ -306,4 +306,6 @@ label {
 @media only screen and (min-width : 595px) and (max-width : 690px) { body { font-size: 0.7em} }
 @media only screen and (min-width : 690px) and (max-width : 800px) { body { font-size: 0.75em} }
 @media only screen and (min-width : 800px) and (max-width : 1024px) { body { font-size: 0.82em}}
+@media only screen and (min-width : 800px) and (max-width : 940px)
+  { .buy-sell-td, .buy-asset-button, .sell-asset-button {font-size: 0.9em; width: 20%;}}
 @media only screen and (min-width :1024px) and (max-width : 1242px) { body { font-size: 0.9em}}

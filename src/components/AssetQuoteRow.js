@@ -1,21 +1,9 @@
 import React, {Component} from 'react'
 import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
+import BuySellAsset from './BuySellAsset';
 
 export default class AssetQuoteRow extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = { counter: 0 }
-  }
-
-  buyAsset = (assetId) => {
-    this.setState({ counter: this.state.counter + 1 })
-  }
-
-  sellAsset = (assetId) => {
-    this.setState({ counter: this.state.counter - 1 })
-  }
 
   render() {
     const { asset, onUpdateAsset } = this.props;
@@ -31,17 +19,10 @@ export default class AssetQuoteRow extends Component {
         <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
         <td>{removeSeconds(asset.quote.latestTime)}</td>
         <td>
-          <button
-            className='buy-asset-button'
-            onClick ={() => this.buyAsset(asset.id)}>
-            +
-          </button>
-          {this.state.counter}
-          <button
-            className='sell-asset-button'
-            onClick ={() => this.sellAsset(asset.id)}>
-            -
-          </button>
+          <BuySellAsset
+            className='buy-sell'
+            asset={asset}
+          />
         </td>
         <td className='no-background'>
           <OptionsButton
