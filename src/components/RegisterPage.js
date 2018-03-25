@@ -27,7 +27,7 @@ class RegisterPage extends Component {
   }
 
   handleSubmit = (event) => {
-    const { username, email, password, passwordConfirm, passwordLengthOk } = this.state;
+    const { username, email, password, passwordConfirm } = this.state;
     event.preventDefault();
     this.setState({ submitted: true });
 

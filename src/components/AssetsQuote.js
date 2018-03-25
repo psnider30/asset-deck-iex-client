@@ -1,43 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
-import OptionsButton from './OptionsButton';
 import refreshLogo from "../refresh-icon.png";
+import AssetQuoteRow from './AssetQuoteRow'
 
 class AssetsQuote extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = { counter: 0 }
+  }
+
   refreshData = (event) => {
     window.location.reload()
+  }
+
+  requestHeaders() {
+    return {
+      'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`,
+      'Content-Type': 'application/json'
+    }
+  }
+
+  callApi = () => {
+    const headers = this.requestHeaders();
+    const request = new Request('http://localhost:3001/api/assets/user-assets', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({asset: { username: this.props.currentUser } }),
+    });
+    fetch(request).then(res => {
+      return res.json()
+    }).then(data => {
+      console.log(data)
+    })
   }
 
   render() {
     const { assets, onUpdateAsset } = this.props;
     const assetsList = assets.map((asset, index) => {
       return (
-        <tr key={asset.id} className='table-row-data'>
-          <td>{asset.quote.symbol}</td>
-          <td>{asset.quote.companyName}</td>
-          <td>$ {asset.quote.open}</td>
-          <td>$ {asset.quote.close}</td>
-          <td>$ {asset.quote.latestPrice}</td>
-          <td>{addPlus(asset.quote.change)}</td>
-          <td>{decimalToPercentage(asset.quote.changePercent)}</td>
-          <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
-          <td>{removeSeconds(asset.quote.latestTime)}</td>
-          <td className='no-background'>
-            <OptionsButton
-              className = 'options-button'
-              asset={asset}
-              onUpdateAsset={onUpdateAsset}
-            />
-          </td>
-        </tr>
+        <AssetQuoteRow
+          key={asset.id}
+          asset={asset}
+          onUpdateAsset={onUpdateAsset}
+        />
       );
     })
 
     return (
       <div className="assets-list">
+        <button onClick ={(event) => this.callApi()}>
+          Call Api
+        </button>
+        <br /><br />
         <table>
           <thead>
             <tr>
@@ -50,6 +66,7 @@ class AssetsQuote extends Component {
               <th><strong>Change %</strong></th>
               <th><strong>Sector</strong></th>
               <th><strong>Time or Date</strong></th>
+              <th>Shares Owned</th>
               <th className='refresh'>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
                   <img src={refreshLogo} alt='refresh' />
@@ -71,6 +88,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     assets: state.manageAssets.assetsInMemory,
     layout: state.changeLayout.layout,
+    currentUser: state.users.currentUser
   }
 }
 
