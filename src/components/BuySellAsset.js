@@ -20,16 +20,18 @@ class BuySellAsset extends Component {
     return (
       <td className='buy-sell-td'>
         <button
-          className='buy-asset-button'
-          onClick ={() => this.handleBuyClick(asset)}>
-          +
-        </button>
-        {asset.shares}
-        <button
           className='sell-asset-button'
           onClick ={() => this.handleSellClick(asset)}>
           -
         </button>
+
+        {asset.shares}
+        
+          <button
+            className='buy-asset-button'
+            onClick ={() => this.handleBuyClick(asset)}>
+            +
+          </button>
       </td>
     );
   }

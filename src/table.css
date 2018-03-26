@@ -40,11 +40,26 @@ tr:nth-of-type(even) {
 }
 
 .buy-asset-button {
-  margin-right: 10px
+  margin-left: 10px;
+  font-size: 1em;
 }
 
 .sell-asset-button {
-  margin-left: 10px
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+.sell-asset-button, .buy-asset-button {
+  border-radius: 4px;
+  outline: none;
+  color: rgb(21, 120, 35);
+  text-shadow: 0.2px 0.2px darkgreen;
+  background-color: white;
+  border: 0.5px solid rgba(21, 120, 35, 0.5);
+}
+
+.sell-asset-button:hover, .buy-asset-button:hover {
+  border: 0.5px solid #ddc063;
 }
 
 @media screen and (max-width: 700px) {
