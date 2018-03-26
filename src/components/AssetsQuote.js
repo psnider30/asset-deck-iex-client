@@ -12,30 +12,10 @@ class AssetsQuote extends Component {
     window.location.reload()
   }
 
-  requestHeaders() {
-    return {
-      'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`,
-      'Content-Type': 'application/json'
-    }
-  }
-
-  callApi = () => {
-    const headers = this.requestHeaders();
-    const request = new Request('http://localhost:3001/api/assets/user-assets', {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({asset: { username: this.props.currentUser } }),
-    });
-    fetch(request).then(res => {
-      return res.json()
-    }).then(data => {
-      console.log(data)
-    })
-  }
-
   render() {
     const { assetsInMemory, onUpdateAsset } = this.props;
-    const assetsList = assetsInMemory.map((asset, index) => {
+    const sortedAssets = assetsInMemory.sort((a,b) => b.shares - a.shares)
+    const assetsList = sortedAssets.map((asset, index) => {
       return (
         <AssetQuoteRow
           key={index}
@@ -47,10 +27,6 @@ class AssetsQuote extends Component {
 
     return (
       <div className="assets-list">
-        <button onClick ={(event) => this.callApi()}>
-          Call Api
-        </button>
-        <br /><br />
         <table>
           <thead>
             <tr>
