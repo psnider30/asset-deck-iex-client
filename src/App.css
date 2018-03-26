@@ -186,9 +186,10 @@ label {
   outline: none;
 }
 
-.returns-button:hover, .returns-button:active {
+.returns-button:hover, .returns-button:active, .returns-button:focus {
   outline: none;
 }
+
 
 .exit-update-button {
   margin-left: 5px;

@@ -52,7 +52,7 @@ export const fetchAsset = (asset, dispatch, replacing = false) => {
         assetData.companyInfo = values[6];
         assetData.id = asset.id
         if (asset.updating) {
-          dispatch(updateAsset({...assetData, id: asset.id, shares: asset.shares, replacing: replacing}))
+          dispatch(updateAsset({...assetData, id: asset.id, shares: 0, replacing: replacing}))
         } else {
           dispatch(addAsset({...assetData, id: asset.id, shares: asset.shares}))
         }

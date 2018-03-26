@@ -29,7 +29,7 @@ class BuySellAsset extends Component {
           -
         </button>
 
-        {asset.shares}
+        {asset.shares || 0}
 
           <button
             className='buy-asset-button'
