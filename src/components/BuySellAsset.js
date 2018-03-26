@@ -28,7 +28,7 @@ class BuySellAsset extends Component {
           onClick ={() => this.buyAsset(asset.id)}>
           +
         </button>
-        {this.state.counter}
+        {asset.shares}
         <button
           className='sell-asset-button'
           onClick ={() => this.sellAsset(asset.id)}>

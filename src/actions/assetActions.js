@@ -32,9 +32,9 @@ export const loadUserAssets = (username) => {
   }
 }
 
-export const loadUserAsset = (userAsset, dispatch) => {
+export const loadUserAsset = (userAsset, shares, dispatch) => {
   dispatch(startFetchingData())
-  const asset = { ...userAsset, id: userAsset.uuid, updating: false}
+  const asset = { ...userAsset, id: userAsset.uuid, shares: shares, updating: false}
     return fetchAsset(asset, dispatch)
 }
 
@@ -52,9 +52,9 @@ export const fetchAsset = (asset, dispatch, replacing = false) => {
         assetData.companyInfo = values[6];
         assetData.id = asset.id
         if (asset.updating) {
-          dispatch(updateAsset({...assetData, id: asset.id, replacing: replacing}))
+          dispatch(updateAsset({...assetData, id: asset.id, shares: asset.shares, replacing: replacing}))
         } else {
-          dispatch(addAsset({...assetData, id: asset.id}))
+          dispatch(addAsset({...assetData, id: asset.id, shares: asset.shares}))
         }
         console.log(assetData)
         dispatch(updateAssetsInMemory())

@@ -75,8 +75,14 @@ export default class userAssetsApi {
     return fetch(request).then(response => {
       if (response.ok) { return response.json() }
         }).then(data => {
-          if (data) { data.forEach(userAsset => loadUserAsset(userAsset, dispatch)) }
+          if (data.assets) {
+            data.assets.forEach((userAsset, idx) => {
+              const shares = data.user_asset_shares[idx]
+              loadUserAsset(userAsset, shares, dispatch)
+            })
+          }
         }).catch(error => {
+          debugger
           return Promise.reject(Error(error.message))
         })
       }

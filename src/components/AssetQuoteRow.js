@@ -18,12 +18,10 @@ export default class AssetQuoteRow extends Component {
         <td>{decimalToPercentage(asset.quote.changePercent)}</td>
         <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
         <td>{removeSeconds(asset.quote.latestTime)}</td>
-        <td>
-          <BuySellAsset
-            className='buy-sell'
-            asset={asset}
-          />
-        </td>
+        <BuySellAsset
+          className='buy-sell'
+          asset={asset}
+        />
         <td className='no-background'>
           <OptionsButton
             className = 'options-button'
