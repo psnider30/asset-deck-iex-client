@@ -12,9 +12,11 @@ class BuySellAsset extends Component {
   }
 
   handleSellClick(asset) {
-    this.props.startFetchingData();
-    this.props.setUpdatingShares();
-    this.props.sellAsset(asset, this.props.currentUser)
+    if (asset.shares > 0) {
+      this.props.startFetchingData();
+      this.props.setUpdatingShares();
+      this.props.sellAsset(asset, this.props.currentUser)
+    }
   }
 
   render() {
