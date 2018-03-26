@@ -8,7 +8,7 @@ export default class AssetQuoteRow extends Component {
   render() {
     const { asset, onUpdateAsset } = this.props;
     return (
-      <tr className='table-row-data'>
+      <tr key={asset.id} className='table-row-data'>
         <td>{asset.quote.symbol}</td>
         <td>{asset.quote.companyName}</td>
         <td>$ {asset.quote.open}</td>

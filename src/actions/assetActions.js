@@ -120,16 +120,18 @@ export function resetReplacingAsset() {
 
 export function buyAsset(asset, username) {
   return dispatch => {
-    return userAssetsApi.SaveAssetBuy(asset, username).then(response => {
-      response.success ? dispatch(buyAssetSuccess(asset)) : console.log(response.errors.message)
+    return userAssetsApi.SaveShareTransaction(asset.id, username, 'buy').then(assetData => {
+      const assetWithBuy = {...asset, shares: assetData.shares}
+      dispatch(buyAssetSuccess(assetWithBuy))
     }).catch(error => console.log(error));
   };
 }
 
 export function sellAsset(asset, username) {
   return dispatch => {
-    return userAssetsApi.SaveAssetSell(asset, username).then(response => {
-      response.success ? dispatch(sellAssetSuccess(asset)) : console.log(response.errors.message)
+    return userAssetsApi.SaveShareTransaction(asset.id, username, 'sell').then(assetData => {
+      const assetWithSale = {...asset, shares: assetData.shares}
+      dispatch(sellAssetSuccess(assetWithSale))
     }).catch(error => console.log(error));
   };
 }
@@ -137,13 +139,19 @@ export function sellAsset(asset, username) {
 function buyAssetSuccess(asset) {
   return {
     type: types.UPDATE_ASSET_SHARES,
-    asset: { ...asset, shares: asset.shares + 1 }
+    asset
   }
 }
 
 function sellAssetSuccess(asset) {
   return {
     type: types.UPDATE_ASSET_SHARES,
-    asset: { ...asset, shares: asset.shares - 1 }
+    asset
+  }
+}
+
+export function resetUpdatingShares() {
+  return {
+    type: types.RESET_UPDATING_SHARES
   }
 }

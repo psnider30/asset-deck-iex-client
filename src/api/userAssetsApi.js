@@ -7,7 +7,10 @@ console.log(API_URL)
 export default class userAssetsApi {
 
   static requestHeaders() {
-    return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
+    return {
+      'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`,
+      'Content-Type': 'application/json'
+    }
   }
 
   static requestBody(asset, username) {
@@ -21,7 +24,7 @@ export default class userAssetsApi {
   }
 
   static saveUserAsset(asset, username, userAssets, dispatch, replacing) {
-    const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+    const headers = this.requestHeaders();
     const body = this.requestBody(asset, username);
 
     asset.updating ?
@@ -106,11 +109,22 @@ export default class userAssetsApi {
     })
   }
 
-  static saveAssetBuy(asset, username) {
+  static SaveShareTransaction(assetId, username, transaction) {
+    const headers = this.requestHeaders();
+    const request = new Request(`${API_URL}/assets/update-shares`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ asset:
+        { username: username,
+          uuid: assetId,
+          transaction: transaction,
+        }
+      })
+    });
 
-  }
-
-  static saveAssetSell(asset, username) {
-
+  return fetch(request).then(response => response.json())
+    .catch(error => {
+      console.log(error)
+    })
   }
 }

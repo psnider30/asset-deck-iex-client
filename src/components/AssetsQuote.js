@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import refreshLogo from "../refresh-icon.png";
-import AssetQuoteRow from './AssetQuoteRow'
+import AssetQuoteRow from './AssetQuoteRow';
+import { updateAssetsInMemory, resetUpdatingShares } from '../actions/assetActions';
 
 class AssetsQuote extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = { counter: 0 }
-  }
 
   refreshData = (event) => {
     window.location.reload()
@@ -19,6 +16,19 @@ class AssetsQuote extends Component {
     return {
       'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`,
       'Content-Type': 'application/json'
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    debugger;
+    if (!nextProps.assets ) { return }
+
+   // Check if a share is being bought or sold and if so update assets in memory
+    if (this.props.updatingShares) {
+      debugger;
+      sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
+      this.props.updateAssetsInMemory()
+      this.props.resetUpdatingShares()
     }
   }
 
@@ -41,7 +51,7 @@ class AssetsQuote extends Component {
     const assetsList = assets.map((asset, index) => {
       return (
         <AssetQuoteRow
-          key={asset.id}
+          key={index}
           asset={asset}
           onUpdateAsset={onUpdateAsset}
         />
@@ -86,10 +96,17 @@ class AssetsQuote extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    assets: state.manageAssets.assetsInMemory,
+    assets: state.manageAssets.assets,
     layout: state.changeLayout.layout,
     currentUser: state.users.currentUser
   }
 }
 
-export default withRouter(connect(mapStateToProps)(AssetsQuote))
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateAssetsInMemory: bindActionCreators(updateAssetsInMemory, dispatch),
+    resetUpdatingShares: bindActionCreators(resetUpdatingShares, dispatch),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AssetsQuote))
