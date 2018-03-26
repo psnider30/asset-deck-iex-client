@@ -51,8 +51,9 @@ export default function assets(state = {
         ...state,
         assets: [...state.assets.slice(0, idx), action.asset, ...state.assets.slice(idx + 1)],
         fetchingData: false,
-        updatingShares: true,
       }
+    case types.SET_UPDATING_SHARES:
+      return {...state, updatingShares: true}
     case types.RESET_UPDATING_SHARES:
       return {...state, updatingShares: false}
     default:

@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyAsset, sellAsset, startFetchingData } from '../actions/assetActions';
+import { buyAsset, sellAsset, setUpdatingShares, startFetchingData } from '../actions/assetActions';
 
 class BuySellAsset extends Component {
 
   handleBuyClick(asset) {
     this.props.startFetchingData();
+    this.props.setUpdatingShares();
     this.props.buyAsset(asset, this.props.currentUser)
   }
 
   handleSellClick(asset) {
     this.props.startFetchingData();
+    this.props.setUpdatingShares();
     this.props.sellAsset(asset, this.props.currentUser)
   }
 
@@ -26,7 +28,7 @@ class BuySellAsset extends Component {
         </button>
 
         {asset.shares}
-        
+
           <button
             className='buy-asset-button'
             onClick ={() => this.handleBuyClick(asset)}>
@@ -39,7 +41,6 @@ class BuySellAsset extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    assets: state.manageAssets.assets,
     currentUser: state.users.currentUser
   }
 }
@@ -48,6 +49,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     buyAsset: bindActionCreators(buyAsset, dispatch),
     sellAsset: bindActionCreators(sellAsset, dispatch),
+    setUpdatingShares: bindActionCreators(setUpdatingShares, dispatch),
     startFetchingData: bindActionCreators(startFetchingData, dispatch),
   }
 }

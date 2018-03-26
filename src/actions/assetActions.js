@@ -150,6 +150,12 @@ function sellAssetSuccess(asset) {
   }
 }
 
+export function setUpdatingShares() {
+  return {
+    type: types.SET_UPDATING_SHARES
+  }
+}
+
 export function resetUpdatingShares() {
   return {
     type: types.RESET_UPDATING_SHARES

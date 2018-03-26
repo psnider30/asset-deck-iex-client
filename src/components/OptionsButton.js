@@ -31,7 +31,7 @@ class OptionsButton extends Component {
       <MenuButton
         className='options-button'
         id={asset.id || 0}
-        label='Options'>
+        label='Actions'>
         <Link to={"/assets/" + asset.quote.symbol + "/returns"}>
           <button
             className='returns-button'

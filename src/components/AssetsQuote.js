@@ -19,19 +19,6 @@ class AssetsQuote extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    debugger;
-    if (!nextProps.assets ) { return }
-
-   // Check if a share is being bought or sold and if so update assets in memory
-    if (this.props.updatingShares) {
-      debugger;
-      sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
-      this.props.updateAssetsInMemory()
-      this.props.resetUpdatingShares()
-    }
-  }
-
   callApi = () => {
     const headers = this.requestHeaders();
     const request = new Request('http://localhost:3001/api/assets/user-assets', {
@@ -47,8 +34,8 @@ class AssetsQuote extends Component {
   }
 
   render() {
-    const { assets, onUpdateAsset } = this.props;
-    const assetsList = assets.map((asset, index) => {
+    const { assetsInMemory, onUpdateAsset } = this.props;
+    const assetsList = assetsInMemory.map((asset, index) => {
       return (
         <AssetQuoteRow
           key={index}
@@ -97,6 +84,8 @@ class AssetsQuote extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     assets: state.manageAssets.assets,
+    assetsInMemory: state.manageAssets.assetsInMemory,
+    updatingShares: state.manageAssets.updatingShares,
     layout: state.changeLayout.layout,
     currentUser: state.users.currentUser
   }

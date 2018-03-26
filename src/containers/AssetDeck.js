@@ -55,8 +55,7 @@ class AssetDeck extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { assets, actions } = this.props;
-    if (!nextProps.assets ) { return }
-
+    if (!nextProps.assets) { return }
     if (nextProps.assets.length !== assets.length) {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
     }
@@ -67,10 +66,15 @@ class AssetDeck extends Component {
     }
    // Check if an asset is being replaced and if so update assets in memory
     if (this.props.replacingAsset) {
-      debugger;
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
       actions.updateAssetsInMemory()
       actions.resetReplacingAsset()
+    }
+
+    if (this.props.updatingShares && this.newTransaction(assets, nextProps.assets)) {
+      sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
+      actions.updateAssetsInMemory()
+      actions.resetUpdatingShares()
     }
   }
 
