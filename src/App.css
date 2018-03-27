@@ -171,11 +171,12 @@ label {
 .options-button {
   background-color: rgb(230,230,230);
   border: 1px solid rgba(21, 120, 35, 0.6);
+
 }
 
 .update-button, .remove-button, .submit-update-button,
 .exit-update-button, .returns-button, .options-button,
-.login-button, .register-button {
+.login-button, .register-button, .returns-buton {
   padding: 3px 5px;
   font-family: 'Quicksand', sans-serif;
   font-size: 0.9em;
@@ -185,10 +186,9 @@ label {
   outline: none;
 }
 
-.returns-button:hover, .returns-button:active, .returns-button:focus {
+.returns-link, .returns-link:focus {
   outline: none;
 }
-
 
 .exit-update-button {
   margin-left: 5px;

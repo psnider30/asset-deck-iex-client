@@ -52,7 +52,6 @@ export default function assets(state = {
         // alternative to slice used in UPDATE_ASSET is to map to replace updated asset
         ...state,
         assets: state.assets.map(a => a.id === action.asset.id ? action.asset : a),
-        fetchingData: false,
       }
     case types.SET_UPDATING_SHARES:
       return {...state, updatingShares: true}

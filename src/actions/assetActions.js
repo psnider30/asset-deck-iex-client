@@ -125,7 +125,6 @@ export function buyAsset(asset, username) {
       dispatch(buyAssetSuccess(assetWithBuy))
     }).catch(error => {
       console.log(error)
-      dispatch(stopFetchingData)
     });
   };
 }
@@ -137,7 +136,6 @@ export function sellAsset(asset, username) {
       dispatch(sellAssetSuccess(assetWithSale))
     }).catch(error => {
       console.log(error)
-      dispatch(stopFetchingData)
     });
   };
 }

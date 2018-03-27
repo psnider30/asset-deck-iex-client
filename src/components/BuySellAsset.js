@@ -6,14 +6,12 @@ import { buyAsset, sellAsset, setUpdatingShares, startFetchingData } from '../ac
 class BuySellAsset extends Component {
 
   handleBuyClick(asset) {
-    this.props.startFetchingData();
     this.props.setUpdatingShares();
     this.props.buyAsset(asset, this.props.currentUser)
   }
 
   handleSellClick(asset) {
     if (asset.shares > 0) {
-      this.props.startFetchingData();
       this.props.setUpdatingShares();
       this.props.sellAsset(asset, this.props.currentUser)
     }
