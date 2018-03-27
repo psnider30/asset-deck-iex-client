@@ -20,11 +20,12 @@ class BuySellAsset extends Component {
   }
 
   render() {
-    const { asset } = this.props
+    const { asset, updatingShares } = this.props
     return (
       <td className='buy-sell-td'>
         <button
           className='sell-asset-button'
+          disabled={updatingShares}
           onClick ={() => this.handleSellClick(asset)}>
           -
         </button>
@@ -33,6 +34,7 @@ class BuySellAsset extends Component {
 
           <button
             className='buy-asset-button'
+            disabled={updatingShares}
             onClick ={() => this.handleBuyClick(asset)}>
             +
           </button>
@@ -43,7 +45,8 @@ class BuySellAsset extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.users.currentUser
+    currentUser: state.users.currentUser,
+    updatingShares: state.manageAssets.updatingShares
   }
 }
 

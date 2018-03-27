@@ -3,18 +3,66 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import refreshLogo from "../refresh-icon.png";
+import sort from "../sort.svg";
 import AssetQuoteRow from './AssetQuoteRow';
 import { updateAssetsInMemory, resetUpdatingShares } from '../actions/assetActions';
 
 class AssetsQuote extends Component {
 
-  refreshData = (event) => {
-    window.location.reload()
+  constructor(props) {
+    super(props)
+
+    this.state = { sortedByShares: null }
   }
 
+  refreshData = (event) => {
+    window.location.reload()
+    // this.setState({ sortedByShares: null })
+  }
+
+  handleSortByShares = () => {
+    if (this.state.sortedByShares === null || this.state.sortedByShares === 'asc') {
+      this.setState({sortedByShares: 'desc'})
+      this.sortSharesDesc()
+    } else {
+      this.setState({sortedByShares: 'asc'})
+      this.sortSharesDesc()
+    }
+  }
+
+    sortSharesDesc = () => {
+      return this.props.assetsInMemory.sort((a,b) => {
+        if (b.shares- a.shares === 0) { return 0 }
+        return b.shares - a.shares
+      })
+    }
+
+    sortSharesAsc = () => {
+      return this.props.assetsInMemory.sort((a,b) => {
+        if (a.shares- b.shares === 0) { return 0 }
+        return a.shares - b.shares
+      })
+    }
+
+    sortbyChangePerecent = () => {
+      return this.props.assetsInMemory.sort((a,b) => {
+        if (b.quote.changePercent - a.quote.changePercent === 0) { return 0 }
+        return b.quote.changePercent - a.quote.changePercent
+      })
+    }
+
   render() {
-    const { assetsInMemory, onUpdateAsset } = this.props;
-    const sortedAssets = assetsInMemory.sort((a,b) => b.shares - a.shares)
+    const { onUpdateAsset } = this.props;
+    let sortedAssets;
+
+    if (this.state.sortedByShares === 'desc') {
+      sortedAssets = this.sortSharesDesc()
+    } else if (this.state.sortedByShares === 'asc') {
+      sortedAssets = this.sortSharesAsc()
+    } else {
+      sortedAssets = this.sortbyChangePerecent()
+    }
+
     const assetsList = sortedAssets.map((asset, index) => {
       return (
         <AssetQuoteRow
@@ -39,7 +87,7 @@ class AssetsQuote extends Component {
               <th><strong>Change %</strong></th>
               <th><strong>Sector</strong></th>
               <th><strong>Time or Date</strong></th>
-              <th>Shares Owned</th>
+              <th>Shares Owned <img src={sort} alt='sort' onClick={() => this.handleSortByShares()} /></th>
               <th className='refresh'>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
                   <img src={refreshLogo} alt='refresh' />

@@ -306,9 +306,9 @@ label {
 @media only screen and (min-width : 300px) and (max-width : 595px) { body { font-size: 0.6em} }
 @media only screen and (min-width : 595px) and (max-width : 690px) { body { font-size: 0.7em} }
 @media only screen and (min-width : 690px) and (max-width : 800px) { body { font-size: 0.75em} }
-@media only screen and (min-width : 690px) and (max-width : 885px)
+@media only screen and (min-width : 690px) and (max-width : 980px)
   { .buy-sell-td, .buy-asset-button, .sell-asset-button {font-size: 0.3em; width: 8%;} }
-@media only screen and (min-width : 800px) and (max-width : 1036px) { body { font-size: 0.8em}}
+@media only screen and (min-width : 800px) and (max-width : 980px) { body { font-size: 0.8em}}
 @media only screen and (min-width : 800px) and (max-width : 1064px)
   { .buy-sell-td, .buy-asset-button, .sell-asset-button {font-size: 0.75em;} }
-@media only screen and (min-width :1036px) and (max-width : 1242px) { body { font-size: 0.9em}}
+@media only screen and (min-width :980px) and (max-width : 1242px) { body { font-size: 0.9em}}

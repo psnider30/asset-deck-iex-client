@@ -46,8 +46,8 @@ export default function assets(state = {
     case types.RESET_REPLACING_ASSET:
       return {...state, replacingAsset: false}
     case types.UPDATE_ASSET_SHARES:
-      //idx = state.assets.findIndex(asset => asset.id === action.asset.id)
       return {
+        // alternative to slice used in UPDATE_ASSET is to map to replace updated asset
         ...state,
         assets: state.assets.map(a => a.id === action.asset.id ? action.asset : a),
         fetchingData: false,

@@ -70,7 +70,7 @@ class AssetDeck extends Component {
       actions.updateAssetsInMemory()
       actions.resetReplacingAsset()
     }
-
+    // Check if any asset shares are being changed and if so update assets in memory
     if (this.props.updatingShares && this.newTransaction(assets, nextProps.assets)) {
       sessionStorage.setItem('assets', JSON.stringify(nextProps.assets))
       actions.updateAssetsInMemory()

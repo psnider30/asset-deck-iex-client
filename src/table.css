@@ -40,12 +40,12 @@ tr:nth-of-type(even) {
 }
 
 .buy-asset-button {
-  margin-left: 10px;
+  margin-left: 7px;
   font-size: 1em;
 }
 
 .sell-asset-button {
-  margin-right: 10px;
+  margin-right: 7px;
   font-size: 1.1em;
 }
 
