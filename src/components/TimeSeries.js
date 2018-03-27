@@ -9,14 +9,6 @@ class TimeSeries extends Component {
     this.state = { frequency: 'daily' }
   }
 
-  handleEditClick = (asset, event) => {
-    this.props.onUpdateAsset(asset);
-  }
-
-  handleRemoveClick = (asset, event) => {
-    this.props.removeAsset(asset.id);
-  }
-
   handleChange = (event) =>{
     this.setState({
       frequency: event.target.value

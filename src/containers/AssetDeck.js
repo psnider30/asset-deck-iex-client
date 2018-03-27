@@ -160,32 +160,33 @@ class AssetDeck extends Component {
                 component={() =>
                   <AssetsQuote
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
+                    handleExitUpdate={this.handleExitUpdate.bind(this)}
                   />}
               />
               <Route exact path="/assets/fundamentals"
                 component={() =>
                   <AssetsFundamentals
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
+                    handleExitUpdate={this.handleExitUpdate.bind(this)}
                   />}
               />
               <Route exact path="/assets/change-summary"
                 component={() =>
                   <ChangeSummary
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
+                    handleExitUpdate={this.handleExitUpdate.bind(this)}
                   />}
               />
               <Route exact path="/assets/financials"
                 component={() =>
                   <AssetsFinancials
                     onUpdateAsset={this.onUpdateAsset.bind(this)}
+                    handleExitUpdate={this.handleExitUpdate.bind(this)}
                   />}
               />
               <Route
                 exact path={"/assets/" + symbol + "/returns"}
-                component={() =>
-                  <TimeSeries
-                    onUpdateAsset={this.onUpdateAsset.bind(this)}
-                  />}
+                component={TimeSeries}
               />
             </Switch>
           </div>

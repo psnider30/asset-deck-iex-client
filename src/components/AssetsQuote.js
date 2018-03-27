@@ -50,7 +50,7 @@ class AssetsQuote extends Component {
     }
 
   render() {
-    const { onUpdateAsset } = this.props;
+    const { onUpdateAsset, handleExitUpdate } = this.props;
     let sortedAssets;
 
     if (this.state.sortedByShares === 'desc') {
@@ -67,6 +67,7 @@ class AssetsQuote extends Component {
           key={index}
           asset={asset}
           onUpdateAsset={onUpdateAsset}
+          handleExitUpdate={handleExitUpdate}
         />
       );
     })

@@ -6,7 +6,7 @@ import BuySellAsset from './BuySellAsset';
 export default class AssetQuoteRow extends Component {
 
   render() {
-    const { asset, onUpdateAsset } = this.props;
+    const { asset, onUpdateAsset, handleExitUpdate } = this.props;
     return (
       <tr key={asset.id} className='table-row-data'>
         <td>{asset.quote.symbol}</td>
@@ -27,6 +27,7 @@ export default class AssetQuoteRow extends Component {
             className = 'options-button'
             asset={asset}
             onUpdateAsset={onUpdateAsset}
+            handleExitUpdate={handleExitUpdate}
           />
         </td>
       </tr>

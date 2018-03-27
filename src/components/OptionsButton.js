@@ -18,6 +18,7 @@ class OptionsButton extends Component {
       symbol: asset.quote.symbol,
       id: asset.id
     }
+    this.props.handleExitUpdate()
     this.props.removeAsset(assetToDelete, this.props.currentUser);
   }
 

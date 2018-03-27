@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 import refreshLogo from "../refresh-icon.png";
@@ -12,7 +11,7 @@ class AssetsFinancials extends Component {
   }
 
   render() {
-    const { assets, onUpdateAsset } = this.props;
+    const { assets, onUpdateAsset, handleExitUpdate } = this.props;
     const assetsList = assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
@@ -30,6 +29,7 @@ class AssetsFinancials extends Component {
               className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
+              handleExitUpdate={handleExitUpdate}
             />
           </td>
         </tr>

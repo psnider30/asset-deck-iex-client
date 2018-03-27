@@ -11,7 +11,7 @@ class AssetsFundamentals extends Component {
   }
 
   render() {
-    const { assets, onUpdateAsset } = this.props;
+    const { assets, onUpdateAsset, handleExitUpdate } = this.props;
     const assetsList = assets.map((asset, index) => {
       return (
         <tr key={asset.id} className='table-row-data'>
@@ -28,6 +28,7 @@ class AssetsFundamentals extends Component {
               className = 'options-button'
               asset={asset}
               onUpdateAsset={onUpdateAsset}
+              handleExitUpdate={handleExitUpdate}
             />
           </td>
         </tr>
