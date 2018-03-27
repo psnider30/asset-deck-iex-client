@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import defaultLogo from "../dollar_logo.jpg";
 
@@ -98,7 +97,7 @@ class TimeSeries extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assetsInMemory,
     layout: state.changeLayout.layout,
@@ -106,4 +105,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(TimeSeries))
+export default connect(mapStateToProps)(TimeSeries)

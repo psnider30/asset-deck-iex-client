@@ -25,7 +25,7 @@ class AssetDeck extends Component {
 
     this.state = this.initialState;
     // if sessionStorage.assets is undefined, then make fetch requests to api to set assets and assetsInMemory
-    // Otherwise don't fetch or set sessionStorage and have it set below from nextProps
+    // Otherwise don't fetch or set sessionStorage and have it set below in componentWillReceiveProps from nextProps
     const { actions, currentUser } = this.props;
     if (sessionStorage.assets === undefined) { actions.loadUserAssets(currentUser) }
     this.onLoad = this.onLoad.bind(this);
@@ -33,11 +33,12 @@ class AssetDeck extends Component {
 
   onLoad(event) {
     // if page is refreshed re-fetch the assets if assets in state are removed but assetsinMemory remain
-    const { assets, assetsInMemory, actions, currentUser } = this.props;
+    const { assets, assetsInMemory, actions, currentUser, layout } = this.props;
     if (sessionStorage.assets && (assetsInMemory.length !== assets.length)) {
       sessionStorage.removeItem('assets')
       actions.loadUserAssets(currentUser)
     }
+    if (layout === 'quote') { this.props.history.push('/assets/quote'); }
   }
 
   newTransaction(assets, nextPropsAssets) {
@@ -61,6 +62,7 @@ class AssetDeck extends Component {
     }
 
     // Check if an asset is being removed and if so update assets in memory
+    // When an asset is added the fetchAssets action in '/actions/assetActions' will run updateAssetsInMemory()
     if (nextProps.assets.length < assets.length) {
       actions.updateAssetsInMemory()
     }
@@ -115,6 +117,7 @@ class AssetDeck extends Component {
 
   render() {
     const { assetSelected, fetchingData } = this.props;
+    // get the symbol if asset is selected to see returns in TimeSeries layout for TimeSeries path below
     const symbol = assetSelected ? assetSelected.quote.symbol : ''
     const updating = this.state.updating;
     let exitUpdateButton;
@@ -141,6 +144,7 @@ class AssetDeck extends Component {
       </div>
 
     return (
+      // First line checks the layout and if it is timeSeries then the quoteForm is not rendered
       <div>
         {this.props.layout !== 'timeSeries' ? quoteForm : null}
         {

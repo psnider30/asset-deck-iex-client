@@ -57,7 +57,7 @@ class OptionsButton extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assets,
     layout: state.changeLayout.layout,

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { decimalToPercentage } from '../lib/formatNumber'
 import OptionsButton from './OptionsButton';
 import refreshLogo from "../refresh-icon.png";
@@ -67,11 +66,11 @@ class ChangeSummary extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assetsInMemory,
     layout: state.changeLayout.layout,
   }
 }
 
-export default withRouter(connect(mapStateToProps)(ChangeSummary))
+export default connect(mapStateToProps)(ChangeSummary)

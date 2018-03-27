@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router';
 import refreshLogo from "../refresh-icon.png";
 import sort from "../sort.svg";
 import AssetQuoteRow from './AssetQuoteRow';
@@ -104,7 +103,7 @@ class AssetsQuote extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assets,
     assetsInMemory: state.manageAssets.assetsInMemory,
@@ -121,4 +120,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AssetsQuote))
+export default connect(mapStateToProps, mapDispatchToProps)(AssetsQuote)

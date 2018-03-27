@@ -67,11 +67,11 @@ class AssetsFinancials extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assetsInMemory,
     layout: state.changeLayout.layout,
   }
 }
 
-export default withRouter(connect(mapStateToProps)(AssetsFinancials))
+export default connect(mapStateToProps)(AssetsFinancials)

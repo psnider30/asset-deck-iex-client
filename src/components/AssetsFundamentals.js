@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 import refreshLogo from "../refresh-icon.png";
@@ -65,11 +64,11 @@ class AssetsFundamentals extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     assets: state.manageAssets.assetsInMemory,
     layout: state.changeLayout.layout,
   }
 }
 
-export default withRouter(connect(mapStateToProps)(AssetsFundamentals))
+export default connect(mapStateToProps)(AssetsFundamentals)
