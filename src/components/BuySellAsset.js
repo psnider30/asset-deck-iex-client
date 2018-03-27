@@ -21,6 +21,7 @@ class BuySellAsset extends Component {
 
   render() {
     const { asset, updatingShares } = this.props
+    asset.shares = asset.shares || 0;
     return (
       <td className='buy-sell-td'>
         <button
@@ -30,7 +31,7 @@ class BuySellAsset extends Component {
           -
         </button>
 
-        {asset.shares || 0}
+        {asset.shares}
 
           <button
             className='buy-asset-button'

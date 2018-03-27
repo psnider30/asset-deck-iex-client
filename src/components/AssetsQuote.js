@@ -17,7 +17,6 @@ class AssetsQuote extends Component {
 
   refreshData = (event) => {
     window.location.reload()
-    // this.setState({ sortedByShares: null })
   }
 
   handleSortByShares = () => {

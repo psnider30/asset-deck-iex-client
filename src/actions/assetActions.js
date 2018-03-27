@@ -52,7 +52,7 @@ export const fetchAsset = (asset, dispatch, replacing = false) => {
         assetData.companyInfo = values[6];
         assetData.id = asset.id
         if (asset.updating) {
-          dispatch(updateAsset({...assetData, id: asset.id, shares: 0, replacing: replacing}))
+          dispatch(updateAsset({...assetData, id: asset.id, oldId: asset.oldId, shares: 0, replacing: replacing}))
         } else {
           dispatch(addAsset({...assetData, id: asset.id, shares: asset.shares}))
         }
@@ -123,7 +123,10 @@ export function buyAsset(asset, username) {
     return userAssetsApi.SaveShareTransaction(asset.id, username, 'buy').then(assetData => {
       const assetWithBuy = {...asset, shares: assetData.shares}
       dispatch(buyAssetSuccess(assetWithBuy))
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      console.log(error)
+      dispatch(stopFetchingData)
+    });
   };
 }
 
@@ -132,7 +135,10 @@ export function sellAsset(asset, username) {
     return userAssetsApi.SaveShareTransaction(asset.id, username, 'sell').then(assetData => {
       const assetWithSale = {...asset, shares: assetData.shares}
       dispatch(sellAssetSuccess(assetWithSale))
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      console.log(error)
+      dispatch(stopFetchingData)
+    });
   };
 }
 

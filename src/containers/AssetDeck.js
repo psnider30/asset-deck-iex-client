@@ -81,7 +81,8 @@ class AssetDeck extends Component {
   handleSubmit = (event) => {
     const { actions, currentUser, userAssets } = this.props;
     event.preventDefault();
-    const asset = this.state.updating ? this.state : {...this.state, id: uuidv4()};
+    const asset = this.state.updating ? {...this.state, newId: uuidv4()} : {...this.state, id: uuidv4()};
+
     if (!asset.updating && userAssets.includes(asset.symbol.toUpperCase())) {
       alert(`You already added "${asset.symbol.toUpperCase()}"`)
     } else {
@@ -126,7 +127,7 @@ class AssetDeck extends Component {
     }
     const quoteForm =
         <div className='quote-form'>
-        <form onSubmit={(event) => this.handleSubmit(event) }>
+        <form onSubmit={(event) => this.handleSubmit(event)}>
           <label id='asset-lookup-label' htmlFor='symbol'>Asset Lookup </label>
           <input type='text' id='asset-lookup-input' name='symbol'
             placeholder='ticker symbol'
