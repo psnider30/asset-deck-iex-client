@@ -1,6 +1,7 @@
 table {
   font-family: 'Quicksand', sans-serif;
   word-wrap:break-word;
+  margin-right: 5px;
 }
 
 thead {
@@ -52,11 +53,16 @@ tr:nth-of-type(even) {
   border: 0.5px solid rgba(21, 120, 35, 0.5);
 }
 
-.sell-asset-button:hover, .buy-asset-button:hover {
-  border: 0.5px solid #ddc063;
+.buy-asset-button:hover {
+  border: .7px solid #dfdc73;
 }
 
-@media screen and (max-width: 700px) {
+.sell-asset-button:hover {
+  border: 0.5px solid #f23e3a;
+}
+
+
+@media screen and (max-width: 685px) {
   tr {
     display: flex;
     flex-direction: row;

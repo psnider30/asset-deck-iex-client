@@ -29,14 +29,14 @@ class BuySellAsset extends Component {
           -
         </button>
 
-        {asset.shares}
+        <span className='asset-shares-count'>{asset.shares} </span>
 
-          <button
-            className='buy-asset-button'
-            disabled={updatingShares}
-            onClick ={() => this.handleBuyClick(asset)}>
-            +
-          </button>
+        <button
+          className='buy-asset-button'
+          disabled={updatingShares}
+          onClick ={() => this.handleBuyClick(asset)}>
+          +
+        </button>
       </td>
     );
   }

@@ -154,7 +154,7 @@ class AssetDeck extends Component {
             <img src={closeLogo} className="App-logo" alt="logo" />
           </div>
           :
-          <div className="asset-layout">
+          <div className="assets-layout">
             <Switch>
               <Route exact path="/assets/quote"
                 component={() =>

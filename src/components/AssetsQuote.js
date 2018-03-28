@@ -86,10 +86,13 @@ class AssetsQuote extends Component {
               <th><strong>Change %</strong></th>
               <th><strong>Sector</strong></th>
               <th><strong>Time or Date</strong></th>
-              <th className='shares-owned-th'>Shares Owned <img src={sort} alt='sort' onClick={() => this.handleSortByShares()} /></th>
-              <th className='refresh'>
+              <th className='shares-owned-th'>
+                Shares Owned
+                <img src={sort} alt='sort' className='sort-by-shares' onClick={() => this.handleSortByShares()} />
+              </th>
+              <th className='refresh-th'>
                 <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
-                  <img src={refreshLogo} alt='refresh' />
+                  <img src={refreshLogo} alt='refresh' className='refresh-logo' />
                 </button>
               </th>
             </tr>
