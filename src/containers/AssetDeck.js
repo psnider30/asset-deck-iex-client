@@ -7,11 +7,7 @@ import Navbar from '../components/Navbar'
 import AssetQuoteForm from './AssetQuoteForm';
 import * as actions from '../actions/assetActions';
 import { changeLayout } from '../actions/layoutActions';
-import AssetService from '../services/AssetService';
-import RegisterPage from '../components/RegisterPage';
 import LoginPage from '../components/LoginPage';
-// import AddAsset from '../components/AddAsset';
-// import { fetchAssetData } from '../actions/assetDataActions'
 
 class AssetDeck extends Component {
 
@@ -19,15 +15,7 @@ class AssetDeck extends Component {
     super(props)
     const currentPath = this.props.location.pathname
 
-    if (currentPath !== '/signup' && currentPath !== '/login') {
-      this.props.history.push('/assets/quote')
-    }
-    this.state = { userAssets: [] }
-  }
-
-  componentDidMount() {
-    AssetService.fetchUserAssets()
-      .then(userAssets => this.setState({ userAssets }))
+    if (currentPath !== '/login') { this.props.history.push('/assets/quote') }
   }
 
   handleLayoutChange = (newLayout) => {
@@ -37,15 +25,7 @@ class AssetDeck extends Component {
     }
   }
 
-  addAsset = (asset) => {
-    debugger
-    // AssetService.createAsset(asset).then(asset => this.setState({
-    //   assets: this.state.userAssets.concat(asset)
-    // }))
-  }
-
   render() {
-    console.log(this.state.userAssets)
     return (
       <div>
           <Route path='/assets' component={() =>
@@ -54,12 +34,8 @@ class AssetDeck extends Component {
               currentLayout={this.props.layout}
             />}
           />
-           <Route path="/signup" component={RegisterPage} />
            <Route path="/login" component={LoginPage} />
            <Route path='/assets' component={AssetQuoteForm} />
-        <div className="rails">
-          {/* <AddAsset addAsset={this.addAsset} /> */}
-        </div>
       </div>
     );
   }
@@ -71,6 +47,7 @@ const mapStateToProps = (state) => {
     layout: state.changeLayout.layout,
     fetchingData: state.fetchingData,
     assetData: state.assetData,
+    loggedIn: state.users.loggedIn
   }
 }
 
@@ -78,7 +55,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     assetActions: bindActionCreators(actions, dispatch),
     changeLayout: bindActionCreators(changeLayout, dispatch),
-    // fetchAssetData: bindActionCreators(fetchAssetData, dispatch),
   };
 }
 

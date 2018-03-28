@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { register } from '../actions/userActions'
 
-class LoginPage extends Component {
+export default class LoginPage extends Component {
   constructor(props) {
     super(props);
 
@@ -27,14 +24,12 @@ class LoginPage extends Component {
     event.preventDefault();
     this.setState({ submitted: true });
     const { username, password } = this.state;
-    const { dispatch } = this.props;
     if (username && password) {
       this.props.register(this.state);
     }
   }
 
   render() {
-    // const { registering } = this.props;
     const { username, password, submitted } = this.state;
     return (
       <div className= "col-md6 col-md-offset-3">
@@ -70,9 +65,3 @@ class LoginPage extends Component {
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  register: bindActionCreators(register, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(LoginPage);

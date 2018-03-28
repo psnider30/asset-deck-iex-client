@@ -124,6 +124,10 @@ input:-webkit-autofill {
   border: 1px solid rgba(21, 120, 35, 0.6);
 }
 
+.returns-link:focus {
+  outline: none;
+}
+
 .update-button, .remove-button, .submit-update-button,
 .exit-update-button, .returns-button, .options-button {
   padding: 3px 5px;

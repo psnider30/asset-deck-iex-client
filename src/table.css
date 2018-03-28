@@ -1,7 +1,6 @@
 table {
   font-family: 'Quicksand', sans-serif;
   word-wrap:break-word;
-  /* border-collapse: collapse; */
 }
 
 thead {
@@ -10,10 +9,6 @@ thead {
   text-shadow: 0.4px 0.4px #a67c00;
   background-color: rgba(21, 120, 35, 0.75);
   border-bottom: 0.8px solid rgba(21, 120, 35, 1);
-}
-
-thead th {
-  /* border: 1px solid darkgreen; */
 }
 
 table th, table td {

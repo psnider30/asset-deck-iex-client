@@ -27,7 +27,7 @@ class OptionsButton extends Component {
         className='options-button'
         id={asset.id}
         label='Options'>
-        <Link to={"/assets/" + asset.quote.symbol + "/returns"}>
+        <Link className='returns-link' to={"/assets/" + asset.quote.symbol + "/returns"}>
           <button
             className='returns-button'
             data-id={asset.id}

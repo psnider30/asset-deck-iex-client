@@ -32,9 +32,16 @@ class LoginPage extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    debugger;
+    const currentPath = this.props.location.pathname
+    const { history } = this.props;
+    if (currentPath === '/login' && nextProps.loggedIn) { history.push('/assets/quote') }
+  }
+
   render() {
     // const { loggingIn } = this.props;
-    const { username, password, errors, submitted } = this.state;
+    const { username, password, submitted } = this.state;
     return (
       <div className= "col-md6 col-md-offset-3">
         <h2>Login</h2>
@@ -68,9 +75,20 @@ class LoginPage extends Component {
           </div>
         </form>
         <br />
-        <Link to="/register" className="btn btn-link">Sign Up</Link>
+        <p>In this version of the app you may LogIn with any credentials and it will only be reflected in redux state</p>
+        <p>Or you can skip the Login and go straight to the App below</p>
+        <br />
+        <Link to="/assets/quote" className="btn btn-link">Enter Asset Deck</Link>
       </div>
     );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    history: ownProps.history,
+    location: ownProps.location,
+    loggedIn: state.users.loggedIn,
   }
 }
 
@@ -80,4 +98,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
