@@ -1,0 +1,11 @@
+{
+  "presets": ["react", "es2016"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    },
+    "production": {
+      "presets": ["react", "es2016"]
+    }
+  }
+}
