@@ -4,7 +4,7 @@ Get real time and historical stock market quotes and data! This a finance web ap
 
 ## Instructions
 To run: clone this repository and the corresponding API repository located at:                                 
-https://github.com/psnider30/asset-deck-iex-app
+https://github.com/psnider30/asset-deck-iex-api
 
 Run the rails api server with rails s -p 3001. It must be run on port 3001 or the app will not work.
 

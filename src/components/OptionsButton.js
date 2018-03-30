@@ -31,7 +31,8 @@ class OptionsButton extends Component {
     return (
       <MenuButton
         className='options-button'
-        id={asset.id || '0'}>
+        id={asset.id || '0'}
+        label=''>
         <Link
           to={"/assets/" + asset.quote.symbol + "/returns"}
           className='returns-link'>

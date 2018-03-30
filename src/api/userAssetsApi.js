@@ -113,7 +113,8 @@ export default class userAssetsApi {
             })
           }
         }).catch(error => {
-          return Promise.reject(Error(error.message))
+          throw error
+          // return Promise.reject(Error(error.message))
         })
       }
 
