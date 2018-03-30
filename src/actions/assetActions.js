@@ -2,8 +2,6 @@ import userAssetsApi from '../api/userAssetsApi';
 import * as types from './actionTypes';
 import * as iex from '../api/fetchAssetData';
 
-const IEX_API = `https://api.iextrading.com/1.0/stock`;
-
 let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} };
 
 export const addUserAsset = (asset, username, userAssets) => {

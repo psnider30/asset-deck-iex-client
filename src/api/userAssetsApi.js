@@ -1,8 +1,8 @@
 import { fetchAsset } from '../actions/assetActions';
 import { stopFetchingData } from '../actions/assetActions';
 import { loadUserAsset } from '../actions/assetActions';
-const API_URL = process.env.REACT_APP_API_URL;
-console.log(API_URL)
+// const API_HOST = process.env.REACT_APP_API_HOST;
+console.log(API_HOST)
 
 export default class userAssetsApi {
 
@@ -45,7 +45,7 @@ export default class userAssetsApi {
 
   static saveNewAsset(asset, username, dispatch, headers) {
     const body = this.saveRequestBody(asset, username);
-    const request = new Request(`${API_URL}/assets`, {
+    const request = new Request(`${API_HOST}/assets`, {
       method: 'POST',
       headers: headers,
       body: body
@@ -59,7 +59,7 @@ export default class userAssetsApi {
 
   static updateAsset(asset, username, userAssets, dispatch, headers, replacing) {
     const body = this.updateRequestBody(asset, username);
-    const request = new Request(`${API_URL}/assets/update`, {
+    const request = new Request(`${API_HOST}/assets/update`, {
       method: 'PUT',
       headers: headers,
       body: body
@@ -83,7 +83,7 @@ export default class userAssetsApi {
   static deleteUserAsset(asset, username) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
     const body = this.saveRequestBody(asset, username);
-    const request = new Request(`${API_URL}/assets/delete`, {
+    const request = new Request(`${API_HOST}/assets/delete`, {
       method: 'DELETE',
       headers: headers,
       body: body
@@ -97,7 +97,7 @@ export default class userAssetsApi {
 
   static fetchUserAssets(username, dispatch) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
-    const request = new Request(`${API_URL}/assets/user-assets`, {
+    const request = new Request(`${API_HOST}/assets/user-assets`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({ asset: { username: username } })
@@ -120,7 +120,7 @@ export default class userAssetsApi {
 
   static SaveShareTransaction(assetId, username, transaction) {
     const headers = this.requestHeaders();
-    const request = new Request(`${API_URL}/assets/update-shares`, {
+    const request = new Request(`${API_HOST}/assets/update-shares`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({ asset:
