@@ -1,8 +1,7 @@
 import { fetchAsset } from '../actions/assetActions';
 import { stopFetchingData } from '../actions/assetActions';
 import { loadUserAsset } from '../actions/assetActions';
-// const API_HOST = process.env.REACT_APP_API_HOST;
-console.log(API_HOST)
+const API_HOST = process.env.API_HOST;
 
 export default class userAssetsApi {
 
@@ -10,7 +9,7 @@ export default class userAssetsApi {
     return {
       'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`,
       'Content-Type': 'application/json'
-    }
+    };
   }
 
   static updateRequestBody(asset, username) {
@@ -21,7 +20,7 @@ export default class userAssetsApi {
         uuid: asset.newId,
         uuidOld: asset.id
       }
-    })
+    });
   }
 
   static saveRequestBody(asset, username) {
@@ -31,7 +30,7 @@ export default class userAssetsApi {
         username: username,
         uuid: asset.id,
       }
-    })
+    });
   }
 
   static saveUserAsset(asset, username, userAssets, dispatch, replacing) {
@@ -39,7 +38,7 @@ export default class userAssetsApi {
 
     asset.updating ?
     this.updateAsset(asset, username, userAssets, dispatch, headers, replacing) :
-    this.saveNewAsset(asset, username, dispatch, headers)
+    this.saveNewAsset(asset, username, dispatch, headers);
 
   }
 
@@ -54,7 +53,7 @@ export default class userAssetsApi {
     return this.makeSaveRequest(request, dispatch).then(assetRes => {
       if (assetRes.uuid !== asset.id) { asset.id = assetRes.uuid }
       fetchAsset(asset, dispatch)
-    })
+    });
   }
 
   static updateAsset(asset, username, userAssets, dispatch, headers, replacing) {
@@ -65,19 +64,19 @@ export default class userAssetsApi {
       body: body
     });
     return this.makeSaveRequest(request, dispatch).then(assetRes => {
-      const assetId = !!assetRes.uuid ? assetRes.uuid : asset.id
-      asset = {...asset, id: assetId, oldId: asset.id}
-      fetchAsset(asset, dispatch, replacing)
-  })
+      const assetId = !!assetRes.uuid ? assetRes.uuid : asset.id;
+      asset = {...asset, id: assetId, oldId: asset.id};
+      fetchAsset(asset, dispatch, replacing);
+  });
 }
 
   static makeSaveRequest(request, dispatch) {
-    return fetch(request).then(res => res.json())
+    return fetch(request).then(res => res.json();)
     .catch(error => {
-      console.log(error)
       dispatch(stopFetchingData())
+      throw error;
       // alert(`status: ${res.status}, ${res.statusText}`)
-    })
+    });
   }
 
   static deleteUserAsset(asset, username) {
@@ -90,10 +89,9 @@ export default class userAssetsApi {
     });
 
     return fetch(request).then(response => {
-      console.log(response);
       return response.json();
-    }).catch(error => console.log(error))
-  }
+    }).catch(error => throw error;);
+  };
 
   static fetchUserAssets(username, dispatch) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
@@ -104,18 +102,18 @@ export default class userAssetsApi {
     });
 
     return fetch(request).then(response => {
-      if (response.ok) { return response.json() }
+      if (response.ok) { return response.json(); }
         }).then(data => {
           if (data.assets) {
             data.assets.forEach((userAsset, idx) => {
-              const shares = data.user_asset_shares[idx]
-              loadUserAsset(userAsset, shares, dispatch)
+              const shares = data.user_asset_shares[idx];
+              loadUserAsset(userAsset, shares, dispatch);
             })
           }
         }).catch(error => {
           throw error
           // return Promise.reject(Error(error.message))
-        })
+        });
       }
 
   static SaveShareTransaction(assetId, username, transaction) {
@@ -130,6 +128,6 @@ export default class userAssetsApi {
         }
       })
     });
-  return fetch(request).then(response => response.json())
+  return fetch(request).then(response => response.json();)
   }
 }

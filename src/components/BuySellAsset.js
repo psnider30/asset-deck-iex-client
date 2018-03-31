@@ -7,18 +7,18 @@ class BuySellAsset extends Component {
 
   handleBuyClick(asset) {
     this.props.setUpdatingShares();
-    this.props.buyAsset(asset, this.props.currentUser)
+    this.props.buyAsset(asset, this.props.currentUser);
   }
 
   handleSellClick(asset) {
     if (asset.shares > 0) {
       this.props.setUpdatingShares();
-      this.props.sellAsset(asset, this.props.currentUser)
+      this.props.sellAsset(asset, this.props.currentUser);
     }
   }
 
   render() {
-    const { asset, updatingShares } = this.props
+    const { asset, updatingShares } = this.props;
     asset.shares = asset.shares || 0;
     return (
       <td className='buy-sell-td'>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import { removeSeconds, decimalToPercentage, addPlus } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
 import BuySellAsset from './BuySellAsset';
@@ -8,7 +8,7 @@ export default class AssetQuoteRow extends Component {
   render() {
     const { asset, onUpdateAsset, handleExitUpdate } = this.props;
     return (
-      <tr key={asset.id} className='table-row-data'>
+      <tr key={asset.id} className="table-row-data">
         <td>{asset.quote.symbol}</td>
         <td>{asset.quote.companyName}</td>
         <td>$ {asset.quote.open}</td>
@@ -19,12 +19,12 @@ export default class AssetQuoteRow extends Component {
         <td>{asset.quote.sector ? asset.quote.sector : ' - '}</td>
         <td>{removeSeconds(asset.quote.latestTime)}</td>
         <BuySellAsset
-          className='buy-sell'
+          className="buy-sell"
           asset={asset}
         />
-        <td className='no-background'>
+        <td className="no-background">
           <OptionsButton
-            className = 'options-button'
+            className ="options-button"
             asset={asset}
             onUpdateAsset={onUpdateAsset}
             handleExitUpdate={handleExitUpdate}
