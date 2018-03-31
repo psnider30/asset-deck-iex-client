@@ -18,4 +18,4 @@ export default function changeLayout(state = {
     default:
       return state;
   }
-};
+}

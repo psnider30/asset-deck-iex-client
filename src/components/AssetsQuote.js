@@ -14,7 +14,7 @@ class AssetsQuote extends Component {
     this.state = { sortedByShares: null }
   }
 
-  refreshData = (event) => {
+  refreshData = () => {
     window.location.reload()
   }
 
@@ -91,7 +91,7 @@ class AssetsQuote extends Component {
                 <img src={sort} alt='sort' className='sort-by-shares' onClick={() => this.handleSortByShares()} />
               </th>
               <th className='refresh-th'>
-                <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
+                <button className='refresh-data' onClick={() => this.refreshData()}>
                   <img src={refreshLogo} alt='refresh' className='refresh-logo' />
                 </button>
               </th>

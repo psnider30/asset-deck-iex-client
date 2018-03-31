@@ -6,13 +6,13 @@ import refreshLogo from "../refresh-icon.png";
 
 class AssetsFinancials extends Component {
 
-  refreshData = (event) => {
+  refreshData = () => {
     window.location.reload()
   }
 
   render() {
     const { assets, onUpdateAsset, handleExitUpdate } = this.props;
-    const assetsList = assets.map((asset, index) => {
+    const assetsList = assets.map((asset) => {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
@@ -51,7 +51,7 @@ class AssetsFinancials extends Component {
               <th><strong>SH Equity</strong></th>
               <th><strong>Date</strong></th>
               <th>
-                <button className='refresh-data' onClick={(event) => this.refreshData(event)}>
+                <button className='refresh-data' onClick={() => this.refreshData()}>
                   <img src={refreshLogo} alt='refresh' />
                 </button>
               </th>

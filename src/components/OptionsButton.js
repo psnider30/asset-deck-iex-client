@@ -4,16 +4,15 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MenuButton from 'react-menu-button';
 import { changeLayout } from '../actions/layoutActions';
-import { removeAsset } from '../actions/assetActions';
-import { updateAssetsInMemory } from '../actions/assetActions';
+import { updateAssetsInMemory, removeAsset } from '../actions/assetActions';
 
 class OptionsButton extends Component {
 
-  handleEditClick = (asset, event) => {
+  handleEditClick = (asset) => {
     this.props.onUpdateAsset(asset);
   }
 
-  handleRemoveClick = (asset, event) => {
+  handleRemoveClick = (asset) => {
     const assetToDelete = {
       symbol: asset.quote.symbol,
       id: asset.id
@@ -22,7 +21,7 @@ class OptionsButton extends Component {
     this.props.removeAsset(assetToDelete, this.props.currentUser);
   }
 
-  handleReturnsClick = (asset, event) => {
+  handleReturnsClick = (asset) => {
     this.props.changeLayout('timeSeries',this.props.layout, asset);
   }
 
@@ -39,14 +38,14 @@ class OptionsButton extends Component {
           <button
             className='returns-button'
             data-id={asset.id}
-            onClick={(event) => this.handleReturnsClick(asset, event)}>
+            onClick={() => this.handleReturnsClick(asset)}>
             Returns
           </button>
         </Link>
         <button
           className='update-button'
           data-id={asset.id}
-          onClick={(event) => this.handleEditClick(asset, event)}>
+          onClick={() => this.handleEditClick(asset)}>
           Update
         </button>
         <button

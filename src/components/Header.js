@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
-import { logOutUser } from '../actions/userActions';
-import { resetRegisterFail } from '../actions/userActions';
+import { logOutUser, resetRegisterFail } from '../actions/userActions';
 
 class Header extends Component {
 
-  handleLogOut = (event) => {
+  handleLogOut = () => {
     this.props.logOutUser();
   }
 
-  handleLoginClick = (event) => {
+  handleLoginClick = () => {
     const { registerFail, resetRegisterFail } = this.props;
     if (registerFail) {
       resetRegisterFail()
@@ -26,7 +25,7 @@ class Header extends Component {
         <div className="App-header">
           <h1 className="App-title">Asset Deck</h1>
           <div className="nav">
-            <a href='' onClick={(event) => this.handleLogOut(event)}>Logout</a>
+            <a href='' onClick={() => this.handleLogOut()}>Logout</a>
           </div>
         </div>
       );
@@ -40,7 +39,7 @@ class Header extends Component {
             Signup
           </Link>
           :
-          <Link to="/login" onClick={(event) => this.handleLoginClick(event)}>
+          <Link to="/login" onClick={() => this.handleLoginClick()}>
             Login
           </Link>
         }

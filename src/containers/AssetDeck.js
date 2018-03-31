@@ -31,7 +31,7 @@ class AssetDeck extends Component {
     this.onLoad = this.onLoad.bind(this);
   }
 
-  onLoad(event) {
+  onLoad() {
     // if page is refreshed re-fetch the assets if assets in state are removed but assetsinMemory remain
     const { assets, assetsInMemory, actions, currentUser, layout } = this.props;
     if (sessionStorage.assets && (assetsInMemory.length !== assets.length)) {
@@ -125,7 +125,7 @@ class AssetDeck extends Component {
     if (updating) {
       exitUpdateButton =
       <button className='exit-update-button' onClick={this.handleExitUpdate}>
-        Don't Update
+        Exit Update
       </button>
     }
     const quoteForm =

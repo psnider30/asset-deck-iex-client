@@ -1,6 +1,5 @@
-import { fetchAsset } from '../actions/assetActions';
-import { stopFetchingData } from '../actions/assetActions';
-import { loadUserAsset } from '../actions/assetActions';
+import { fetchAsset, stopFetchingData, loadUserAsset } from '../actions/assetActions';
+
 const API_HOST = process.env.API_HOST;
 
 export default class userAssetsApi {
@@ -64,17 +63,17 @@ export default class userAssetsApi {
       body: body
     });
     return this.makeSaveRequest(request, dispatch).then(assetRes => {
-      const assetId = !!assetRes.uuid ? assetRes.uuid : asset.id;
+      const assetId = assetRes.uuid ? assetRes.uuid : asset.id;
       asset = {...asset, id: assetId, oldId: asset.id};
       fetchAsset(asset, dispatch, replacing);
   });
 }
 
   static makeSaveRequest(request, dispatch) {
-    return fetch(request).then(res => res.json();)
+    return fetch(request).then(res => res.json())
     .catch(error => {
       dispatch(stopFetchingData())
-      throw error;
+      return error;
       // alert(`status: ${res.status}, ${res.statusText}`)
     });
   }
@@ -90,8 +89,10 @@ export default class userAssetsApi {
 
     return fetch(request).then(response => {
       return response.json();
-    }).catch(error => throw error;);
-  };
+    }).catch(error => {
+      return error;
+    });
+  }
 
   static fetchUserAssets(username, dispatch) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
@@ -102,7 +103,7 @@ export default class userAssetsApi {
     });
 
     return fetch(request).then(response => {
-      if (response.ok) { return response.json(); }
+      if (response.ok) { return response.json() }
         }).then(data => {
           if (data.assets) {
             data.assets.forEach((userAsset, idx) => {
@@ -111,7 +112,7 @@ export default class userAssetsApi {
             })
           }
         }).catch(error => {
-          throw error
+          return error;
           // return Promise.reject(Error(error.message))
         });
       }
@@ -128,6 +129,6 @@ export default class userAssetsApi {
         }
       })
     });
-  return fetch(request).then(response => response.json();)
+  return fetch(request).then(response => response.json());
   }
 }

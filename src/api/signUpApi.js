@@ -10,7 +10,8 @@ export default class SignUpApi {
 
     return fetch(request).then(response => {
       return response.json();
-    }).catch(error => {
+    }).catch(error =>  {
+      return error;
     });
   }
 }

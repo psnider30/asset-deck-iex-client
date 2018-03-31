@@ -23,7 +23,7 @@ export function logInUser(credentials, history) {
       dispatch(logInAttempt(credentials.username, valid));
       history.push('/assets/quote');
     }).catch(error => {
-      throw(error);
+      return error;
     });
   };
 }
@@ -48,7 +48,7 @@ export function signUpUser(userInfo, history) {
       dispatch(signUpAttempt(user));
       history.push('/login');
     }).catch(error => {
-      throw(error);
+      return error;
     });
   };
 }

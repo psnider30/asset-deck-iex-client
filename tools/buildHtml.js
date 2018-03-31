@@ -1,6 +1,5 @@
-import fs from 'fs';
-import cheerio from 'cheerio';
-import colors from 'colors';
+const fs = require('fs');
+const cheerio = require('cheerio');
 
 /*eslint-disable no-console */
 
