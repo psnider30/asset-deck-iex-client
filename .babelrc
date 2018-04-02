@@ -3,5 +3,6 @@
   "plugins": [
     "babel-plugin-transform-object-rest-spread",
     "transform-class-properties",
+    "transform-inline-environment-variables", 
   ],
 }
