@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatNumber } from '../lib/formatNumber';
-import defaultLogo from "../dollar_logo.jpg";
+import defaultLogo from "../assets/media/dollar_logo.jpg";
 
 class TimeSeries extends Component {
   constructor(props) {

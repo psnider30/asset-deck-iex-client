@@ -18,7 +18,7 @@ class RegisterPage extends Component {
     this.state = this.initialState;
   }
 
-  handleChange = (event) => {
+  handleChange(event) {
     const { name, value } = event.target
     this.setState({ [name]: value });
     if (this.state.password.length > 5 && this.state.password.length < 21) {
@@ -26,7 +26,7 @@ class RegisterPage extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit(event) {
     const { username, email, password, passwordConfirm } = this.state;
     event.preventDefault();
     this.setState({ submitted: true });

@@ -1,6 +1,8 @@
 export default class SessionApi {
   static login(credentials) {
-    const request = new Request(`${process.env.API_HOST}/login`, {
+    debugger;
+    console.log(process.env.REACT_APP_API_HOST)
+    const request = new Request(`${process.env.REACT_APP_API_HOST}/login`, {
       method: 'POST',
       headers: new Headers({
         'Content-type': 'application/json'

@@ -7,7 +7,9 @@ const path = require('path')
 
 
 export default {
+  mode: 'production',
   devtool: 'source-map',
+  context: path.resolve(__dirname, "src"),
 
   entry: [
     './src/index'
@@ -53,13 +55,7 @@ export default {
 
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: true
-    }),
-
-
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: true
+      debug: false
     }),
   ])
 }

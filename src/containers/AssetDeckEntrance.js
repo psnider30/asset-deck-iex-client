@@ -20,7 +20,7 @@ class AssetDeckEntrance extends Component {
     }
   }
 
-  handleLayoutChange = (newLayout) => {
+  handleLayoutChange(newLayout) {
     const currentLayout = this.props.layout
     if (currentLayout !== newLayout) {
       this.props.changeLayout(newLayout, currentLayout)

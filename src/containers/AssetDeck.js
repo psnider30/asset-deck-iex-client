@@ -9,8 +9,7 @@ import AssetsFundamentals from '../components/AssetsFundamentals';
 import ChangeSummary from '../components/ChangeSummary';
 import AssetsFinancials from '../components/AssetsFinancials';
 import TimeSeries from '../components/TimeSeries';
-import '../table.css';
-import closeLogo from '../close.svg';
+import closeLogo from '../assets/media/close.svg';
 import uuidv4 from 'uuid/v4';
 
 class AssetDeck extends Component {
@@ -80,7 +79,7 @@ class AssetDeck extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit(event) {
     const { actions, currentUser, userAssets } = this.props;
     event.preventDefault();
     const asset = this.state.updating ? {...this.state, newId: uuidv4()} : {...this.state, id: uuidv4()};
@@ -94,7 +93,7 @@ class AssetDeck extends Component {
     this.setState(this.initialState);
   }
 
-  handleChange = (event) => {
+  handleChange(event) {
     const { name, value } = event.target
     this.setState({[name]: value});
   }

@@ -7,11 +7,11 @@ import { logOutUser, resetRegisterFail } from '../actions/userActions';
 
 class Header extends Component {
 
-  handleLogOut = () => {
+  handleLogOut() {
     this.props.logOutUser();
   }
 
-  handleLoginClick = () => {
+  handleLoginClick() {
     const { registerFail, resetRegisterFail } = this.props;
     if (registerFail) {
       resetRegisterFail()

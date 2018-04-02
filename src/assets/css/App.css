@@ -1,0 +1,487 @@
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+  background-color: #cfdcd7;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.App {
+  margin: 0px;
+  height: 100%;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: rgba(21, 120, 35, 0.7);
+  height: 48px;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-bottom: 0.8px solid rgba(21, 120, 35, 1);
+}
+.nav {
+  display: inline;
+  margin-left: 20px;
+
+}
+.nav a {
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.App-title, .navbar-button, .navbar-button-active, .nav, .nav a {
+  font-family: 'Roboto Slab', serif;
+  color: rgb(255,250,250);
+  text-shadow: 1.5px 1.5px #a67c00;
+}
+
+.App-title {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 0px;
+  font-size: 2.2em;
+}
+
+.App-body, .users-entrance  {
+  margin-left: 40px;
+  margin-right: 40px;
+  padding: 0;
+  font-family: 'Robot Slab', sans-serif;
+}
+
+.navbar {
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+.navbar-button, .navbar-button-active {
+  margin-left: 30px;
+}
+
+.navbar-button, .navbar-button-active {
+  font-size: 1.2em;
+  text-shadow: 0.8px 0.8px #a67c00;
+  background-color: rgba(21, 120, 35, 0.75);
+  border: 0.5px solid rgba(21, 120, 35, 1);
+  padding: 5px;
+}
+
+.navbar-button:hover, .navbar-button-active {
+  color: rgb(21, 120, 35);
+  background-color: white;
+  text-shadow: none;
+  outline: none;
+}
+
+button:hover, button:focus, button:active {
+  outline: none;
+}
+
+.quote-form {
+  background-color: rgb(245,245,245);
+  border: 1px solid #b9d9c9 !important;
+}
+
+.assets-list, .time-series {
+  background-color: rgb(250,250,250);
+  border: 1px solid #b9d9c9 !important;
+  margin-bottom: 20px;
+}
+
+.quote-form, .assets-list, .time-series {
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 1px solid rgb(210,210,210);
+}
+
+.assets-list, .time-series {
+  background-color: rgb(252,252,252);
+  min-height: 100px;
+}
+
+.time-series {
+  padding-top:0;
+}
+
+label {
+  display: block;
+}
+
+#asset-lookup-label, .large-green {
+  color: rgb(21, 120, 35);
+  font-size: 1.6em;
+  text-shadow: 0.3px 0.3px darkgreen;
+  font-family: 'Mukta Mahee', sans-serif;
+}
+
+#asset-lookup-input {
+  height: 20px;
+  font-size: 1em;
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid rgba(21, 120, 35, 0.6);
+}
+
+#time-series-label, .med-green {
+  color: rgb(21, 120, 35);
+  font-size: 1.2em;
+  text-shadow: 0.2px 0.2px darkgreen;
+  font-family: 'Mukta Mahee', sans-serif;
+}
+
+#time-series-lookup-input {
+  border: 1px solid rgba(21, 120, 35, 0.6);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ddc063;
+  opacity: 1; /* Firefox */
+}
+
+.submit-update-button, .update-button, .login-button, .register-button{
+  background-color: rgb(0,153,216);
+}
+
+.refresh-th {
+  background-color: rgb(252,252,252);
+}
+
+.refresh-data {
+  color: rgb(21, 120, 35);
+  background-color: rgb(235,235,235);
+  font-size: 1em;
+  font-family: 'Roboto Slab', serif;
+  color: rgb(21, 120, 35);
+  text-shadow: 0.15px 0.15px darkgreen;
+  border: 0.5px solid rgba(21, 120, 35, 1);
+  padding: 3px 5px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.refresh-data:hover {
+  background-color: white;
+  text-shadow: 0.3px 0.3px darkgreen;
+  border: 0.8px solid rgba(21, 120, 35, 1);
+}
+
+.options-button {
+  background-color: rgb(230,230,230);
+  border: 1px solid rgba(21, 120, 35, 0.6);
+  margin-top: 3px !important;
+
+}
+
+.update-button, .remove-button, .submit-update-button,
+.exit-update-button, .returns-button, .options-button,
+.login-button, .register-button, .returns-buton {
+  padding: 3px 5px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9em;
+  margin-top: 15px;
+  color: white;
+  border-radius: 4px;
+  outline: none;
+}
+
+.returns-link, .returns-link:focus {
+  outline: none;
+}
+
+.exit-update-button {
+  margin-left: 5px;
+}
+
+.returns-button {
+  background-color: rgba(21, 120, 35, 0.8);
+}
+
+.remove-button, .exit-update-button {
+  background-color: rgb(255,97,102);
+}
+
+.company-logo {
+  -webkit-transform: scale(0.6);
+  margin: 10px 0;
+  padding: 0;
+}
+
+.logo-container {
+  width: auto !important;
+  height: auto !important;
+}
+
+.company-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+}
+
+.company-name {
+  margin: 0 10px 4px 0;
+  padding: 0;
+}
+
+.company-detail {
+  margin: 0 10px 4px 0;
+  padding: 0;
+}
+
+.company-details {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px 4px 0;
+  max-width: 270px;
+}
+
+.company-description {
+  margin: 12px 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  white-space:wrap;
+ -webkit-order:1;
+ -webkit-flex: 0 1 auto; /*important*/
+  text-overflow: ellipsis;
+  overflow:hidden;
+  min-width:0;
+  max-width: 515px;
+}
+
+.returns {
+  z-index: 10;
+}
+
+.company-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 30px;
+  margin-left: 15px;
+}
+
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+.has-error, .help-block {
+  color: #D8000C;
+}
+
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* table.css */
+
+table {
+  font-family: 'Quicksand', sans-serif;
+  word-wrap:break-word;
+  margin-right: 5px;
+}
+
+thead {
+  color: rgb(255,255,255);
+  font-size: 1.1em;
+  text-shadow: 0.4px 0.4px #a67c00;
+  background-color: rgba(21, 120, 35, 0.75);
+  border-bottom: 0.8px solid rgba(21, 120, 35, 1);
+}
+
+table th, table td {
+  text-align: center;
+  padding: 3px 7px;
+}
+
+tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table-row-data {
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.no-background {
+  background-color: white;
+  padding: 3px 3px 3px;
+}
+
+.time-series-td, .time-series-td {
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.buy-asset-button {
+  margin-left: 10px;
+}
+
+.sell-asset-button {
+  margin-right: 10px;
+}
+
+.sell-asset-button, .buy-asset-button {
+  font-size: 1em;
+  border-radius: 4px;
+  outline: none;
+  color: rgb(21, 120, 35);
+  text-shadow: 0.2px 0.2px darkgreen;
+  background-color: white;
+  border: 0.5px solid rgba(21, 120, 35, 0.5);
+}
+
+.buy-asset-button:hover {
+  border: .7px solid #dfdc73;
+}
+
+.sell-asset-button:hover {
+  border: 0.5px solid #f23e3a;
+}
+
+
+@media screen and (max-width: 685px) {
+  tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5em 0;
+    border: 1px solid rgba(3,3,3,0.2);
+  }
+}
+
+/* end table.css */
+
+@media only screen and  (max-width : 185px) {
+  .refresh-logo {
+    max-width: 45% !important;
+    max-height: 50% !important;
+  }
+}
+
+@media only screen and  (max-width : 300px) {
+  body { font-size: 0.5em }
+  .refresh-logo, .refresh-th {
+    max-width: 30%;
+    max-height: 30%;
+  }
+  .sort-by-shares, .shares-owned-th {
+    max-width: 40%;
+    max-height: 45%;
+  }
+  .refresh-th {
+    background-color: #409961;
+  }
+}
+@media only screen and (min-width : 300px) and (max-width : 595px) {
+  body { font-size: 0.6em}
+  .buy-sell-td, .buy-asset-button, .sell-asset-button {
+    font-size: 0.2em;
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+  }
+}
+@media only screen and (min-width : 300px) and (max-width : 685px) {
+  .refresh-logo, .sort-by-shares, .shares-owned-th, .refresh-th {
+    max-width: 55%;
+    max-height: 55%;
+  }
+  .refresh-th {
+    background-color: #409961;
+  }
+  .refresh-data {
+    max-width: 75%;
+  }
+}
+@media only screen and (min-width : 595px) and (max-width : 900px) {
+  body { font-size: 0.7em }
+  .assets-list th {
+    font-size: 0.8em;
+  }
+  .buy-asset-button, .sell-asset-button{
+    font-size: 0.25em;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .options-button {
+    margin: 2px;
+    padding: 2px;
+  }
+  .refresh-logo, .sort-by-shares, .shares-owned-th, .refresh-th {
+    max-width: 70%;
+    max-height: 75%;
+  }
+  .refresh-data {
+    max-width: 85%;
+  }
+}
+@media only screen and (min-width : 685px) and (max-width : 880px) {
+  .refresh-data {
+    min-width: 135%;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width : 780px) {
+  .App-body {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (min-width : 900px) and (max-width : 980px) {
+  body { font-size: 0.8em}
+  .assets-list th {
+    font-size: 0.85em;
+  }
+  .asset-shares-count {
+    font-size: 1.2em;
+  }
+  .refresh-logo, .sort-by-shares, .shares-owned-th {
+    max-width: 98%;
+    max-height: 98%;
+  }
+}
+@media only screen and (min-width : 870px) and (max-width : 1064px) {
+  .buy-sell-td, .buy-asset-button, .sell-asset-button {
+    font-size: 0.75em;
+    }
+  }
+@media only screen and (min-width :980px) and (max-width : 1242px) {body { font-size: 0.9em}}

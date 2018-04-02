@@ -1,3 +1,14 @@
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+  background-color: #cfdcd7;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
 .App {
   margin: 0px;
   height: 100%;
@@ -300,6 +311,84 @@ label {
   to { transform: rotate(360deg); }
 }
 
+/* table.css */
+
+table {
+  font-family: 'Quicksand', sans-serif;
+  word-wrap:break-word;
+  margin-right: 5px;
+}
+
+thead {
+  color: rgb(255,255,255);
+  font-size: 1.1em;
+  text-shadow: 0.4px 0.4px #a67c00;
+  background-color: rgba(21, 120, 35, 0.75);
+  border-bottom: 0.8px solid rgba(21, 120, 35, 1);
+}
+
+table th, table td {
+  text-align: center;
+  padding: 3px 7px;
+}
+
+tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table-row-data {
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.no-background {
+  background-color: white;
+  padding: 3px 3px 3px;
+}
+
+.time-series-td, .time-series-td {
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.buy-asset-button {
+  margin-left: 10px;
+}
+
+.sell-asset-button {
+  margin-right: 10px;
+}
+
+.sell-asset-button, .buy-asset-button {
+  font-size: 1em;
+  border-radius: 4px;
+  outline: none;
+  color: rgb(21, 120, 35);
+  text-shadow: 0.2px 0.2px darkgreen;
+  background-color: white;
+  border: 0.5px solid rgba(21, 120, 35, 0.5);
+}
+
+.buy-asset-button:hover {
+  border: .7px solid #dfdc73;
+}
+
+.sell-asset-button:hover {
+  border: 0.5px solid #f23e3a;
+}
+
+
+@media screen and (max-width: 685px) {
+  tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5em 0;
+    border: 1px solid rgba(3,3,3,0.2);
+  }
+}
+
+/* end table.css */
+
 @media only screen and  (max-width : 185px) {
   .refresh-logo {
     max-width: 45% !important;
@@ -396,3 +485,4 @@ label {
     }
   }
 @media only screen and (min-width :980px) and (max-width : 1242px) {body { font-size: 0.9em}}
+

@@ -2,12 +2,13 @@
 import 'babel-polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './assets/css/App.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import WebFont from 'webfontloader';
 import store from './store';
+require('./assets/media/favicon.ico');
 
 WebFont.load({
   google: {
@@ -17,7 +18,7 @@ WebFont.load({
 
 ReactDOM.render(
   <Provider store={store}>
-    <App store={store}/>
+    <App />
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

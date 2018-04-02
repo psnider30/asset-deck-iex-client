@@ -2,13 +2,14 @@ import userAssetsApi from '../api/userAssetsApi';
 import * as types from './actionTypes';
 import * as iex from '../api/fetchAssetData';
 require('es6-promise').polyfill();
+// const Promise = require('es5-promise').Promise;
 
 let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} };
 
 export const addUserAsset = (asset, username, userAssets) => {
   return dispatch => {
     // This first fetch checks if asset is fetchable before sending post request to create or update in the rails api
-    fetch(`${process.env.IEX_API}/${asset.symbol}/company`).then(response => {
+    fetch(`${process.env.REACT_APP_IEX_API}/${asset.symbol}/company`).then(response => {
       if (response.status === 200) {
         const replacing = !userAssets.includes(asset.symbol);
         // send request to save asset to rails if the asset is being replaced or this is saving a new asset (not updating)
@@ -38,7 +39,6 @@ export const loadUserAsset = (userAsset, shares, dispatch) => {
 }
 
 export const fetchAsset = (asset, dispatch, replacing = false) => {
-  var Promise = require('es6-promise').Promise;
     Promise.all([iex.fetchMain(asset.symbol), iex.fetchFundamentals(asset.symbol), iex.fetchFinancials(asset.symbol),
     iex.fetchMonthlyTimeSeries(asset.symbol), iex.fetchDailyTimeSeries(asset.symbol), iex.fetchLogo(asset.symbol),
     iex.fetchCompanyInfo(asset.symbol)])

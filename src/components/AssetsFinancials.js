@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatNumber } from '../lib/formatNumber';
 import OptionsButton from './OptionsButton';
-import refreshLogo from "../refresh-icon.png";
+import refreshLogo from "../assets/media/refresh-icon.png";
 
 class AssetsFinancials extends Component {
 

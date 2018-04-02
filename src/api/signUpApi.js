@@ -1,6 +1,6 @@
 export default class SignUpApi {
   static signup(userInfo) {
-    const request = new Request(`${process.env.API_HOST}/signup`, {
+    const request = new Request(`${process.env.REACT_APP_API_HOST}/signup`, {
       method: 'POST',
       headers: new Headers({
         'Content-type': 'application/json'

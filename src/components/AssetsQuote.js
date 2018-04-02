@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import refreshLogo from "../refresh-icon.png";
-import sort from "../sort.svg";
+import refreshLogo from "../assets/media/refresh-icon.png";
+import sort from "../assets/media/sort.svg";
 import AssetQuoteRow from './AssetQuoteRow';
 import { updateAssetsInMemory, resetUpdatingShares } from '../actions/assetActions';
 
