@@ -57,10 +57,6 @@
     "webpack-dev-server": "^3.1.1",
     "webpack-hot-middleware": "^2.21.2"
   },
-  "engines": {
-    "node": "8.11.1",
-    "yarn": "1.5.1"
-  },
   "bugs": {
     "url": "https://github.com/psnider30/asset-deck-iex-client/issues"
   },
