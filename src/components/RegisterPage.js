@@ -76,7 +76,7 @@ class RegisterPage extends Component {
           <div className={'form-group' + (submitted && !password ? 'has-error': '')}>
             <label className='med-green' htmlFor="password">Password </label>
             <input type="password" className="form-control" name='password'
-              value={password} onChange={this.handleChange}/>
+              value={password} onChange={(event) => this.handleChange(event)}/>
             {submitted && !password &&
               <div className="help-block">Password is required</div>
             }
@@ -85,7 +85,7 @@ class RegisterPage extends Component {
           <div className={'form-group' + (submitted && !passwordConfirm ? 'has-error': '')}>
             <label className='med-green' htmlFor="passwordConfirm">Password Confirm </label>
             <input type="password" className="form-control" name='passwordConfirm'
-              value={passwordConfirm} onChange={this.handleChange}/>
+              value={passwordConfirm} onChange={(event) => this.handleChange(event)}/>
             {submitted && !passwordConfirm &&
               <div className="help-block">Password Confirmation is required</div>
             }

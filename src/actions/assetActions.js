@@ -10,7 +10,7 @@ const IEX_API = process.env.REACT_APP_IEX_API ? process.env.REACT_APP_IEX_API : 
 export const addUserAsset = (asset, username, userAssets) => {
   return dispatch => {
     // This first fetch checks if asset is fetchable before sending post request to create or update in the rails api
-    fetch(`${process.env.IEX_API}/${asset.symbol}/company`).then(response => {
+    fetch(`${IEX_API}/${asset.symbol}/company`).then(response => {
       if (response.status === 200) {
         const replacing = !userAssets.includes(asset.symbol);
         // send request to save asset to rails if the asset is being replaced or this is saving a new asset (not updating)

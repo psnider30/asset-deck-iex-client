@@ -2,7 +2,7 @@ export default class SignUpApi {
 
   static signup(userInfo) {
     const API_HOST = process.env.REACT_APP_API_HOST_LOCAL ? process.env.REACT_APP_API_HOST_LOCAL : 'https://asset-deck-rails-api.herokuapp.com/api';
-    const request = new Request(`${API_HOST}/signup`, {
+    const request = new Request('http://localhost:3001/signup', {
       method: 'POST',
       headers: new Headers({
         'Content-type': 'application/json'
