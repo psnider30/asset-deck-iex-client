@@ -8,7 +8,6 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import WebFont from 'webfontloader';
 import store from './store';
-import favicon from './assets/media/favicon.ico';
 
 WebFont.load({
   google: {

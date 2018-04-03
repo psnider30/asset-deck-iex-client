@@ -5,6 +5,7 @@ require('es6-promise').polyfill();
 // const Promise = require('es5-promise').Promise;
 
 let assetData = { quote: {}, fundamentals: {}, financials: {}, timeSeries: {}, logo: {} };
+const IEX_API = process.env ? process.env.REACT_APP_IEX_API : 'https://api.iextrading.com/1.0/stock';
 
 export const addUserAsset = (asset, username, userAssets) => {
   return dispatch => {
