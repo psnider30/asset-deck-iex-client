@@ -1,4 +1,6 @@
 /* /index.html 200
+*/assets/media* /index.html 200
+
 https://asset-deck-rails-api.herokuapp.com/api* https://asset-deck-rails-api.herokuapp.com/api:splat 200
 https://api.iextrading.com/1.0/stock* https://api.iextrading.com/1.0/stock:splat 200
 /${API_HOST}/* https://asset-deck-rails-api.herokuapp.com/api:splat 200
