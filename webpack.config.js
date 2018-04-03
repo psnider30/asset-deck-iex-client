@@ -51,13 +51,14 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html",
-      favicon: "./src/assets/media/favicon.ico",
+      favicon: "./tools/assets/public/favicon.ico",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
-    new webpack.EnvironmentPlugin({
+    new webpack.EnvironmentPlugin( { ...process.env } ),
+    new webpack.DefinePlugin({
       NODE_ENV: 'development',
       REACT_APP_API_HOST_LOCAL: 'http://localhost:3001/api',
       REACT_APP_API_HOST_HEROKU: 'https://asset-deck-rails-api.herokuapp.com/api',
