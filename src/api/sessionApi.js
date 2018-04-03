@@ -1,7 +1,8 @@
 export default class SessionApi {
 
   static login(credentials) {
-    const API_HOST = process.env ? process.env.REACT_APP_API_HOST_LOCAL : 'https://asset-deck-rails-api.herokuapp.com/api';
+    console.log(process.env)
+    const API_HOST = process.env.REACT_APP_API_HOST_LOCAL ? process.env.REACT_APP_API_HOST_LOCAL : 'https://asset-deck-rails-api.herokuapp.com/api';
     debugger;
     const request = new Request(`${API_HOST}/login`, {
       method: 'POST',
