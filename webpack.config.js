@@ -51,7 +51,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html",
-      favicon: "./tools/assets/public/favicon.ico",
+      favicon: "./src/assets/media/favicon.ico",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
@@ -60,9 +60,9 @@ module.exports = {
     new webpack.EnvironmentPlugin( { ...process.env } ),
     new webpack.DefinePlugin({
       NODE_ENV: 'development',
-      REACT_APP_API_HOST_LOCAL: 'http://localhost:3001/api',
-      REACT_APP_API_HOST_HEROKU: 'https://asset-deck-rails-api.herokuapp.com/api',
-      REACT_APP_IEX_API: 'https://api.iextrading.com/1.0/stock',
+      REACT_APP_API_HOST_LOCAL: JSON.stringify('http://localhost:3001/api'),
+      REACT_APP_API_HOST_HEROKU: JSON.stringify('https://asset-deck-rails-api.herokuapp.com/api'),
+      REACT_APP_IEX_API: JSON.stringify('https://api.iextrading.com/1.0/stock'),
     })
     // new webpack.DefinePlugin({
     //   'process.env.API_HOST': JSON.stringify('http://localhost:3001/api'),
