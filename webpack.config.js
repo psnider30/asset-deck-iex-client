@@ -60,15 +60,10 @@ module.exports = {
     new webpack.EnvironmentPlugin( { ...process.env } ),
     new webpack.DefinePlugin({
       NODE_ENV: 'development',
-      REACT_APP_API_HOST_LOCAL: JSON.stringify('http://localhost:3001/api'),
-      REACT_APP_API_HOST_HEROKU: JSON.stringify('https://asset-deck-rails-api.herokuapp.com/api'),
+      REACT_APP_API_HOST_LOCAL: JSON.stringify('http://localhost:3001'),
+      REACT_APP_API_HOST_HEROKU: JSON.stringify('https://asset-deck-api.herokuapp.com'),
       REACT_APP_IEX_API: JSON.stringify('https://api.iextrading.com/1.0/stock'),
-    })
-    // new webpack.DefinePlugin({
-    //   'process.env.API_HOST': JSON.stringify('http://localhost:3001/api'),
-    //   'process.env.IEX_API': JSON.stringify('https://api.iextrading.com/1.0/stock'),
-    //   'process.env.NODE_ENV': JSON.stringify('development'),
-    // }),
+    }),
   ],
   devServer: {
     // static files served from here

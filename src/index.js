@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/App.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import WebFont from 'webfontloader';
 import store from './store';
@@ -20,4 +20,4 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
