@@ -1,6 +1,6 @@
 import { fetchAsset, stopFetchingData, loadUserAsset } from '../actions/assetActions';
 
-const API_HOST = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_API_HOST_LOCAL + '/api' : 'https://asset-deck-api.herokuapp.com/api';
+const API_HOST = process.env.REACT_APP_API_HOST_LOCAL ? process.env.REACT_APP_API_HOST_LOCAL + '/api' : 'https://asset-deck-api.herokuapp.com/api';
 
 export default class userAssetsApi {
 
