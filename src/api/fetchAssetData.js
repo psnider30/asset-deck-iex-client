@@ -1,4 +1,4 @@
-const IEX_API = process.env.REACT_APP_IEX_API;
+const IEX_API = 'https://api.iextrading.com/1.0/stock';
 
 export const fetchMain = (symbol) => {
   return fetch(`${IEX_API}/${symbol}/quote`)
