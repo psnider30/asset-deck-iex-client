@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import userAssetsApi from '../api/userAssetsApi';
 import * as types from './actionTypes';
 import * as iex from '../api/fetchAssetData';
@@ -12,7 +13,7 @@ export const addUserAsset = (asset, username, userAssets) => {
     // This first fetch checks if asset is fetchable before sending post request to create or update in the rails api
     fetch(`${IEX_API}/${asset.symbol}/company`).then(response => {
       if (response.status === 200) {
-        const replacing = !userAssets.includes(asset.symbol);
+        const replacing = !userAssets.includes(asset.symbol.toUpperCase());
         // send request to save asset to rails if the asset is being replaced or this is saving a new asset (not updating)
         if (replacing || !asset.updating) {
           userAssetsApi.saveUserAsset(asset, username, userAssets, dispatch, replacing)
@@ -21,7 +22,7 @@ export const addUserAsset = (asset, username, userAssets) => {
         }
       } else {
         dispatch(stopFetchingData())
-        alert('Invalid Sybol')
+        alert('Invalid Symbol')
       }
     })
   }
@@ -46,7 +47,7 @@ export const fetchAsset = (asset, dispatch, replacing = false) => {
       .then(values => {
         assetData.quote = values[0];
         assetData.fundamentals = values[1];
-        assetData.financials = values[2].financials[0];
+        assetData.financials = _.isEmpty(values[2]) ? null : values[2].financials[0];
         assetData.timeSeries.monthly = values[3];
         assetData.timeSeries.daily = values[4];
         assetData.logo = values[5];
