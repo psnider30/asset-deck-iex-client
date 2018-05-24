@@ -16,14 +16,14 @@ class AssetsFinancials extends Component {
       return (
         <tr key={asset.id} className='table-row-data'>
           <td>{asset.quote.symbol}</td>
-          <td>{formatNumber(asset.financials.grossProfit)}</td>
-          <td>{formatNumber(asset.financials.totalRevenue)}</td>
-          <td>{formatNumber(asset.financials.operatingIncome)}</td>
-          <td>{formatNumber(asset.financials.totalAssets)}</td>
-          <td>{formatNumber(asset.financials.totalLiabilities)}</td>
-          <td>{formatNumber(asset.financials.cashFlow)}</td>
-          <td>{formatNumber(asset.financials.shareholderEquity)}</td>
-          <td>{asset.financials.reportDate}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.grossProfit : 0)}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.totalRevenue : 0)}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.operatingIncome : 0)}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.totalAssets : 0)}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.totalLiabilities : 0)}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.cashFlow : 0)}</td>
+          <td>{formatNumber(asset.financials ? asset.financials.shareholderEquity : 0)}</td>
+          <td>{asset.financials ? asset.financials.reportDate : '-'}</td>
           <td className='no-background'>
             <OptionsButton
               className = 'options-button'
